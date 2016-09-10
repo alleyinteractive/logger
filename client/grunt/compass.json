@@ -1,0 +1,15 @@
+{
+  "dist": {
+    "options": {
+      "sassDir": "client/sass",
+      "cssDir": "static/css",
+      "relativeAssets": true,
+      "imagesDir": "client/images",
+      "javascriptsDir": "client/js",
+      "generatedImagesDir": "static/images/sprites",
+      "httpGeneratedImagesPath": "static/images/sprites",
+      "outputStyle": "compact",
+      "noLineComments": true
+    }
+  }
+}

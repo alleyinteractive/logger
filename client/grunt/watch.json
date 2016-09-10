@@ -1,0 +1,10 @@
+{
+  "js": {
+    "files": ["client/js/{,*/}*.js"],
+    "tasks": ["scripts"]
+  },
+  "compass": {
+    "files": ["client/sass/{,*/}*.{scss,sass}"],
+    "tasks": ["styles"]
+  }
+}

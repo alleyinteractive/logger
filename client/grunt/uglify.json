@@ -1,0 +1,12 @@
+{
+  "dist": {
+    "options": {
+      "sourceMap": true
+    },
+    "files": {
+      "static/js/admin.min.js": [
+        "static/js/admin.js"
+      ]
+    }
+  }
+}

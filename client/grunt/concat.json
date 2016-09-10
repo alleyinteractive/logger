@@ -1,0 +1,6 @@
+{
+  "dist": {
+    "src": ["client/js/admin.js"],
+    "dest": "static/js/admin.js"
+  }
+}

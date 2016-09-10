@@ -1,0 +1,20 @@
+{
+  "default": [
+    "build"
+  ],
+  "scripts": [
+    "jshint",
+    "concat",
+    "uglify"
+  ],
+  "styles": [
+    "compass",
+    "postcss",
+    "cssmin",
+    "imagemin"
+  ],
+  "build": [
+    "scripts",
+    "styles"
+  ]
+}

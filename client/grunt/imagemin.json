@@ -1,0 +1,10 @@
+{
+  "dynamic": {
+    "files": [{
+      "expand": true,
+      "cwd": "static/images/",
+      "src": ["**/*.{png,jpg,gif}"],
+      "dest": "static/images/"
+    }]
+  }
+}
