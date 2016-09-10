@@ -60,12 +60,22 @@ class AI_Logger {
 			'info' => __( 'Info', 'ai-logger' ),
 			'warning' => __( 'Warning', 'ai-logger' ),
 			'error' => __( 'Error', 'ai-logger' ),
+			'critical' => __( 'Critical', 'ai-logger' ),
 		);
 
 		$this->throttle_limit = apply_filters( 'ai_logger_throttle_limit', MINUTE_IN_SECONDS * 15 );
 
 	}
 
+	/**
+	 * Inserts a new log entry
+	 *
+	 * @param string $key A short and unique title for the log entry
+	 * @param string $message An info or error message
+	 * @param array $args Optional
+	 * @access public
+	 * @return void
+	 */
 	public function insert( $key, $message, $args = array() ) {
 
 		$defaults = array(
@@ -108,9 +118,11 @@ class AI_Logger {
 			}
 
 			// create a unique transient key based on the log key and context
-			$context = ! empty( $args['context'] ) ? $args['context'] : '';
-			$transient_key = 'ai_log_' . md5( $key . $context );
-			set_transient( $transient_key, true, $this->throttle_limit );
+			if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
+				$context = ! empty( $args['context'] ) ? $args['context'] : '';
+				$transient_key = 'ai_log_' . md5( $key . $context );
+				set_transient( $transient_key, true, $this->throttle_limit );
+			}
 		}
 	}
 

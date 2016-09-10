@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: AI Logger
- * Plugin URI: https://github.com/alleyinteractive/ai-logger
+ * Plugin URI: https://github.com/alleyinteractive/logger
  * Description: A logger tool that stores errors and messages as a custom post type
  * Version: 1.0.0
  * Author: Jared Cobb
