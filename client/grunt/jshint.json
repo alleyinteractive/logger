@@ -1,9 +1,0 @@
-{
-  "options": {
-    "jshintrc": "client/.jshintrc"
-  },
-  "all": [
-    "Gruntfile.js",
-    "client/js/{,*/}*.js"
-  ]
-}
