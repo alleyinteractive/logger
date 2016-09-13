@@ -32,6 +32,16 @@ class AI_Logger {
 	protected $throttle_limit;
 
 	/**
+	 * A collection of log entries that should be inspected
+	 * for inclusion in a DB insert at the end of the WP
+	 * lifecycle.
+	 *
+	 * @var array
+	 * @access protected
+	 */
+	protected $log_stack = array();
+
+	/**
 	 * Get the instance of this singleton
 	 *
 	 * @access public
@@ -98,30 +108,54 @@ class AI_Logger {
 			$message .= "\r\n\r\n" . esc_html( $e->getTraceAsString() );
 		}
 
-		// determine if this insert should actually write to the DB
-		if ( $this->insert_permitted( $key, $args ) ) {
-			$post_args = array(
-				'post_title' => $key,
-				'post_status' => 'publish',
-				'post_type' => 'ai_log',
-				'comment_status' => 'closed',
-				'ping_status' => 'closed',
-				'post_content' => $message,
+		// add the log entry to the top of the stack,
+		// using the transient key as the array key
+		$transient_key = 'ai_log_' . md5( $key . $args['context'] );
+		if ( ! array_key_exists( $transient_key, $this->log_stack ) ) {
+			$this->log_stack[ $transient_key ] = array(
+				'key' => $key,
+				'message' => $message,
+				'args' => $args,
 			);
-			$new_post_id = wp_insert_post( $post_args );
+		}
 
-			if ( $new_post_id ) {
-				$this->assign_terms( $new_post_id, $this->allowed_levels[ $args['level'] ], 'ai_log_level' );
-				if ( ! empty( $args['context'] ) ) {
-					$this->assign_terms( $new_post_id, $args['context'], 'ai_log_context' );
+	}
+
+	/**
+	 * Callback for the 'shutdown' hook
+	 *
+	 * This function will parse the array of collected
+	 * log entries and record them to the database
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function record_logs() {
+		// loop through the array of possible log entries
+		foreach ( $this->log_stack as $transient_key => $log ) {
+			// determine if this insert should actually write to the DB
+			if ( $this->insert_permitted( $transient_key, $log ) ) {
+				$post_args = array(
+					'post_title' => $log['key'],
+					'post_status' => 'publish',
+					'post_type' => 'ai_log',
+					'comment_status' => 'closed',
+					'ping_status' => 'closed',
+					'post_content' => $log['message'],
+				);
+				$new_post_id = wp_insert_post( $post_args );
+
+				if ( $new_post_id ) {
+					$this->assign_terms( $new_post_id, $this->allowed_levels[ $log['args']['level'] ], 'ai_log_level' );
+					if ( ! empty( $log['args']['context'] ) ) {
+						$this->assign_terms( $new_post_id, $log['args']['context'], 'ai_log_context' );
+					}
 				}
-			}
 
-			// create a unique transient key based on the log key and context
-			if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
-				$context = ! empty( $args['context'] ) ? $args['context'] : '';
-				$transient_key = 'ai_log_' . md5( $key . $context );
-				set_transient( $transient_key, true, $this->throttle_limit );
+				// create a unique transient key based on the log key and context
+				if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
+					set_transient( $transient_key, true, $this->throttle_limit );
+				}
 			}
 		}
 	}
@@ -175,12 +209,12 @@ class AI_Logger {
 	 * is defined as true (for info levels) and will throttle
 	 * the overall inserts happening to the DB
 	 *
-	 * @param string $key
-	 * @param array $args
+	 * @param string $transient_key
+	 * @param array $log
 	 * @access protected
 	 * @return bool
 	 */
-	protected function insert_permitted( $key, $args ) {
+	protected function insert_permitted( $transient_key, $log ) {
 
 		// if the site is in debug mode, always write to the log
 		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
@@ -188,13 +222,9 @@ class AI_Logger {
 		} else {
 			// in production, do not write info messages to the log
 			// unless the filter has been overriden
-			if ( 'info' === $args['level'] && ! apply_filters( 'ai_logger_allow_production_info_logs', false ) ) {
+			if ( 'info' === $log['args']['level'] && ! apply_filters( 'ai_logger_allow_production_info_logs', false ) ) {
 				return false;
 			}
-
-			// create a unique transient key based on the log key and context
-			$context = ! empty( $args['context'] ) ? $args['context'] : '';
-			$transient_key = 'ai_log_' . md5( $key . $context );
 
 			// the throttling transient has expired if get_transient
 			// returns false, and a new insert should be permitted

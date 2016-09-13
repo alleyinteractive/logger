@@ -57,23 +57,14 @@ class AI_Logger_Plugin {
 	 */
 	public function run() {
 		// required includes
-		add_action( 'after_setup_theme', array( $this, 'setup_dependencies' ) );
-	}
-
-	/**
-	 * Include various files and setup dependent classes
-	 * after the theme has been loaded
-	 *
-	 * @access public
-	 * @return void
-	 */
-	public function setup_dependencies() {
 		require_once( $this->plugin_path . 'includes/class-ai-logger-post-type.php' );
 		require_once( $this->plugin_path . 'includes/class-ai-logger-post-type-log.php' );
 		require_once( $this->plugin_path . 'includes/class-ai-logger-taxonomy.php' );
 		require_once( $this->plugin_path . 'includes/class-ai-logger-taxonomy-context.php' );
 		require_once( $this->plugin_path . 'includes/class-ai-logger-taxonomy-level.php' );
 		require_once( $this->plugin_path . 'includes/class-ai-logger.php' );
-	}
 
+		// hooks and filters
+		add_action( 'shutdown', array( AI_Logger::instance(), 'record_logs' ) );
+	}
 }
