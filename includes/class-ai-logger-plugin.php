@@ -63,9 +63,9 @@ class AI_Logger_Plugin {
 		require_once( $this->plugin_path . 'includes/class-ai-logger-taxonomy-context.php' );
 		require_once( $this->plugin_path . 'includes/class-ai-logger-taxonomy-level.php' );
 		require_once( $this->plugin_path . 'includes/class-ai-logger.php' );
-		require_once( $this->plugin_path . 'includes/template-tags.php' );
 
 		// hooks and filters
+		add_action( 'ai_logger_insert', array( AI_Logger::instance(), 'insert' ), 10, 3 );
 		add_action( 'shutdown', array( AI_Logger::instance(), 'record_logs' ) );
 	}
 }

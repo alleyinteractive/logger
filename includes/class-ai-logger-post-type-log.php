@@ -39,6 +39,7 @@ class AI_Logger_Post_Type_Log extends AI_Logger_Post_Type {
 			'menu_icon' => 'dashicons-warning',
 			'menu_position' => 80,
 			'capabilities' => array(
+				'create_posts'       => 'ai_log_create_posts',
 				'edit_post'          => 'update_core',
 				'read_post'          => 'update_core',
 				'delete_post'        => 'update_core',
