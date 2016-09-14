@@ -40,14 +40,14 @@ class AI_Logger_Post_Type_Log extends AI_Logger_Post_Type {
 			'menu_position' => 80,
 			'capabilities' => array(
 				'create_posts'       => 'ai_log_create_posts',
-				'edit_post'          => 'update_core',
-				'read_post'          => 'update_core',
-				'delete_post'        => 'update_core',
-				'edit_posts'         => 'update_core',
-				'edit_others_posts'  => 'update_core',
-				'delete_posts'       => 'update_core',
-				'publish_posts'      => 'update_core',
-				'read_private_posts' => 'update_core',
+				'edit_post'          => 'create_users',
+				'read_post'          => 'create_users',
+				'delete_post'        => 'create_users',
+				'edit_posts'         => 'create_users',
+				'edit_others_posts'  => 'create_users',
+				'delete_posts'       => 'create_users',
+				'publish_posts'      => 'create_users',
+				'read_private_posts' => 'create_users',
 			),
 		) );
 	}
