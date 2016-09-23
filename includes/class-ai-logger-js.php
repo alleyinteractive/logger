@@ -1,6 +1,8 @@
 <?php
 /**
  * Class to implement JavaScript logging functionality.
+ * Disabled by default. to enable, filter ai_logger_enable_js_logging.
+ * e.g. Place `add_filter( 'ai_logger_enable_js_logging', '__return_true' );` in your theme.
  */
 class AI_Logger_JS {
 
@@ -66,7 +68,7 @@ class AI_Logger_JS {
 }
 
 add_action( 'after_setup_theme', function() {
-	if ( apply_filters( 'ai_logger_enable_js_logging', true ) ) {
+	if ( apply_filters( 'ai_logger_enable_js_logging', false ) ) {
 		new AI_Logger_JS();
 	}
 }, 20 );
