@@ -21,8 +21,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+define( 'AI_LOGGER_PATH', plugin_dir_path( __FILE__ ) );
+define( 'AI_LOGGER_URL', plugins_url( '/', __FILE__ ) );
+
 // require the main plugin class
-require_once plugin_dir_path( __FILE__ ) . 'includes/class-ai-logger-plugin.php';
+require_once AI_LOGGER_PATH . 'includes/class-ai-logger-plugin.php';
 
 /**
  * Begin execution of the main plugin class

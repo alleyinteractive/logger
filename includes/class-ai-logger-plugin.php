@@ -62,6 +62,7 @@ class AI_Logger_Plugin {
 		require_once( $this->plugin_path . 'includes/class-ai-logger-taxonomy.php' );
 		require_once( $this->plugin_path . 'includes/class-ai-logger-taxonomy-context.php' );
 		require_once( $this->plugin_path . 'includes/class-ai-logger-taxonomy-level.php' );
+		require_once( $this->plugin_path . 'includes/class-ai-logger-js.php' );
 		require_once( $this->plugin_path . 'includes/class-ai-logger.php' );
 
 		// hooks and filters
