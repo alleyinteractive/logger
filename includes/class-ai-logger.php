@@ -172,35 +172,22 @@ class AI_Logger {
 	 * @return void
 	 */
 	protected function assign_terms( $new_post_id, $term, $taxonomy ) {
-
-		$term_id = false;
-
-		if ( function_exists( 'wpcom_vip_get_term_by' ) ) {
-			$existing_term = wpcom_vip_get_term_by( 'name', $term, $taxonomy );
-		} else {
-			$existing_term = get_term_by( 'name', $term, $taxonomy );
-		}
+		$term_id       = false;
+		$existing_term = get_term_by( 'name', $term, $taxonomy );
 
 		if ( ! $existing_term ) {
-
 			$existing_term = wp_insert_term( $term, $taxonomy );
 
 			if ( ! empty( $existing_term ) && ! is_wp_error( $existing_term ) ) {
 				$term_id = $existing_term['term_id'];
 			}
-
 		} else {
-
 			$term_id = $existing_term->term_id;
-
 		}
 
 		if ( $term_id ) {
-
 			wp_set_object_terms( $new_post_id, $term_id, $taxonomy );
-
 		}
-
 	}
 
 	/**
