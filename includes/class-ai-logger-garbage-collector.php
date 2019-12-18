@@ -60,7 +60,7 @@ class AI_Logger_Garbage_Collector {
 					'fields'                 => 'ids',
 					'ignore_sticky_posts'    => true,
 					'post_type'              => 'ai_log',
-					'posts_per_page'         => 100,
+					'posts_per_page'         => $throttle ? 100 : 1000,
 					'suppress_filters'       => false,
 					'update_post_meta_cache' => false,
 					'update_post_term_cache' => false,
