@@ -42,6 +42,13 @@ class AI_Logger {
 	protected $log_stack = array();
 
 	/**
+	 * Flag to write the logs on shutodown.
+	 *
+	 * @var bool
+	 */
+	public $write_on_shutdown = true;
+
+	/**
 	 * Get the instance of this singleton
 	 *
 	 * @access public
@@ -119,6 +126,9 @@ class AI_Logger {
 			);
 		}
 
+		if ( ! $this->write_on_shutdown ) {
+			$this->record_logs();
+		}
 	}
 
 	/**
@@ -157,6 +167,9 @@ class AI_Logger {
 					set_transient( $transient_key, true, $this->throttle_limit );
 				}
 			}
+
+			// Remove the log from the stack.
+			unset( $this->log_stack[ $transient_key ] );
 		}
 	}
 
