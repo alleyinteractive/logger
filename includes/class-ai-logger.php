@@ -29,7 +29,7 @@ class AI_Logger {
 	 * @var int
 	 * @access protected
 	 */
-	protected $throttle_limit;
+	protected $throttle_limit = 60;
 
 	/**
 	 * A collection of log entries that should be inspected
@@ -59,7 +59,7 @@ class AI_Logger {
 
 		if ( ! isset( static::$instance ) ) {
 			static::$instance = new AI_Logger();
-			static::$instance->setup();
+			\add_action( 'init', [ static::$instance, 'setup' ] );
 		}
 		return static::$instance;
 
@@ -80,8 +80,12 @@ class AI_Logger {
 			'critical' => __( 'Critical', 'ai-logger' ),
 		);
 
-		$this->throttle_limit = apply_filters( 'ai_logger_throttle_limit', MINUTE_IN_SECONDS * 15 );
-
+		/**
+		 * Limit the throttle of storing logs, defaults to 15 minutes.
+		 *
+		 * @param int $throttle Throttle limit.
+		 */
+		$this->throttle_limit = absint( apply_filters( 'ai_logger_throttle_limit', MINUTE_IN_SECONDS * 15 ) );
 	}
 
 	/**
