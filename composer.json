@@ -1,0 +1,24 @@
+{
+    "name": "alleyinteractive/internal-flags",
+    "description": "Use a hidden taxonomy to improve expensive queries.",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Alley Interactive",
+            "email": "info@alley.co"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/alleyinteractive/Alley-Coding-Standards"
+        }
+    ],
+    "require-dev": {
+        "alley/alley-coding-standards": "dev-master"
+    },
+    "scripts": {
+        "phpcs" : "phpcs --standard=./phpcs.xml ."
+    }
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<phpunit
+	bootstrap="tests/bootstrap.php"
+	backupGlobals="false"
+	colors="true"
+	convertErrorsToExceptions="true"
+	convertNoticesToExceptions="true"
+	convertWarningsToExceptions="true"
+>
+
+	<rule ref="vendor/alley/alley-coding-standards" />
+	<arg value="ps" />
+	<arg name="severity" value="1" />
+
+	<exclude-pattern>tests/</exclude-pattern>
+
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="AI_Logger"/>
+			</property>
+		</properties>
+	</rule>
+</phpunit>
