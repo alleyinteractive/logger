@@ -5,6 +5,8 @@
  * @package AI_Logger
  */
 
+namespace AI_Logger;
+
 /**
  * Main class responsible for defining the logger functionality
  */

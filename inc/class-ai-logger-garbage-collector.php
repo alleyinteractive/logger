@@ -2,8 +2,10 @@
 /**
  * AI_Logger_Garbage_Collector class file.
  *
- * @package ai
+ * @package AI_Logger
  */
+
+namespace AI_Logger;
 
 /**
  * AI Logger Garbage Collector
@@ -88,5 +90,3 @@ class AI_Logger_Garbage_Collector {
 		}
 	}
 }
-
-add_action( 'init', [ AI_Logger_Garbage_Collector::class, 'add_hooks' ] );
