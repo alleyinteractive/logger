@@ -23,14 +23,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 require_once __DIR__ . '/includes/class-ai-logger-plugin.php';
 
-/**
- * Begin execution of the main plugin class.
- *
- * @access public
- * @return void
- */
-function ai_logger_plugin_init() {
-	$plugin = new AI_Logger_Plugin( __FILE__ );
-	$plugin->run();
-}
-ai_logger_plugin_init();
+add_action(
+	'plugins_loaded',
+	function () { 
+		// Begin execution of the main plugin class.
+		(new AI_Logger_Plugin( __FILE__ ))->run();
+	},
+	10,
+	0
+);
