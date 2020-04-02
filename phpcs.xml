@@ -8,11 +8,19 @@
 	convertWarningsToExceptions="true"
 >
 
-	<rule ref="vendor/alley/alley-coding-standards" />
+	<rule ref="vendor/alley/alley-coding-standards">
+		<exclude name="Squiz.Commenting.FileComment.Missing" />
+		<exclude name="WordPress.NamingConventions.ValidPostTypeSlug.NotStringLiteral" />
+	</rule>
+
 	<arg value="ps" />
 	<arg name="severity" value="1" />
 
 	<exclude-pattern>tests/</exclude-pattern>
+
+	<rule ref="WordPress">
+		<exclude name="WordPress.NamingConventions.ValidPostTypeSlug.NotStringLiteral" />
+	</rule>
 
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
 		<properties>
