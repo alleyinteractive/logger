@@ -1,8 +1,16 @@
 <?php
 /**
+ * AI_Logger_Plugin class file.
+ *
+ * @package AI_Logger
+ */
+
+namespace AI_Logger;
+
+/**
  * Main class responsible for defining plugin settings, hooks, and filters
  */
-class AI_Logger_Plugin {
+class Plugin {
 
 	/**
 	 * A unique identifier for various slugs used throughout the plugin
@@ -57,17 +65,10 @@ class AI_Logger_Plugin {
 	 * @return void
 	 */
 	public function run() {
-		// required includes.
-		require_once __DIR__ . '/class-ai-logger-post-type.php';
-		require_once __DIR__ . '/class-ai-logger-post-type-log.php';
-		require_once __DIR__ . '/class-ai-logger-taxonomy.php';
-		require_once __DIR__ . '/class-ai-logger-taxonomy-context.php';
-		require_once __DIR__ . '/class-ai-logger-taxonomy-level.php';
-		require_once __DIR__ . '/class-ai-logger.php';
-		require_once __DIR__ . '/class-ai-logger-garbage-collector.php';
+		new Data_Structures();
 
-		// hooks and filters.
-		add_action( 'ai_logger_insert', array( AI_Logger::instance(), 'insert' ), 10, 3 );
-		add_action( 'shutdown', array( AI_Logger::instance(), 'record_logs' ) );
+		add_action( 'ai_logger_insert', [ AI_Logger::instance(), 'insert' ], 10, 3 );
+		add_action( 'shutdown', [ AI_Logger::instance(), 'record_logs' ] );
+		add_action( 'init', [ AI_Logger_Garbage_Collector::class, 'add_hooks' ] );
 	}
 }

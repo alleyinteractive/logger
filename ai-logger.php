@@ -17,17 +17,28 @@
  * @author jaredcobb
  */
 
+namespace AI_Logger;
+
+use function AI_Logger\generate_autoloader;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-require_once __DIR__ . '/includes/class-ai-logger-plugin.php';
+// Load the one required file.
+require_once __DIR__ . '/inc/autoload.php';
+
+try {
+	\spl_autoload_register( generate_autoloader( __NAMESPACE__, __DIR__ . '/inc/' ) );
+} catch ( \Exception $exception ) {
+	wp_die( esc_html__( 'Error generating autoloader.', 'ai-logger' ) );
+}
 
 add_action(
 	'plugins_loaded',
 	function () {
 		// Begin execution of the main plugin class.
-		( new AI_Logger_Plugin( __FILE__ ) )->run();
+		( new Plugin( __FILE__ ) )->run();
 	},
 	10,
 	0
