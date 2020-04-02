@@ -16,7 +16,7 @@ class Data_Structures {
 	 *
 	 * @var string
 	 */
-	public const POST_TYPE= 'ai_log';
+	public const POST_TYPE = 'ai_log';
 
 	/**
 	 * Taxonomy name for log context.
