@@ -6,10 +6,6 @@ language: php
 notifications:
   email: false
 
-branches:
-  only:
-    - master
-
 cache:
   directories:
     - $HOME/.composer/cache
