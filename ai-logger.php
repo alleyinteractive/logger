@@ -25,9 +25,9 @@ require_once __DIR__ . '/includes/class-ai-logger-plugin.php';
 
 add_action(
 	'plugins_loaded',
-	function () { 
+	function () {
 		// Begin execution of the main plugin class.
-		(new AI_Logger_Plugin( __FILE__ ))->run();
+		( new AI_Logger_Plugin( __FILE__ ) )->run();
 	},
 	10,
 	0
