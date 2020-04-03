@@ -16,7 +16,7 @@ abstract class AI_Logger_Post_Type {
 	 * Constructor.
 	 */
 	public function __construct() {
-		// Create the post type
+		// Create the post type.
 		add_action( 'init', array( $this, 'create_post_type' ) );
 	}
 

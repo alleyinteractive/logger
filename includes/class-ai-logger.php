@@ -1,11 +1,17 @@
 <?php
 /**
+ * AI_Logger class file.
+ *
+ * @package AI_Logger
+ */
+
+/**
  * Main class responsible for defining the logger functionality
  */
 class AI_Logger {
 
 	/**
-	 * instance
+	 * Class instance.
 	 *
 	 * @var AI_Logger
 	 * @access protected
@@ -53,16 +59,15 @@ class AI_Logger {
 	 *
 	 * @access public
 	 * @static
-	 * @return object
+	 * @return AI_Logger
 	 */
 	public static function instance() {
 
 		if ( ! isset( static::$instance ) ) {
 			static::$instance = new AI_Logger();
-			static::$instance->setup();
 		}
-		return static::$instance;
 
+		return static::$instance;
 	}
 
 	/**
@@ -71,12 +76,11 @@ class AI_Logger {
 	 * @access public
 	 * @return void
 	 */
-	public function setup() {
-
+	protected function __construct() {
 		$this->allowed_levels = array(
-			'info' => __( 'Info', 'ai-logger' ),
-			'warning' => __( 'Warning', 'ai-logger' ),
-			'error' => __( 'Error', 'ai-logger' ),
+			'info'     => __( 'Info', 'ai-logger' ),
+			'warning'  => __( 'Warning', 'ai-logger' ),
+			'error'    => __( 'Error', 'ai-logger' ),
 			'critical' => __( 'Critical', 'ai-logger' ),
 		);
 
@@ -87,42 +91,46 @@ class AI_Logger {
 	/**
 	 * Inserts a new log entry
 	 *
-	 * @param string $key A short and unique title for the log entry
-	 * @param string $message An info or error message
-	 * @param array $args Optional
+	 * @param string $key A short and unique title for the log entry.
+	 * @param string $message An info or error message.
+	 * @param array  $args Arguments (optional).
 	 * @access public
 	 * @return void
 	 */
 	public function insert( $key, $message, $args = array() ) {
 
 		$defaults = array(
-			'level' => 'error',
-			'context' => '',
+			'level'               => 'error',
+			'context'             => '',
 			'include_stack_trace' => true,
 		);
 
-		// parse incoming $args and merge it with $defaults
+		// Parse incoming $args and merge it with $defaults.
 		$args = wp_parse_args( $args, $defaults );
 
-		// validate the level term is actually an allowed term for this taxonomy
-		// otherwise just force the log level to be 'error'
+		/**
+		 * Validate the level term is actually an allowed term for this taxonomy
+		 * otherwise just force the log level to be 'error'.
+		 */
 		if ( ! array_key_exists( $args['level'], $this->allowed_levels ) ) {
 			$args['level'] = 'error';
 		}
 
 		if ( true === $args['include_stack_trace'] ) {
-			$e = new \Exception;
+			$e        = new \Exception();
 			$message .= "\r\n\r\n" . esc_html( $e->getTraceAsString() );
 		}
 
-		// add the log entry to the top of the stack,
-		// using the transient key as the array key
+		/**
+		 * Add the log entry to the top of the stack, using the transient key
+		 * as the array key.
+		 */
 		$transient_key = 'ai_log_' . md5( $key . $args['context'] );
 		if ( ! array_key_exists( $transient_key, $this->log_stack ) ) {
 			$this->log_stack[ $transient_key ] = array(
-				'key' => $key,
+				'key'     => $key,
 				'message' => $message,
-				'args' => $args,
+				'args'    => $args,
 			);
 		}
 
@@ -141,17 +149,17 @@ class AI_Logger {
 	 * @return void
 	 */
 	public function record_logs() {
-		// loop through the array of possible log entries
+		// Loop through the array of possible log entries.
 		foreach ( $this->log_stack as $transient_key => $log ) {
-			// determine if this insert should actually write to the DB
+			// Determine if this insert should actually write to the DB.
 			if ( $this->insert_permitted( $transient_key, $log ) ) {
-				$post_args = array(
-					'post_title' => $log['key'],
-					'post_status' => 'publish',
-					'post_type' => 'ai_log',
+				$post_args   = array(
+					'post_title'     => $log['key'],
+					'post_status'    => 'publish',
+					'post_type'      => 'ai_log',
 					'comment_status' => 'closed',
-					'ping_status' => 'closed',
-					'post_content' => $log['message'],
+					'ping_status'    => 'closed',
+					'post_content'   => $log['message'],
 				);
 				$new_post_id = wp_insert_post( $post_args );
 
@@ -162,7 +170,7 @@ class AI_Logger {
 					}
 				}
 
-				// create a unique transient key based on the log key and context
+				// create a unique transient key based on the log key and context.
 				if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
 					set_transient( $transient_key, true, $this->throttle_limit );
 				}
@@ -178,42 +186,29 @@ class AI_Logger {
 	 * used to apply a Log Level (info, warning, error) and the
 	 * custom context to a log
 	 *
-	 * @param int $new_post_id
-	 * @param string $term
-	 * @param string $taxonomy
+	 * @param int    $new_post_id Post ID.
+	 * @param string $term Term name.
+	 * @param string $taxonomy Taxonomy name.
 	 * @access protected
 	 * @return void
 	 */
 	protected function assign_terms( $new_post_id, $term, $taxonomy ) {
-
-		$term_id = false;
-
-		if ( function_exists( 'wpcom_vip_get_term_by' ) ) {
-			$existing_term = wpcom_vip_get_term_by( 'name', $term, $taxonomy );
-		} else {
-			$existing_term = get_term_by( 'name', $term, $taxonomy );
-		}
+		$term_id       = false;
+		$existing_term = get_term_by( 'name', $term, $taxonomy );
 
 		if ( ! $existing_term ) {
-
 			$existing_term = wp_insert_term( $term, $taxonomy );
 
 			if ( ! empty( $existing_term ) && ! is_wp_error( $existing_term ) ) {
 				$term_id = $existing_term['term_id'];
 			}
-
 		} else {
-
 			$term_id = $existing_term->term_id;
-
 		}
 
 		if ( $term_id ) {
-
 			wp_set_object_terms( $new_post_id, $term_id, $taxonomy );
-
 		}
-
 	}
 
 	/**
@@ -222,52 +217,29 @@ class AI_Logger {
 	 * is defined as true (for info levels) and will throttle
 	 * the overall inserts happening to the DB
 	 *
-	 * @param string $transient_key
-	 * @param array $log
+	 * @param string $transient_key Transient key to store to.
+	 * @param array  $log Log arguments.
 	 * @access protected
 	 * @return bool
 	 */
-	protected function insert_permitted( $transient_key, $log ) {
-
-		// if the site is in debug mode, always write to the log
+	protected function insert_permitted( $transient_key, $log ): bool {
+		// If the site is in debug mode, always write to the log.
 		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
 			return true;
 		} else {
-			// in production, do not write info messages to the log
-			// unless the filter has been overriden
+			/**
+			 * In production, do not write info messages to the log unless the
+			 * filter has been overridden.
+			 */
 			if ( 'info' === $log['args']['level'] && ! apply_filters( 'ai_logger_allow_production_info_logs', false ) ) {
 				return false;
 			}
 
-			// the throttling transient has expired if get_transient
-			// returns false, and a new insert should be permitted
+			/**
+			 * The throttling transient has expired if get_transient returns false,
+			 * and a new insert should be permitted.
+			 */
 			return false === get_transient( $transient_key );
 		}
-
-	}
-
-	/**
-	 * Protected constructor to prevent creating a new instance of the
-	 * singleton via the `new` operator from outside of this class.
-	 */
-	protected function __construct() {
-	}
-
-	/**
-	 * Private clone method to prevent cloning of the instance of the
-	 * singleton instance.
-	 *
-	 * @return void
-	 */
-	private function __clone() {
-	}
-
-	/**
-	 * Private unserialize method to prevent unserializing of the
-	 * singleton instance.
-	 *
-	 * @return void
-	 */
-	private function __wakeup() {
 	}
 }

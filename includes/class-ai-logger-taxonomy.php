@@ -1,4 +1,9 @@
 <?php
+/**
+ * AI_Logger_Taxonomy class file
+ *
+ * @package AI_Logger
+ */
 
 /**
  * Abstract class for taxonomy classes
@@ -23,7 +28,7 @@ abstract class AI_Logger_Taxonomy {
 	 * Constructor.
 	 */
 	public function __construct() {
-		// Create the taxonomy
+		// Create the taxonomy.
 		add_action( 'init', array( $this, 'create_taxonomy' ) );
 	}
 

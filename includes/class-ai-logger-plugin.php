@@ -39,14 +39,15 @@ class AI_Logger_Plugin {
 	/**
 	 * Initialize the plugin settings
 	 *
+	 * @param string $plugin_root Plugin root path.
 	 * @access public
 	 * @return void
 	 */
 	public function __construct( $plugin_root ) {
-		$this->token = 'ai-logger';
-		$this->plugin_url = apply_filters( 'ai_logger_plugin_dir_url', plugin_dir_url( $plugin_root ) );
+		$this->token       = 'ai-logger';
+		$this->plugin_url  = apply_filters( 'ai_logger_plugin_dir_url', plugin_dir_url( $plugin_root ) );
 		$this->plugin_path = apply_filters( 'ai_logger_plugin_dir_path', plugin_dir_path( $plugin_root ) );
-		$this->version = '1.0.0';
+		$this->version     = '1.0.0';
 	}
 
 	/**
@@ -56,16 +57,16 @@ class AI_Logger_Plugin {
 	 * @return void
 	 */
 	public function run() {
-		// required includes
-		require_once( $this->plugin_path . 'includes/class-ai-logger-post-type.php' );
-		require_once( $this->plugin_path . 'includes/class-ai-logger-post-type-log.php' );
-		require_once( $this->plugin_path . 'includes/class-ai-logger-taxonomy.php' );
-		require_once( $this->plugin_path . 'includes/class-ai-logger-taxonomy-context.php' );
-		require_once( $this->plugin_path . 'includes/class-ai-logger-taxonomy-level.php' );
-		require_once( $this->plugin_path . 'includes/class-ai-logger.php' );
-		require_once( $this->plugin_path . 'includes/class-ai-logger-garbage-collector.php' );
+		// required includes.
+		require_once __DIR__ . '/class-ai-logger-post-type.php';
+		require_once __DIR__ . '/class-ai-logger-post-type-log.php';
+		require_once __DIR__ . '/class-ai-logger-taxonomy.php';
+		require_once __DIR__ . '/class-ai-logger-taxonomy-context.php';
+		require_once __DIR__ . '/class-ai-logger-taxonomy-level.php';
+		require_once __DIR__ . '/class-ai-logger.php';
+		require_once __DIR__ . '/class-ai-logger-garbage-collector.php';
 
-		// hooks and filters
+		// hooks and filters.
 		add_action( 'ai_logger_insert', array( AI_Logger::instance(), 'insert' ), 10, 3 );
 		add_action( 'shutdown', array( AI_Logger::instance(), 'record_logs' ) );
 	}
