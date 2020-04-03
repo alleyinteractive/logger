@@ -40,5 +40,5 @@ script:
     if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
       composer run phpcs
     fi
-
-    phpunit
+  - |
+    vendor/bin/phpunit
