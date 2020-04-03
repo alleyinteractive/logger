@@ -1,5 +1,6 @@
+dist: bionic
+
 sudo: false
-dist: trusty
 
 language: php
 
@@ -16,7 +17,8 @@ matrix:
       env: WP_VERSION=latest WP_TRAVISCI=phpcs
 
 before_script:
-  - export PATH="$HOME/.composer/vendor/bin:$PATH"
+  - |
+    export PATH="$HOME/.composer/vendor/bin:$PATH"
   - |
     if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
       phpenv config-rm xdebug.ini
