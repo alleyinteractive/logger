@@ -79,15 +79,24 @@ class AI_Logger {
 	 * @return void
 	 */
 	protected function __construct() {
+		/**
+		 * Log levels according to RFC 5424.
+		 *
+		 * @link https://tools.ietf.org/html/rfc5424
+		 */
 		$this->allowed_levels = array(
-			'info'     => __( 'Info', 'ai-logger' ),
-			'warning'  => __( 'Warning', 'ai-logger' ),
-			'error'    => __( 'Error', 'ai-logger' ),
-			'critical' => __( 'Critical', 'ai-logger' ),
+			'emergency' => __( 'Emergency', 'ai-logger' ),
+			'alert'     => __( 'Alert', 'ai-logger' ),
+			'critical'  => __( 'Critical', 'ai-logger' ),
+			'error'     => __( 'Error', 'ai-logger' ),
+			'warning'   => __( 'Warning', 'ai-logger' ),
+			'notice'    => __( 'Notice', 'ai-logger' ),
+			'info'      => __( 'Info', 'ai-logger' ),
+			'debug'     => __( 'Debug', 'ai-logger' ),
+			'log'       => __( 'Log', 'ai-logger' ),
 		);
 
 		$this->throttle_limit = apply_filters( 'ai_logger_throttle_limit', MINUTE_IN_SECONDS * 15 );
-
 	}
 
 	/**
