@@ -1,6 +1,7 @@
 {
-    "name": "alleyinteractive/internal-flags",
-    "description": "Use a hidden taxonomy to improve expensive queries.",
+    "name": "alleyinteractive/logger",
+    "description": "A logger tool that stores errors and messages as a custom post type.",
+    "homepage": "https://github.com/alleyinteractive/logger",
     "type": "wordpress-plugin",
     "license": "GPL-2.0-or-later",
     "authors": [
@@ -20,5 +21,11 @@
     },
     "scripts": {
         "phpcs" : "phpcs --standard=./phpcs.xml ."
+    },
+    "autoload": {
+        "classmap": ["inc/"]
+    },
+    "require": {
+        "psr/log": "^1.1"
     }
 }
