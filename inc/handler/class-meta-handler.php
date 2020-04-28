@@ -16,7 +16,7 @@ namespace AI_Logger\Handler;
  * the log messages for once it is back to the original site. Logs will
  * be stored on 'shutdown'.
  */
-abstract class Meta_Handler {
+abstract class Meta_Handler extends Handler {
 	/**
 	 * Object ID to store in.
 	 *
