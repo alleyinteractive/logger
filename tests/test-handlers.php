@@ -1,8 +1,10 @@
 <?php
 namespace AI_Logger\Tests;
 
+use AI_Logger\AI_Logger;
 use AI_Logger\Handler\{
-	Post_Meta_Handler,
+    Post_Handler,
+    Post_Meta_Handler,
 	Term_Meta_Handler
 };
 
@@ -82,6 +84,69 @@ class Test_Class_Handler extends \WP_UnitTestCase {
 		list( $level, $message ) = array_shift( $log );
 		$this->assertEquals( 'info', $level );
 		$this->assertEquals( 'Test message', $message );
+	}
+
+	/**
+	 * Test the legacy method to write logs via 'ai_logger_insert'.
+	 */
+	public function test_legacy_write_logs() {
+		// Ensure all logs are written instantly.
+		add_filter( 'ai_logger_should_write_on_shutdown', '__return_false', 99 );
+
+		$log_key = 'Log key ' . wp_rand( 1, 1000 );
+
+		// Write to the log.
+		\do_action( 'ai_logger_insert', $log_key, 'Log message', [ 'context' => 'log-context' ] );
+
+		// Check if the log exists.
+		$logs = get_posts(
+			[
+				'post_type' => 'ai_log',
+			]
+		);
+
+		$this->assertNotEmpty( $logs );
+
+		$log = array_shift( $logs );
+		$this->assertEquals( $log_key, $log->post_title, 'Log post title should match the "' . $log_key . '"' );
+
+		// Verify the context.
+		$this->assertEquals( $this->get_log_context( $log->ID ), 'log-context' );
+	}
+
+	public function test_post_logger() {
+		// Ensure all logs are written instantly.
+		add_filter( 'ai_logger_should_write_on_shutdown', '__return_false', 99 );
+
+		$log_message = 'Direct Log key ' . wp_rand( 1, 1000 );
+
+		AI_Logger::emergency( $log_message, [ 'context' => 'the-context' ] );
+
+		// Check if the log exists.
+		$logs = get_posts(
+			[
+				'post_type' => 'ai_log',
+			]
+		);
+
+		$this->assertNotEmpty( $logs );
+
+		$log = array_shift( $logs );
+		$this->assertEquals( $log_message, $log->post_title, 'Log post title should match the "' . $log_message . '"' );
+
+		// Verify the context.
+		$this->assertEquals( $this->get_log_context( $log->ID ), 'the-context' );
+	}
+
+	/**
+	 * Quick log context getter.
+	 *
+	 * @param int $log_id Log post ID.
+	 * @return string|null
+	 */
+	protected function get_log_context( int $log_id ): string {
+		$terms = \get_the_terms( $log_id, Post_Handler::TAXONOMY_LOG_CONTEXT );
+		return ! empty( $terms ) ? $terms[0]->slug : null;
 	}
 }
 

@@ -66,9 +66,8 @@ class Plugin {
 	 */
 	public function run() {
 		new Data_Structures();
+		AI_Logger::instance();
 
-		add_action( 'ai_logger_insert', [ AI_Logger::instance(), 'insert' ], 10, 3 );
-		add_action( 'shutdown', [ AI_Logger::instance(), 'record_logs' ] );
 		add_action( 'init', [ AI_Logger_Garbage_Collector::class, 'add_hooks' ] );
 	}
 }
