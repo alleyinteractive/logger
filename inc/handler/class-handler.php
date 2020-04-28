@@ -8,8 +8,8 @@
 namespace AI_Logger\Handler;
 
 use Psr\Log\{
-  AbstractLogger,
-  LoggerInterface
+	AbstractLogger,
+	LoggerInterface
 };
 
 /**

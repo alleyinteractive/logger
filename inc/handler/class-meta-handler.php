@@ -104,11 +104,9 @@ abstract class Meta_Handler extends Handler {
 
 	/**
 	 * Process the queue of log messages.
-	 *
-	 * @param int $new_site_id New site ID.
 	 */
-	public function process_queue( $new_site_id ) {
-		if ( $new_site_id !== $this->original_site_id ) {
+	public function process_queue() {
+		if ( \get_current_blog_id() !== $this->original_site_id ) {
 			return;
 		}
 
