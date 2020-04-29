@@ -3,8 +3,8 @@ namespace AI_Logger\Tests;
 
 use AI_Logger\AI_Logger;
 use AI_Logger\Handler\{
-    Post_Handler,
-    Post_Meta_Handler,
+	Post_Handler,
+	Post_Meta_Handler,
 	Term_Meta_Handler
 };
 
