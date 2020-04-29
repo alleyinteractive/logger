@@ -19,20 +19,38 @@
 
 namespace AI_Logger;
 
-use function AI_Logger\generate_autoloader;
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// Check if Composer is installed.
+if ( ! file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
+	\add_action(
+		'admin_notices',
+		function() {
+			?>
+			<div class="notice notice-error">
+				<p><?php esc_html_e( 'AI Logger: Composer is not installed and the plugin cannot load.', 'ai-logger' ); ?></p>
+			</div>
+			<?php
+		}
+	);
+
+	return;
+}
+
 // Include core dependencies.
 require_once __DIR__ . '/vendor/autoload.php';
-require_once __DIR__ . '/inc/autoload.php';
 
-try {
-	\spl_autoload_register( generate_autoloader( __NAMESPACE__, __DIR__ . '/inc/' ) );
-} catch ( \Exception $exception ) {
-	wp_die( esc_html__( 'Error generating autoloader.', 'ai-logger' ) );
+// If the Composer autoloader doesn't find the main file, fallback to plugin's.
+if ( ! class_exists( 'AI_Logger\AI_Logger' ) ) {
+	require_once __DIR__ . '/inc/autoload.php';
+
+	try {
+		\spl_autoload_register( generate_autoloader( __NAMESPACE__, __DIR__ . '/inc/' ) );
+	} catch ( \Exception $exception ) {
+		wp_die( esc_html__( 'Error generating autoloader.', 'ai-logger' ) );
+	}
 }
 
 AI_Logger::instance();
