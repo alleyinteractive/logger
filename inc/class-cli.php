@@ -127,7 +127,7 @@ class CLI extends \WP_CLI_Command {
 		for ( $i = 0; $i < $assoc_args['count']; $i++ ) {
 			$level = $levels[ array_rand( $levels ) ];
 			$logger->$level(
-				'Example log message: ' . $i,
+				'Example log message: ' . ( $i + 1 ),
 				[
 					'example_context' => $i,
 				]
@@ -168,7 +168,7 @@ class CLI extends \WP_CLI_Command {
 		for ( $i = 0; $i < $assoc_args['count']; $i++ ) {
 			$level = $levels[ array_rand( $levels ) ];
 			$logger->$level(
-				'Example log message: ' . $i,
+				'Example log message: ' . ( $i + 1 ),
 				[
 					'example_context' => $i,
 				]

@@ -31,10 +31,10 @@ class Post_Meta_Box extends Meta_Box {
 	 * Register the log meta box.
 	 *
 	 * @param string   $post_type Post type.
-	 * @param \WP_post $post Post object.
+	 * @param \WP_Post $post Post object.
 	 */
-	public function register_meta_boxes( $post_type, $post ) {
-		$meta = \get_post_meta( $this->object_id, $this->meta_key, false );
+	public function add_meta_boxes( $post_type, $post ) {
+		$meta = \get_post_meta( $post->ID, $this->meta_key, false );
 
 		if ( empty( $meta ) || ! is_array( $meta ) ) {
 			return;

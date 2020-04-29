@@ -12,6 +12,25 @@ namespace AI_Logger\Meta_Box;
  */
 class Term_Meta_Box extends Meta_Box {
 	/**
+	 * Taxonomies to enable it for.
+	 *
+	 * @var string[]
+	 */
+	protected $taxonomies = [];
+
+	/**
+	 * Constructor
+	 *
+	 * @param string $meta_key Meta key for logs.
+	 * @param string $title Title for the meta box.
+	 * @param array  $taxonomies Taxonomies to use.
+	 */
+	public function __construct( string $meta_key, string $title, array $taxonomies ) {
+		$this->taxonomies = $taxonomies;
+		parent::__construct( $meta_key, $title );
+	}
+
+	/**
 	 * Meta type to retrieve the logs for.
 	 *
 	 * @return string
@@ -24,9 +43,8 @@ class Term_Meta_Box extends Meta_Box {
 	 * Method to retrieve the meta box for display.
 	 */
 	public function register_meta_box() {
-		$term = \get_term( $this->object_id );
-		if ( $term instanceof \WP_Term ) {
-			\add_action( "{$term->taxonomy}_edit_form", [ $this, 'render_meta_box' ], 99 );
+		foreach ( $this->taxonomies as $taxonomy ) {
+			\add_action( "{$taxonomy}_edit_form", [ $this, 'render_meta_box' ], 99 );
 		}
 	}
 }

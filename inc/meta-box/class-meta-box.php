@@ -14,13 +14,6 @@ namespace AI_Logger\Meta_Box;
  */
 abstract class Meta_Box {
 	/**
-	 * Object ID.
-	 *
-	 * @var int
-	 */
-	protected $object_id;
-
-	/**
 	 * Meta key for the logs.
 	 *
 	 * @var string
@@ -37,14 +30,14 @@ abstract class Meta_Box {
 	/**
 	 * Constructor
 	 *
-	 * @param int    $object_id Object ID.
 	 * @param string $meta_key Meta key for logs.
 	 * @param string $title Title for the meta box.
 	 */
-	public function __construct( int $object_id, string $meta_key, string $title ) {
-		$this->object_id = $object_id;
-		$this->meta_key  = $meta_key;
-		$this->title     = $title;
+	public function __construct( string $meta_key, string $title ) {
+		$this->meta_key = $meta_key;
+		$this->title    = $title;
+
+		$this->register_meta_box();
 	}
 
 	/**
@@ -61,14 +54,32 @@ abstract class Meta_Box {
 
 	/**
 	 * Render the meta box.
+	 *
+	 * @param mixed $object Object to render meta box for.
 	 */
-	public function render_meta_box() {
-		$logs = \get_metadata( $this->get_meta_type(), $this->object_id, $this->meta_key, false );
+	public function render_meta_box( $object ) {
+		if ( $object instanceof \WP_Post ) {
+			$object_id = $object->ID;
+		} elseif ( $object instanceof \WP_Term ) {
+			$object_id = $object->term_id;
+		} else {
+			// Bail if unknown.
+			return;
+		}
+
+		$logs = \get_metadata( $this->get_meta_type(), $object_id, $this->meta_key, false );
 
 		if ( empty( $logs ) || ! is_array( $logs ) ) {
 			return;
 		}
 
-		include __DIR__ . '/template-parts/meta-box.php';
+		if ( 'term' === $this->get_meta_type() ) {
+			printf(
+				'<h4>%s</h4>',
+				esc_html( $this->title )
+			);
+		}
+
+		include AI_LOGGER_PATH . '/template-parts/meta-box.php'; // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingCustomConstant
 	}
 }
