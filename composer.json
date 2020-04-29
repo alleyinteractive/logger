@@ -4,6 +4,10 @@
     "homepage": "https://github.com/alleyinteractive/logger",
     "type": "wordpress-plugin",
     "license": "GPL-2.0-or-later",
+    "config": {
+      "optimize-autoloader": true,
+      "apcu-autoloader": true
+    },
     "authors": [
         {
             "name": "Alley Interactive",
