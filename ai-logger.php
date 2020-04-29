@@ -54,3 +54,8 @@ if ( ! class_exists( 'AI_Logger\AI_Logger' ) ) {
 }
 
 AI_Logger::instance();
+
+// wp-cli command.
+if ( defined( 'WP_CLI' ) && WP_CLI ) {
+	\WP_CLI::add_command( 'ai-logger', __NAMESPACE__ . '\CLI' );
+}
