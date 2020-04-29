@@ -6,8 +6,8 @@
  * Version: 1.0.0
  * Author: Alley Interactive, Jared Cobb
  * Author URI: https://alley.co/
- * Requires at least: 4.6.0
- * Tested up to: 4.6.1
+ * Requires at least: 5.4
+ * Tested up to: 5.4
  *
  * Text Domain: ai-logger
  * Domain Path: /languages/
