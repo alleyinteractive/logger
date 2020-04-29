@@ -16,7 +16,7 @@ namespace AI_Logger\Handler;
  * the log messages for once it is back to the original site. Logs will
  * be stored on 'shutdown'.
  */
-abstract class Meta_Handler extends Handler {
+abstract class Meta_Handler implements Handler_Interface {
 	/**
 	 * Object ID to store in.
 	 *
@@ -85,7 +85,7 @@ abstract class Meta_Handler extends Handler {
 	 * @param string $message Log message.
 	 * @param array  $context Context to store.
 	 */
-	public function log( $level, $message, array $context = [] ) {
+	public function handle( string $level, string $message, array $context = [] ) {
 		$log_entry   = func_get_args();
 		$log_entry[] = time();
 

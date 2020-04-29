@@ -35,12 +35,4 @@ try {
 	wp_die( esc_html__( 'Error generating autoloader.', 'ai-logger' ) );
 }
 
-add_action(
-	'plugins_loaded',
-	function () {
-		// Begin execution of the main plugin class.
-		( new Plugin( __FILE__ ) )->run();
-	},
-	10,
-	0
-);
+AI_Logger::instance();

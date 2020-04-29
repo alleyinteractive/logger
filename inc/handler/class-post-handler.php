@@ -15,7 +15,7 @@ use Psr\Log\LogLevel;
  * Writes logs to a custom post type that allows logs to be viewed
  * across the site.
  */
-class Post_Handler extends Handler {
+class Post_Handler implements Handler_Interface {
 	/**
 	 * Post type to log to.
 	 *
@@ -115,7 +115,7 @@ class Post_Handler extends Handler {
 	 * @param string $message Log message.
 	 * @param array  $context Context to store.
 	 */
-	public function log( $level, $message, array $context = [] ) {
+	public function handle( string $level, string $message, array $context = [] ) {
 		// Ensure the log entry is always 3 items.
 		$log_entry   = array_slice( func_get_args(), 0, 3 );
 		$log_entry[] = time();

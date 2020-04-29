@@ -1,19 +1,14 @@
 <?php
 /**
- * Logger class file.
+ * Handler_Interface interface file.
  *
  * @package AI_Logger
  */
 
 namespace AI_Logger\Handler;
 
-use Psr\Log\{
-	AbstractLogger,
-	LoggerInterface
-};
-
 /**
- * Abstract Logger
+ * Handler Interface
  *
  * Uses shared methods to define a consistent logger interface to use.
  * Inherited from the PSR-3 logger. The design of the log handlers is
@@ -21,11 +16,11 @@ use Psr\Log\{
  *
  * @link https://github.com/Seldaek/monolog/blob/master/doc/02-handlers-formatters-processors.md
  */
-abstract class Handler extends AbstractLogger implements LoggerInterface {
+interface Handler_Interface {
 	/**
 	 * Clear the stored log, not applicable.
 	 */
-	abstract public function clear();
+	public function clear();
 
 	/**
 	 * Store a log entry.
@@ -39,5 +34,5 @@ abstract class Handler extends AbstractLogger implements LoggerInterface {
 	 * @param string $message Log message.
 	 * @param array  $context Context to store.
 	 */
-	abstract public function log( $level, $message, array $context = [] );
+	public function handle( string $level, string $message, array $context = [] );
 }

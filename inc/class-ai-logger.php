@@ -22,11 +22,11 @@ class AI_Logger {
 	protected static $instance;
 
 	/**
-	 * Post Log Logger Handler
+	 * Logger with a Post Handler attached.
 	 *
-	 * @var Handler\Post_Handler
+	 * @var Logger
 	 */
-	protected $handler;
+	protected $logger;
 
 	/**
 	 * Get the instance of this singleton
@@ -37,30 +37,35 @@ class AI_Logger {
 	 */
 	public static function instance() {
 		if ( ! isset( static::$instance ) ) {
-			static::$instance = new AI_Logger();
+			static::$instance = new static();
 		}
 
 		return static::$instance;
 	}
 
 	/**
-	 * Register various actions & filters, initialize the object
-	 *
-	 * @access public
-	 * @return void
+	 * Register various actions & filters, initialize the object.
 	 */
 	protected function __construct() {
-		$this->handler = new Handler\Post_Handler();
+		new Data_Structures();
+
+		// Setup the global post logger.
+		$this->logger = new Logger(
+			__( 'Post Logger', 'ai-logger' ),
+			[ new Handler\Post_Handler() ]
+		);
+
 		\add_action( 'ai_logger_insert', [ $this, 'insert_legacy_log' ], 10, 3 );
+		\add_action( 'init', [ AI_Logger_Garbage_Collector::class, 'add_hooks' ] );
 	}
 
 	/**
-	 * Getter for the Post Log Handler
+	 * Getter for the Logger instance.
 	 *
-	 * @return Post_Handler
+	 * @return Logger
 	 */
-	public function get_handler(): Handler\Post_Handler {
-		return $this->handler;
+	public function get_logger(): Logger {
+		return $this->logger;
 	}
 
 	/**
@@ -71,7 +76,7 @@ class AI_Logger {
 	 * @param array  $args Arguments (optional).
 	 */
 	public function insert_legacy_log( $key, $message, $args = [] ) {
-		$this->handler->log(
+		$this->logger->log(
 			$args['level'] ?? 'error',
 			$key,
 			array_merge(
@@ -91,7 +96,7 @@ class AI_Logger {
 	 */
 	public static function __callStatic( string $method, array $args = [] ) {
 		return call_user_func_array(
-			[ static::instance()->get_handler(), 'log' ],
+			[ static::instance()->get_logger(), 'log' ],
 			array_merge(
 				[
 					$method,

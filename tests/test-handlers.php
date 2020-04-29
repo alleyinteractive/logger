@@ -19,7 +19,7 @@ class Test_Class_Handler extends \WP_UnitTestCase {
 
 		// Write the log.
 		$post_logger = new Post_Meta_Handler( $post_id, 'test_key' );
-		$post_logger->log( 'info', 'Test message' );
+		$post_logger->handle( 'info', 'Test message' );
 		$post_logger->process_queue();
 
 		$log = get_post_meta( $post_id, 'test_key', false );
@@ -37,14 +37,14 @@ class Test_Class_Handler extends \WP_UnitTestCase {
 
 		// Write the log.
 		$post_logger = new Post_Meta_Handler( $post_id, 'test_key' );
-		$post_logger->log( 'info', 'Test message' );
+		$post_logger->handle( 'info', 'Test message' );
 
 		$new_blog_id = $this->factory->blog->create();
 
 		switch_to_blog( $new_blog_id );
 
 		// Write to the logger again.
-		$post_logger->log( 'error', 'Error from another site!' );
+		$post_logger->handle( 'error', 'Error from another site!' );
 		// Even try and process the log here.
 
 		$post_logger->process_queue();
@@ -75,7 +75,7 @@ class Test_Class_Handler extends \WP_UnitTestCase {
 
 		// Write the log.
 		$post_logger = new Term_Meta_Handler( $term_id, 'test_key' );
-		$post_logger->log( 'info', 'Test message' );
+		$post_logger->handle( 'info', 'Test message' );
 		$post_logger->process_queue();
 
 		$log = get_term_meta( $term_id, 'test_key', false );
