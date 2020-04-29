@@ -3,15 +3,25 @@ namespace AI_Logger\Tests;
 
 use AI_Logger\AI_Logger;
 use AI_Logger\Handler\{
-	Post_Handler,
+    CLI_Handler,
+    Post_Handler,
 	Post_Meta_Handler,
-	Term_Meta_Handler
+	Term_Meta_Handler,
+	Exception_Handler,
+	Handler_Exception
 };
+use Mockery;
+use Psr\Log\LogLevel;
 
 /**
  * Test log handlers.
  */
 class Test_Class_Handler extends \WP_UnitTestCase {
+	public function tearDown() {
+		parent::tearDown();
+		\Mockery::close();
+	}
+
 	public function test_post_handler() {
 		$post_id = $this->factory->post->create();
 
@@ -147,6 +157,24 @@ class Test_Class_Handler extends \WP_UnitTestCase {
 	protected function get_log_context( int $log_id ): string {
 		$terms = \get_the_terms( $log_id, Post_Handler::TAXONOMY_LOG_CONTEXT );
 		return ! empty( $terms ) ? $terms[0]->slug : null;
+	}
+
+	public function test_wp_cli_handler() {
+		$mock = Mockery::mock( 'alias:WP_CLI' );
+		$mock->shouldReceive( 'log' )->twice();
+
+		define( 'WP_CLI', true );
+
+		$cli_handler = new CLI_Handler();
+		$cli_handler->handle( LogLevel::ALERT, 'An alert to log to the CLI!', [ 1, 2, 3 ] );
+		$cli_handler->handle( LogLevel::INFO, 'An info to log to the CLI!', [ 1, 2, 3 ] );
+	}
+
+	public function test_exception_handler() {
+		$this->expectException( Handler_Exception::class );
+
+		$exception_handler = new Exception_Handler();
+		$exception_handler->handle( LogLevel::EMERGENCY, 'A real emergency!', [ 1, 2, 3 ] );
 	}
 }
 
