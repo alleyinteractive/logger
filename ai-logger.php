@@ -23,6 +23,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+define( 'AI_LOGGER_PATH', __DIR__ );
+
 // Check if Composer is installed.
 if ( ! file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 	\add_action(
@@ -54,3 +56,8 @@ if ( ! class_exists( 'AI_Logger\AI_Logger' ) ) {
 }
 
 AI_Logger::instance();
+
+// wp-cli command.
+if ( defined( 'WP_CLI' ) && WP_CLI ) {
+	\WP_CLI::add_command( 'ai-logger', __NAMESPACE__ . '\CLI' );
+}
