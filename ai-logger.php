@@ -6,8 +6,8 @@
  * Version: 1.0.0
  * Author: Alley Interactive, Jared Cobb
  * Author URI: https://alley.co/
- * Requires at least: 4.6.0
- * Tested up to: 4.6.1
+ * Requires at least: 5.4
+ * Tested up to: 5.4
  *
  * Text Domain: ai-logger
  * Domain Path: /languages/
@@ -19,27 +19,38 @@
 
 namespace AI_Logger;
 
-use function AI_Logger\generate_autoloader;
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// Load the one required file.
-require_once __DIR__ . '/inc/autoload.php';
+// Check if Composer is installed.
+if ( ! file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
+	\add_action(
+		'admin_notices',
+		function() {
+			?>
+			<div class="notice notice-error">
+				<p><?php esc_html_e( 'AI Logger: Composer is not installed and the plugin cannot load.', 'ai-logger' ); ?></p>
+			</div>
+			<?php
+		}
+	);
 
-try {
-	\spl_autoload_register( generate_autoloader( __NAMESPACE__, __DIR__ . '/inc/' ) );
-} catch ( \Exception $exception ) {
-	wp_die( esc_html__( 'Error generating autoloader.', 'ai-logger' ) );
+	return;
 }
 
-add_action(
-	'plugins_loaded',
-	function () {
-		// Begin execution of the main plugin class.
-		( new Plugin( __FILE__ ) )->run();
-	},
-	10,
-	0
-);
+// Include core dependencies.
+require_once __DIR__ . '/vendor/autoload.php';
+
+// If the Composer autoloader doesn't find the main file, fallback to plugin's.
+if ( ! class_exists( 'AI_Logger\AI_Logger' ) ) {
+	require_once __DIR__ . '/inc/autoload.php';
+
+	try {
+		\spl_autoload_register( generate_autoloader( __NAMESPACE__, __DIR__ . '/inc/' ) );
+	} catch ( \Exception $exception ) {
+		wp_die( esc_html__( 'Error generating autoloader.', 'ai-logger' ) );
+	}
+}
+
+AI_Logger::instance();

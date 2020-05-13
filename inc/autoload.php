@@ -59,6 +59,7 @@ function generate_autoloader( string $namespace, string $root_path ): callable {
 			if ( \file_exists( $path ) && 0 === validate_file( $path ) ) {
 				// Path is defined by this file and validated.
 				require_once $path; // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable
+				return;
 			}
 		}
 	};

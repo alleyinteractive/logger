@@ -18,6 +18,8 @@ matrix:
   include:
     - php: 7.3
       env: WP_VERSION=latest WP_TRAVISCI=phpcs
+    - php: 7.4
+      env: WP_VERSION=latest
 
 before_install:
   - |
@@ -38,9 +40,7 @@ install:
       composer global require "phpunit/phpunit=4.8.*|5.7.*"
     fi
   - |
-    if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
-      composer install
-    fi
+    composer install
 
 script:
   - |
