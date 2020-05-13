@@ -155,7 +155,7 @@ abstract class Meta_Handler implements Handler_Interface {
 	 * @return Meta_Handler
 	 */
 	public function rotate( int $days = 7 ): Meta_Handler {
-		$logs   = \get_post_meta( $this->object_id, $this->log_key, false );
+		$logs   = \get_metadata( $this->get_meta_type(), $this->object_id, $this->log_key, false );
 		$cutoff = time() - $days * DAY_IN_SECONDS;
 		foreach ( $logs as $log ) {
 			if ( $cutoff > $log[3] ) {
