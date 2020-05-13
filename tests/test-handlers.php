@@ -23,7 +23,7 @@ class Test_Class_Handler extends \WP_UnitTestCase {
 		$post_logger->process_queue();
 
 		$log = get_post_meta( $post_id, 'test_key', false );
-		$this->assertInternalType( 'array', $log, 'Log should have log entires.' );
+		$this->assertInternalType( 'array', $log, 'Log should have log entries.' );
 
 		list( $level, $message ) = array_shift( $log );
 		$this->assertEquals( 'info', $level );
@@ -56,7 +56,7 @@ class Test_Class_Handler extends \WP_UnitTestCase {
 		$post_logger->process_queue();
 
 		$log = get_post_meta( $post_id, 'test_key', false );
-		$this->assertInternalType( 'array', $log, 'Log should have log entires.' );
+		$this->assertInternalType( 'array', $log, 'Log should have log entries.' );
 
 		list( $level, $message ) = array_shift( $log );
 		$this->assertEquals( 'info', $level );
@@ -79,7 +79,7 @@ class Test_Class_Handler extends \WP_UnitTestCase {
 		$post_logger->process_queue();
 
 		$log = get_term_meta( $term_id, 'test_key', false );
-		$this->assertInternalType( 'array', $log, 'Log should have log entires.' );
+		$this->assertInternalType( 'array', $log, 'Log should have log entries.' );
 
 		list( $level, $message ) = array_shift( $log );
 		$this->assertEquals( 'info', $level );

@@ -139,7 +139,6 @@ class Post_Handler implements Handler_Interface {
 
 		// Loop through the array of possible log entries.
 		foreach ( $this->queue as $transient_key => $log ) {
-			// var_dump($log);exit;
 			// Determine if this insert should actually write to the DB.
 			if ( ! $this->insert_permitted( $transient_key, $log ) ) {
 				continue;
