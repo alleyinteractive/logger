@@ -54,7 +54,8 @@ class AI_Logger {
 		// Setup the global post logger.
 		$this->logger = new Logger(
 			__( 'Post Logger', 'ai-logger' ),
-			[ new Handler\Post_Handler() ]
+			[ new Handler\Post_Handler() ],
+			[ new \Monolog\Processor\WebProcessor() ],
 		);
 
 		\add_action( 'ai_logger_insert', [ $this, 'insert_legacy_log' ], 10, 3 );
