@@ -7,6 +7,8 @@
 
 namespace AI_Logger;
 
+use Monolog\Logger;
+
 /**
  * Main class responsible for defining the logger functionality
  */

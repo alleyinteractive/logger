@@ -11,12 +11,20 @@ use AI_Logger\Handler\{
 	Handler_Exception
 };
 use Mockery;
+use Monolog\Logger;
 use Psr\Log\LogLevel;
 
 /**
  * Test log handlers.
  */
 class Test_Class_Handler extends \WP_UnitTestCase {
+	public function setUp() {
+		parent::setUp();
+
+		remove_action( 'shutdown', 'wp_ob_end_flush_all', 1 );
+		add_filter( 'ai_logger_should_write_on_shutdown', '__return_false' );
+	}
+
 	public function tearDown() {
 		parent::tearDown();
 		\Mockery::close();
@@ -28,16 +36,17 @@ class Test_Class_Handler extends \WP_UnitTestCase {
 		$this->assertEmpty( get_post_meta( $post_id, 'test_key', false ), 'Log should be empty.' );
 
 		// Write the log.
-		$post_logger = new Post_Meta_Handler( $post_id, 'test_key' );
-		$post_logger->handle( 'info', 'Test message' );
-		$post_logger->process_queue();
+		$post_logger = new Logger( 'Unit Test', [ new Post_Meta_Handler( Logger::DEBUG, true, $post_id, 'test_key' ) ] );
+		$post_logger->info( 'Test message' );
+
+		do_action( 'shutdown' );
 
 		$log = get_post_meta( $post_id, 'test_key', false );
 		$this->assertInternalType( 'array', $log, 'Log should have log entries.' );
 
-		list( $level, $message ) = array_shift( $log );
-		$this->assertEquals( 'info', $level );
-		$this->assertEquals( 'Test message', $message );
+		$entry = array_shift( $log );
+		$this->assertEquals( 'INFO', $entry['level_name'] );
+		$this->assertEquals( 'Test message', $entry['message'] );
 	}
 
 	public function test_switch_site_writing() {
@@ -46,36 +55,36 @@ class Test_Class_Handler extends \WP_UnitTestCase {
 		$this->assertEmpty( get_post_meta( $post_id, 'test_key', false ), 'Log should be empty.' );
 
 		// Write the log.
-		$post_logger = new Post_Meta_Handler( $post_id, 'test_key' );
-		$post_logger->handle( 'info', 'Test message' );
+		$post_logger = new Logger( 'Unit Test', [ new Post_Meta_Handler( Logger::DEBUG, true, $post_id, 'test_key' ) ] );
+		$post_logger->info( 'Test message' );
 
 		$new_blog_id = $this->factory->blog->create();
 
 		switch_to_blog( $new_blog_id );
 
 		// Write to the logger again.
-		$post_logger->handle( 'error', 'Error from another site!' );
+		$post_logger->error( 'Error from another site!' );
 		// Even try and process the log here.
 
-		$post_logger->process_queue();
+		do_action( 'shutdown' );
 
 		// Go back to the original site.
 		restore_current_blog();
 
 		// Now process the log.
-		$post_logger->process_queue();
+		do_action( 'shutdown' );
 
 		$log = get_post_meta( $post_id, 'test_key', false );
 		$this->assertInternalType( 'array', $log, 'Log should have log entries.' );
 
-		list( $level, $message ) = array_shift( $log );
-		$this->assertEquals( 'info', $level );
-		$this->assertEquals( 'Test message', $message );
+		$entry = array_shift( $log );
+		$this->assertEquals( 'INFO', $entry['level_name'] );
+		$this->assertEquals( 'Test message', $entry['message'] );
 
 		// Check that the next log was recorded as well.
-		list( $level, $message ) = array_shift( $log );
-		$this->assertEquals( 'error', $level );
-		$this->assertEquals( 'Error from another site!', $message );
+		$entry = array_shift( $log );
+		$this->assertEquals( 'ERROR', $entry['level_name'] );
+		$this->assertEquals( 'Error from another site!', $entry['message'] );
 	}
 
 	public function test_term_handler() {
@@ -84,16 +93,17 @@ class Test_Class_Handler extends \WP_UnitTestCase {
 		$this->assertEmpty( get_term_meta( $term_id, 'test_key', false ), 'Log should be empty.' );
 
 		// Write the log.
-		$post_logger = new Term_Meta_Handler( $term_id, 'test_key' );
-		$post_logger->handle( 'info', 'Test message' );
-		$post_logger->process_queue();
+		$post_logger = new Logger( 'Unit Test', [ new Term_Meta_Handler( Logger::DEBUG, true, $term_id, 'test_key' ) ] );
+		$post_logger->info( 'Test message' );
+
+		do_action( 'shutdown' );
 
 		$log = get_term_meta( $term_id, 'test_key', false );
 		$this->assertInternalType( 'array', $log, 'Log should have log entries.' );
 
-		list( $level, $message ) = array_shift( $log );
-		$this->assertEquals( 'info', $level );
-		$this->assertEquals( 'Test message', $message );
+		$entry = array_shift( $log );
+		$this->assertEquals( 'INFO', $entry['level_name'] );
+		$this->assertEquals( 'Test message', $entry['message'] );
 	}
 
 	/**
