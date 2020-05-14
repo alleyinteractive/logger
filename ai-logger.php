@@ -16,7 +16,6 @@
  * @author jaredcobb
  */
 
-use AI_Logger\AI_Logger;
 use Monolog\Logger;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -49,13 +48,13 @@ if ( ! class_exists( 'AI_Logger\AI_Logger' ) ) {
 	require_once __DIR__ . '/inc/autoload.php';
 
 	try {
-		\spl_autoload_register( generate_autoloader( 'AI_Logger', __DIR__ . '/inc/' ) );
+		\spl_autoload_register( AI_Logger\generate_autoloader( 'AI_Logger', __DIR__ . '/inc/' ) );
 	} catch ( \Exception $exception ) {
 		wp_die( esc_html__( 'Error generating autoloader.', 'ai-logger' ) );
 	}
 }
 
-AI_Logger::instance();
+AI_Logger\AI_Logger::instance();
 
 // wp-cli command.
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
@@ -68,5 +67,5 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
  * @return Logger
  */
 function ai_logger(): Logger {
-	return AI_Logger::instance()->get_logger();
+	return AI_Logger\AI_Logger::instance()->get_logger();
 }
