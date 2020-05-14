@@ -22,7 +22,23 @@ function ai_logger_render_table( array $data ) {
 				<code><?php echo esc_html( $key ); ?></code>
 			</td>
 			<td>
-				<?php if ( is_scalar( $value ) ) : ?>
+				<?php if ( 'backtrace' === $key && is_array( $value ) ) : ?>
+					<ul>
+						<?php foreach ( $value as $item ) : ?>
+							<li>
+								<?php
+								$function = ! empty( $item['class'] ) ? $item['class'] . '::' . $item['function'] : $item['function'];
+								printf(
+									'<code>%s</code> @ <code>%s</code> (%s)',
+									esc_html( $item['file'] ?? 'n/a' ),
+									esc_html( $function ),
+									esc_html( $item['line'] ?? '?' )
+								);
+								?>
+							</li>
+						<?php endforeach; ?>
+					</ul>
+				<?php elseif ( is_scalar( $value ) ) : ?>
 					<code><?php echo esc_html( $value ); ?></code>
 				<?php elseif ( null === $value ) : ?>
 					<code>(null)</code>

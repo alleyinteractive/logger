@@ -121,6 +121,9 @@ class Post_Handler extends AbstractProcessingHandler implements Handler_Interfac
 	 * @param array $record Log Record.
 	 */
 	protected function write( array $record ): void {
+		// Capture the stack trace.
+		$record['extra']['backtrace'] = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_debug_backtrace
+
 		$transient_key = 'ai_log_' . md5( $record['message'] . $record['channel'] );
 
 		$this->queue[ $transient_key ] = $record;
