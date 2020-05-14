@@ -63,3 +63,4 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 }
 
 new Meta_Box\Post_Meta_Box( 'log', 'Post Log' );
+new Meta_Box\Term_Meta_Box( 'log', 'Term Log', [ 'category' ] );
