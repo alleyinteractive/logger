@@ -61,6 +61,3 @@ AI_Logger::instance();
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
 	\WP_CLI::add_command( 'ai-logger', __NAMESPACE__ . '\CLI' );
 }
-
-new Meta_Box\Post_Meta_Box( 'log', 'Post Log' );
-new Meta_Box\Term_Meta_Box( 'log', 'Term Log', [ 'category' ] );
