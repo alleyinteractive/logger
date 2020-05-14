@@ -1,37 +1,39 @@
 {
     "name": "alleyinteractive/logger",
+    "type": "wordpress-plugin",
     "description": "A logger tool that stores errors and messages as a custom post type.",
     "homepage": "https://github.com/alleyinteractive/logger",
-    "type": "wordpress-plugin",
     "license": "GPL-2.0-or-later",
-    "config": {
-      "optimize-autoloader": true,
-      "apcu-autoloader": true
-    },
     "authors": [
         {
             "name": "Alley Interactive",
             "email": "info@alley.co"
         }
     ],
+    "require": {
+        "monolog/monolog": "^2.0",
+        "psr/log": "^1.1"
+    },
+    "require-dev": {
+        "alley/alley-coding-standards": "dev-master",
+        "mockery/mockery": "^1.3"
+    },
+    "config": {
+        "apcu-autoloader": true,
+        "optimize-autoloader": true
+    },
+    "autoload": {
+        "files": [
+            "ai-logger.php"
+        ]
+    },
     "repositories": [
         {
             "type": "git",
             "url": "https://github.com/alleyinteractive/Alley-Coding-Standards"
         }
     ],
-    "require-dev": {
-        "alley/alley-coding-standards": "dev-master",
-        "mockery/mockery": "^1.3"
-    },
     "scripts": {
-        "phpcs" : "phpcs --standard=./phpcs.xml ."
-    },
-    "autoload": {
-        "classmap": ["inc/"]
-    },
-    "require": {
-        "psr/log": "^1.1",
-        "monolog/monolog": "^2.0"
+        "phpcs": "phpcs --standard=./phpcs.xml ."
     }
 }

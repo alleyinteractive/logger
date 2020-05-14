@@ -154,7 +154,7 @@ class CLI extends \WP_CLI_Command {
 			]
 		);
 
-		$logger = new Logger( 'Log Generator', [ new Post_Handler() ] );
+		$logger = AI_Logger::instance()->get_logger();
 
 		$levels = [
 			LogLevel::EMERGENCY,
