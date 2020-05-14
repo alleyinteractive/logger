@@ -7,7 +7,7 @@
 
 namespace AI_Logger;
 
-use Psr\Log\LogLevel;
+use Monolog\Logger;
 
 // phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 
@@ -23,35 +23,37 @@ $ai_logger_timestamp_format = 'm/d/Y H:i:s';
 	<thead>
 		<tr>
 			<th align="left"><?php esc_html_e( 'Level', 'ai-logger' ); ?></th>
+			<th align="left"><?php esc_html_e( 'Channel', 'ai-logger' ); ?></th>
 			<th align="left"><?php esc_html_e( 'Message', 'ai-logger' ); ?></th>
 			<th align="left"><?php esc_html_e( 'Context', 'ai-logger' ); ?></th>
-			<th align="left"><?php esc_html_e( 'Timestamp', 'ai-logger' ); ?></th>
 		</tr>
 	</thead>
 	<tbody>
 		<?php foreach ( $logs as $log ) : ?>
 			<tr
-				<?php if ( in_array( $log[0], [ LogLevel::EMERGENCY, LogLevel::CRITICAL ], true ) ) : ?>
+				<?php if ( $log['level'] >= Logger::ALERT ) : ?>
 					bgcolor="red"
-				<?php elseif ( LogLevel::ALERT === $log[0] ) : ?>
+				<?php elseif ( $log['level'] >= Logger::ERROR ) : ?>
 					bgcolor="orange"
 				<?php endif; ?>
 			>
-				<td><?php echo esc_html( $log[0] ?? '' ); ?></td>
-				<td><?php echo esc_html( $log[1] ?? '' ); ?></td>
+				<td>
+					<?php echo esc_html( $log['level_name'] ?? '' ); ?>
+					<br />
+					<?php echo esc_html( date_i18n( $ai_logger_timestamp_format, $log['datetime']->format( 'U' ), false ) ); ?>
+				</td>
+				<td><?php echo esc_html( $log['channel'] ?? '' ); ?></td>
+				<td><?php echo esc_html( $log['message'] ?? '' ); ?></td>
 				<td>
 					<?php
-					if ( ! empty( $log[2] ) ) {
-						if ( is_array( $log[2] ) ) {
-							printf( '<code>%s</code>', wp_json_encode( $log[2] ) );
-						} else {
-							echo esc_html( $log[2] );
-						}
+					if ( ! empty( $log['context'] ) ) {
+						printf( '<code>%s</code>', wp_json_encode( $log['context'] ) );
+					}
+
+					if ( ! empty( $log['extra'] ) ) {
+						printf( '<code>%s</code>', wp_json_encode( $log['extra'] ) );
 					}
 					?>
-				</td>
-				<td>
-					<?php echo esc_html( date_i18n( $ai_logger_timestamp_format, (int) $log[3] ?? '', false ) ); ?>
 				</td>
 			</tr>
 		<?php endforeach; ?>

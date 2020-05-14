@@ -7,6 +7,8 @@
 
 namespace AI_Logger\Handler;
 
+use Monolog\Handler\AbstractProcessingHandler;
+use Monolog\Logger;
 use Psr\Log\LogLevel;
 
 /**
@@ -15,7 +17,7 @@ use Psr\Log\LogLevel;
  * Writes logs to a custom post type that allows logs to be viewed
  * across the site.
  */
-class Post_Handler implements Handler_Interface {
+class Post_Handler extends AbstractProcessingHandler implements Handler_Interface {
 	/**
 	 * Post type to log to.
 	 *
@@ -71,8 +73,13 @@ class Post_Handler implements Handler_Interface {
 
 	/**
 	 * Constructor.
+	 *
+	 * @param int|string $level  The minimum logging level at which this handler will be triggered.
+	 * @param bool       $bubble Whether the messages that are handled can bubble up the stack or not.
 	 */
-	public function __construct() {
+	public function __construct( $level = Logger::DEBUG, bool $bubble = true ) {
+		parent::__construct( $level, $bubble );
+
 		/**
 		 * Log levels according to RFC 5424.
 		 *
@@ -111,18 +118,12 @@ class Post_Handler implements Handler_Interface {
 	 *
 	 * @link https://github.com/php-fig/log/blob/master/Psr/Log/AbstractLogger.php
 	 *
-	 * @param string $level Log level {@see Psr\Log\LogLevel}.
-	 * @param string $message Log message.
-	 * @param array  $context Context to store.
+	 * @param array $record Log Record.
 	 */
-	public function handle( string $level, string $message, array $context = [] ) {
-		// Ensure the log entry is always 3 items.
-		$log_entry   = array_slice( func_get_args(), 0, 3 );
-		$log_entry[] = time();
+	protected function write( array $record ): void {
+		$transient_key = 'ai_log_' . md5( $record['message'] . $record['channel'] );
 
-		$transient_key = 'ai_log_' . md5( \wp_json_encode( $log_entry ) );
-
-		$this->queue[ $transient_key ] = $log_entry;
+		$this->queue[ $transient_key ] = $record;
 
 		if ( ! $this->should_write_on_shutdown() ) {
 			$this->process_queue();
@@ -144,28 +145,33 @@ class Post_Handler implements Handler_Interface {
 				continue;
 			}
 
-			list( $level, $title, $context ) = $log;
+			$level = $log['level_name'];
 
 			// Log message content.
-			$content     = $context['content'] ?? '';
-			$log_context = $context['context'] ?? '';
+			$content = [
+				$log['formatted'],
+				/* translators: 1: Log Channel */
+				sprintf( __( 'Log Channel: %s', 'ai-logger' ), $log['channel'] ),
+				wp_json_encode( $log['context'], JSON_PRETTY_PRINT ),
+			];
 
 			$log_post_id = \wp_insert_post(
 				[
 					'comment_status' => 'closed',
 					'ping_status'    => 'closed',
-					'post_content'   => $content,
+					'post_content'   => implode( PHP_EOL, $content ),
 					'post_status'    => 'publish',
-					'post_title'     => $title,
+					'post_title'     => $log['message'],
 					'post_type'      => static::POST_TYPE,
 				]
 			);
 
 			if ( ! empty( $log_post_id ) ) {
-				if ( ! empty( $this->allowed_levels[ $level ] ) ) {
-					$this->assign_terms( $log_post_id, $this->allowed_levels[ $level ], static::TAXONOMY_LOG_LEVEL );
-				}
+				\update_post_meta( $log_post_id, '_logger_record', $log );
 
+				$this->assign_terms( $log_post_id, $level, static::TAXONOMY_LOG_LEVEL );
+
+				$log_context = $log['context']['context'] ?? '';
 				if ( ! empty( $log_context ) ) {
 					$this->assign_terms( $log_post_id, $log_context, static::TAXONOMY_LOG_CONTEXT );
 				}
@@ -214,7 +220,7 @@ class Post_Handler implements Handler_Interface {
 	 * @access protected
 	 * @return bool
 	 */
-	protected function insert_permitted( $transient_key, $log ): bool {
+	protected function insert_permitted( string $transient_key, array $log ): bool {
 		// If the site is in debug mode, always write to the log.
 		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
 			return true;
@@ -224,7 +230,7 @@ class Post_Handler implements Handler_Interface {
 		 * In production, do not write info messages to the log unless the
 		 * filter has been overridden.
 		 */
-		if ( 'info' === $log['args']['level'] && ! \apply_filters( 'ai_logger_allow_production_info_logs', false ) ) {
+		if ( in_array( $log['level_name'], [ 'info', 'debug' ], true ) && ! \apply_filters( 'ai_logger_allow_production_info_logs', false ) ) {
 			return false;
 		}
 

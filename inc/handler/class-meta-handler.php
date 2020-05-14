@@ -7,6 +7,9 @@
 
 namespace AI_Logger\Handler;
 
+use Monolog\Handler\AbstractProcessingHandler;
+use Monolog\Logger;
+
 /**
  * Meta Logging Handler
  *
@@ -16,7 +19,7 @@ namespace AI_Logger\Handler;
  * the log messages for once it is back to the original site. Logs will
  * be stored on 'shutdown'.
  */
-abstract class Meta_Handler implements Handler_Interface {
+abstract class Meta_Handler extends AbstractProcessingHandler implements Handler_Interface {
 	/**
 	 * Object ID to store in.
 	 *
@@ -48,10 +51,14 @@ abstract class Meta_Handler implements Handler_Interface {
 	/**
 	 * Constructor.
 	 *
-	 * @param int    $object_id Object ID.
-	 * @param string $log_key Meta key.
+	 * @param int|string $level  The minimum logging level at which this handler will be triggered.
+	 * @param bool       $bubble Whether the messages that are handled can bubble up the stack or not.
+	 * @param int        $object_id Object ID to use.
+	 * @param string     $log_key Meta key to use, defaults to 'log'.
 	 */
-	public function __construct( int $object_id, string $log_key ) {
+	public function __construct( $level = Logger::DEBUG, bool $bubble = true, int $object_id, string $log_key = 'log' ) {
+		parent::__construct( $level, $bubble );
+
 		$this->object_id        = $object_id;
 		$this->log_key          = $log_key;
 		$this->original_site_id = \get_current_blog_id();
@@ -81,25 +88,29 @@ abstract class Meta_Handler implements Handler_Interface {
 	 *
 	 * @link https://github.com/php-fig/log/blob/master/Psr/Log/AbstractLogger.php
 	 *
-	 * @param string $level Log level {@see Psr\Log\LogLevel}.
-	 * @param string $message Log message.
-	 * @param array  $context Context to store.
+	 * @param array $record Log record.
 	 */
-	public function handle( string $level, string $message, array $context = [] ) {
-		$log_entry   = func_get_args();
-		$log_entry[] = time();
-
-		if ( get_current_blog_id() !== $this->original_site_id ) {
-			$this->queue[] = $log_entry;
+	protected function write( array $record ): void {
+		if ( \get_current_blog_id() !== $this->original_site_id ) {
+			$this->queue[] = $record;
 		} else {
-			\add_metadata(
-				$this->get_meta_type(),
-				$this->object_id,
-				$this->log_key,
-				$log_entry,
-				false
-			);
+			$this->write_log_record( $record );
 		}
+	}
+
+	/**
+	 * Writer the log record to the object meta.
+	 *
+	 * @param array $record Log Record.
+	 */
+	protected function write_log_record( array $record ) {
+		\add_metadata(
+			$this->get_meta_type(),
+			$this->object_id,
+			$this->log_key,
+			$record,
+			false
+		);
 	}
 
 	/**
@@ -112,13 +123,7 @@ abstract class Meta_Handler implements Handler_Interface {
 
 		// Process the queue and flush it.
 		foreach ( $this->queue as $queue_item ) {
-			\add_metadata(
-				$this->get_meta_type(),
-				$this->object_id,
-				$this->log_key,
-				$queue_item,
-				false
-			);
+			$this->write_log_record( $queue_item );
 		}
 
 		$this->queue = [];

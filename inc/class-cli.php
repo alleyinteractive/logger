@@ -8,6 +8,7 @@
 namespace AI_Logger;
 
 use AI_Logger\Handler\Post_Handler;
+use Monolog\Logger;
 use Psr\Log\LogLevel;
 use WP_CLI;
 
@@ -107,10 +108,10 @@ class CLI extends \WP_CLI_Command {
 
 		if ( 'term' === $object_type ) {
 			WP_CLI::log( 'Generating logs using Term_Meta_Handler' );
-			$logger->add_handler( new Handler\Term_Meta_Handler( $object_id, $meta_key ) );
+			$logger->setHandlers( [ new Handler\Term_Meta_Handler( Logger::DEBUG, true, $object_id, $meta_key ) ] );
 		} else {
 			WP_CLI::log( 'Generating logs using Post_Meta_Handler' );
-			$logger->add_handler( new Handler\Post_Meta_Handler( $object_id, $meta_key ) );
+			$logger->setHandlers( [ new Handler\Post_Meta_Handler( Logger::DEBUG, true, $object_id, $meta_key ) ] );
 		}
 
 		$levels = [
@@ -129,6 +130,7 @@ class CLI extends \WP_CLI_Command {
 			$logger->$level(
 				'Example log message: ' . ( $i + 1 ),
 				[
+					'context'         => 'wp-cli generator',
 					'example_context' => $i,
 				]
 			);
@@ -170,6 +172,7 @@ class CLI extends \WP_CLI_Command {
 			$logger->$level(
 				'Example log message: ' . ( $i + 1 ),
 				[
+					'context'         => 'wp-cli generator',
 					'example_context' => $i,
 				]
 			);
