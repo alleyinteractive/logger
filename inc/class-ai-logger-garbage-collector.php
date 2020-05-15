@@ -2,8 +2,10 @@
 /**
  * AI_Logger_Garbage_Collector class file.
  *
- * @package ai
+ * @package AI_Logger
  */
+
+namespace AI_Logger;
 
 /**
  * AI Logger Garbage Collector
@@ -28,9 +30,9 @@ class AI_Logger_Garbage_Collector {
 			/**
 			 * Enable/disable the garbage collector.
 			 *
-			 * @param bool $enabled Flag to enable the garbage collector (defaults to false).
+			 * @param bool $enabled Flag to enable the garbage collector (defaults to true).
 			 */
-			&& true === apply_filters( 'ai_logger_garbage_collector_enabled', false )
+			&& true === apply_filters( 'ai_logger_garbage_collector_enabled', true )
 		) {
 			\add_action( static::CRON_HOOK, [ static::class, 'run_cleanup' ] );
 
@@ -88,5 +90,3 @@ class AI_Logger_Garbage_Collector {
 		}
 	}
 }
-
-add_action( 'init', [ AI_Logger_Garbage_Collector::class, 'add_hooks' ] );

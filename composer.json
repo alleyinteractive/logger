@@ -1,7 +1,8 @@
 {
     "name": "alleyinteractive/logger",
-    "description": "Use a hidden taxonomy to improve expensive queries.",
     "type": "wordpress-plugin",
+    "description": "A logger tool that stores errors and messages as a custom post type.",
+    "homepage": "https://github.com/alleyinteractive/logger",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -9,16 +10,25 @@
             "email": "info@alley.co"
         }
     ],
+    "require": {
+        "monolog/monolog": "^2.0",
+        "psr/log": "^1.1"
+    },
+    "require-dev": {
+        "alley/alley-coding-standards": "dev-master",
+        "mockery/mockery": "^1.3"
+    },
+    "config": {
+        "apcu-autoloader": true,
+        "optimize-autoloader": true
+    },
     "repositories": [
         {
             "type": "git",
             "url": "https://github.com/alleyinteractive/Alley-Coding-Standards"
         }
     ],
-    "require-dev": {
-        "alley/alley-coding-standards": "dev-master"
-    },
     "scripts": {
-        "phpcs" : "phpcs --standard=./phpcs.xml ."
+        "phpcs": "phpcs --standard=./phpcs.xml ."
     }
 }

@@ -3,17 +3,16 @@
  * Plugin Name: AI Logger
  * Plugin URI: https://github.com/alleyinteractive/logger
  * Description: A logger tool that stores errors and messages as a custom post type
- * Version: 1.0.0
+ * Version: 2.0.0
  * Author: Alley Interactive, Jared Cobb
  * Author URI: https://alley.co/
- * Requires at least: 4.6.0
- * Tested up to: 4.6.1
+ * Requires at least: 5.4
+ * Tested up to: 5.4
  *
  * Text Domain: ai-logger
  * Domain Path: /languages/
  *
  * @package AI_Logger
- * @category Core
  * @author jaredcobb
  */
 
@@ -21,14 +20,33 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-require_once __DIR__ . '/includes/class-ai-logger-plugin.php';
+define( 'AI_LOGGER_PATH', __DIR__ );
 
-add_action(
-	'plugins_loaded',
-	function () {
-		// Begin execution of the main plugin class.
-		( new AI_Logger_Plugin( __FILE__ ) )->run();
-	},
-	10,
-	0
-);
+// Check if Composer is installed.
+if ( ! file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
+	\add_action(
+		'admin_notices',
+		function() {
+			?>
+			<div class="notice notice-error">
+				<p><?php esc_html_e( 'AI Logger: Composer is not installed and the plugin cannot load.', 'ai-logger' ); ?></p>
+			</div>
+			<?php
+		}
+	);
+
+	return;
+}
+
+// Include core dependencies.
+require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/inc/bootstrap.php';
+
+/**
+ * Retrieve the core logger instance.
+ *
+ * @return Monolog\Logger
+ */
+function ai_logger(): Monolog\Logger {
+	return \AI_Logger\AI_Logger::instance()->get_logger();
+}
