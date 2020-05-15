@@ -38,22 +38,8 @@ if ( ! file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 	return;
 }
 
-// Include core dependencies.
+// Include core dependencies (which loads inc/bootstrap.php).
 require_once __DIR__ . '/vendor/autoload.php';
-require_once __DIR__ . '/inc/autoload.php';
-
-try {
-	\spl_autoload_register( \AI_Logger\generate_autoloader( 'AI_Logger', __DIR__ . '/inc/' ) );
-} catch ( \Exception $exception ) {
-	wp_die( esc_html__( 'Error generating autoloader.', 'ai-logger' ) );
-}
-
-\AI_Logger\AI_Logger::instance();
-
-// wp-cli command.
-if ( defined( 'WP_CLI' ) && WP_CLI ) {
-	\WP_CLI::add_command( 'ai-logger', 'AI_Logger\CLI' );
-}
 
 /**
  * Retrieve the core logger instance.

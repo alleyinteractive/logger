@@ -24,7 +24,7 @@
     },
     "autoload": {
         "files": [
-            "ai-logger.php"
+            "inc/bootstrap.php"
         ]
     },
     "repositories": [
