@@ -16,8 +16,6 @@
  * @author jaredcobb
  */
 
-use Monolog\Logger;
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -42,19 +40,15 @@ if ( ! file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 
 // Include core dependencies.
 require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/inc/autoload.php';
 
-// If the Composer autoloader doesn't find the main file, fallback to plugin's.
-if ( ! class_exists( 'AI_Logger\AI_Logger' ) ) {
-	require_once __DIR__ . '/inc/autoload.php';
-
-	try {
-		\spl_autoload_register( AI_Logger\generate_autoloader( 'AI_Logger', __DIR__ . '/inc/' ) );
-	} catch ( \Exception $exception ) {
-		wp_die( esc_html__( 'Error generating autoloader.', 'ai-logger' ) );
-	}
+try {
+	\spl_autoload_register( \AI_Logger\generate_autoloader( 'AI_Logger', __DIR__ . '/inc/' ) );
+} catch ( \Exception $exception ) {
+	wp_die( esc_html__( 'Error generating autoloader.', 'ai-logger' ) );
 }
 
-AI_Logger\AI_Logger::instance();
+\AI_Logger\AI_Logger::instance();
 
 // wp-cli command.
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
@@ -64,8 +58,8 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 /**
  * Retrieve the core logger instance.
  *
- * @return Logger
+ * @return Monolog\Logger
  */
-function ai_logger(): Logger {
-	return AI_Logger\AI_Logger::instance()->get_logger();
+function ai_logger(): Monolog\Logger {
+	return \AI_Logger\AI_Logger::instance()->get_logger();
 }
