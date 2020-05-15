@@ -107,6 +107,34 @@ class Test_Class_Handler extends \WP_UnitTestCase {
 	}
 
 	/**
+	 * Test calling the logger with `ai_logger()`.
+	 */
+	public function test_ai_logger() {
+		// Ensure all logs are written instantly.
+		add_filter( 'ai_logger_should_write_on_shutdown', '__return_false', 99 );
+
+		$log_key = 'Log key ' . wp_rand( 1, 1000 );
+
+		// Write to the log.
+		ai_logger()->info( $log_key, [ 'context' => 'log-context' ] );
+
+		// Check if the log exists.
+		$logs = get_posts(
+			[
+				'post_type' => 'ai_log',
+			]
+		);
+
+		$this->assertNotEmpty( $logs );
+
+		$log = array_shift( $logs );
+		$this->assertEquals( $log_key, $log->post_title, 'Log post title should match the "' . $log_key . '"' );
+
+		// Verify the context.
+		$this->assertEquals( $this->get_log_context( $log->ID ), 'log-context' );
+	}
+
+	/**
 	 * Test the legacy method to write logs via 'ai_logger_insert'.
 	 */
 	public function test_legacy_write_logs() {

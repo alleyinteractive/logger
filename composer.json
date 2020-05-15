@@ -22,11 +22,6 @@
         "apcu-autoloader": true,
         "optimize-autoloader": true
     },
-    "autoload": {
-        "files": [
-            "ai-logger.php"
-        ]
-    },
     "repositories": [
         {
             "type": "git",
