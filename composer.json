@@ -22,11 +22,6 @@
         "apcu-autoloader": true,
         "optimize-autoloader": true
     },
-    "autoload": {
-        "files": [
-            "inc/bootstrap.php"
-        ]
-    },
     "repositories": [
         {
             "type": "git",

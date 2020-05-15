@@ -10,7 +10,7 @@ namespace AI_Logger;
 require_once __DIR__ . '/autoload.php';
 
 try {
-	\spl_autoload_register( generate_autoloader( __NAMESPACE__, __DIR__) );
+	\spl_autoload_register( generate_autoloader( __NAMESPACE__, __DIR__ ) );
 } catch ( \Exception $exception ) {
 	wp_die( esc_html__( 'Error generating autoloader.', 'ai-logger' ) );
 }

@@ -38,8 +38,9 @@ if ( ! file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 	return;
 }
 
-// Include core dependencies (which loads inc/bootstrap.php).
+// Include core dependencies.
 require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/inc/bootstrap.php';
 
 /**
  * Retrieve the core logger instance.
