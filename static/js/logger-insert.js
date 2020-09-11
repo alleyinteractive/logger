@@ -1,27 +1,43 @@
-/**
- * Enable ai-logger JavaScript logging.
- *
- * @param string Key for your log message.
- * @param string Log message.
- * @param object Arguments for the logger method e.g. { level: 'info', context: 'Testing', include_stack_trace: false }
- */
-function aiLoggerInsert( key, message, args ) {
-	if ( 'object' !== typeof window.aiLogger
-		|| 'undefined' === typeof window.aiLogger.url
-		|| 'undefined' === typeof window.aiLogger.nonce
-			) {
-		return false;
-	}
 
-	// Args are optional.
-	args = args || {};
+window.aiLogger = window.aiLogger || [];
 
-	// Post data to the admin.
-	jQuery.post( window.aiLogger.url, {
-		'action': 'ai_logger_insert',
-		'key': key,
-		'message': message,
-		'args': args,
-		'ai_logger_nonce': window.aiLogger.nonce,
-	} );
+class Logger {
+  /**
+   * Constructor.
+   *
+   * @param  {...any} args Array of arguments from `window.aiLogger`.
+   */
+  constructor(...args) {
+    console.log('args', args);
+    if (args.length) {
+      args.forEach((item) => this.push(...item))
+    }
+  }
+
+  /**
+   * Handle a log event.
+   *
+   * @param {Array} record Log record.
+   */
+  async push(...args) {
+    const [ message, logArgs ] = args;
+    const { nonce, url } = window.aiLoggerConfig;
+
+    // Include the current request information.
+    logArgs.url = window.location.href;
+
+    const body = new URLSearchParams();
+    body.append('action', 'ai_logger_insert');
+    body.append('ai_logger_nonce', nonce);
+    body.append('args', JSON.stringify(logArgs));
+    body.append('message', message);
+
+    await fetch(url, {
+      method: 'POST',
+      credentials: 'same-origin',
+      body,
+    });
+  }
 }
+
+window.aiLogger = new Logger(...window.aiLogger || []);

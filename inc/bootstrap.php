@@ -7,8 +7,6 @@
 
 namespace AI_Logger;
 
-use AI_Logger_JS;
-
 require_once __DIR__ . '/autoload.php';
 
 try {
@@ -22,6 +20,11 @@ AI_Logger::instance();
 add_action(
 	'after_setup_theme',
 	function() {
+		/**
+		 * Flag if Javascript logging is enabled.
+		 *
+		 * @param bool $enabled Flag if Javascript logging is enabled.
+		 */
 		if ( apply_filters( 'ai_logger_enable_js_logging', false ) ) {
 			new AI_Logger_JS();
 		}

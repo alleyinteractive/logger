@@ -21,6 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 define( 'AI_LOGGER_PATH', __DIR__ );
+define( 'AI_LOGGER_URL', plugins_url( '/', __FILE__ ) );
 
 // Check if Composer is installed.
 if ( ! file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
