@@ -121,8 +121,22 @@ class Post_Handler extends AbstractProcessingHandler implements Handler_Interfac
 	 * @param array $record Log Record.
 	 */
 	protected function write( array $record ): void {
+		$user = wp_get_current_user();
+
 		// Capture the stack trace.
 		$record['extra']['backtrace'] = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_debug_backtrace
+		$record['extra']['user']      = [
+			'ID'         => $user->ID,
+			'user_login' => $user->user_login,
+			'user_email' => $user->user_email,
+		];
+
+		/**
+		 * Filter the log record.
+		 *
+		 * @param array $record Log record.
+		 */
+		$record = (array) apply_filters( 'ai_logger_log_record', $record );
 
 		$transient_key = 'ai_log_' . md5( $record['message'] . $record['channel'] );
 

@@ -29,7 +29,7 @@ function ai_logger_render_table( array $data ) {
 								<?php
 								$function = ! empty( $item['class'] ) ? $item['class'] . '::' . $item['function'] : $item['function'];
 								printf(
-									'<code>%s</code> @ <code>%s</code> (%s)',
+									'<code>%s</code> in <strong>%s</strong> at line <strong>%s</strong>',
 									esc_html( $item['file'] ?? 'n/a' ),
 									esc_html( $function ),
 									esc_html( $item['line'] ?? '?' )
@@ -38,6 +38,10 @@ function ai_logger_render_table( array $data ) {
 							</li>
 						<?php endforeach; ?>
 					</ul>
+				<?php elseif ( 'user' === $key ) : ?>
+					<table>
+						<?php ai_logger_render_table( (array) $value ); ?>
+					</table>
 				<?php elseif ( is_scalar( $value ) ) : ?>
 					<code><?php echo esc_html( $value ); ?></code>
 				<?php elseif ( null === $value ) : ?>
