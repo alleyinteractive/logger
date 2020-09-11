@@ -66,9 +66,3 @@ class AI_Logger_JS {
 		) );
 	}
 }
-
-add_action( 'after_setup_theme', function() {
-	if ( apply_filters( 'ai_logger_enable_js_logging', false ) ) {
-		new AI_Logger_JS();
-	}
-}, 20 );
