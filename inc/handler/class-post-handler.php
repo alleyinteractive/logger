@@ -125,11 +125,14 @@ class Post_Handler extends AbstractProcessingHandler implements Handler_Interfac
 
 		// Capture the stack trace.
 		$record['extra']['backtrace'] = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_debug_backtrace
-		$record['extra']['user']      = [
-			'ID'         => $user->ID,
-			'user_login' => $user->user_login,
-			'user_email' => $user->user_email,
-		];
+
+		if ( $user ) {
+			$record['extra']['user'] = [
+				'ID'         => $user->ID,
+				'user_login' => $user->user_login,
+				'user_email' => $user->user_email,
+			];
+		}
 
 		/**
 		 * Filter the log record.
