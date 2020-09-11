@@ -8,7 +8,6 @@ class Logger {
    * @param  {...any} args Array of arguments from `window.aiLogger`.
    */
   constructor(...args) {
-    console.log('args', args);
     if (args.length) {
       args.forEach((item) => this.push(...item))
     }
