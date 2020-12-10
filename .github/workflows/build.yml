@@ -8,7 +8,7 @@ on:
         - gh-build
 
 jobs:
-  release:
+  build-master:
     name: Built Branch
     runs-on: ubuntu-latest
 
