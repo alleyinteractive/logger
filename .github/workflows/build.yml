@@ -21,7 +21,7 @@ jobs:
         id: extract_branch
       - name: Clear gitignore and .github
         shell: bash
-        run: q|
+        run: |
           rm -rf .gitignore
           rm -rf .github
       - name: Push to built branch
