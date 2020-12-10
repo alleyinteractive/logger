@@ -25,9 +25,31 @@ jobs:
           rm -rf .gitignore
           rm -rf .github
       - name: Push to built branch
-        uses: Automattic/action-commit-to-branch@master
-        with:
-          branch: '${{ steps.extract_branch.outputs.branch }}-built'
-          commit_message: 'Build ${{ steps.extract_branch.outputs.branch }}'
+        shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: ${{ steps.extract_branch.outputs.branch }}
+          BUILT_BRANCH: '${{ steps.extract_branch.outputs.branch }}-built'
+        run: |
+          git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git config --global user.name "$GITHUB_ACTOR"
+
+          git remote update
+          git fetch --all
+
+          git stash
+
+          # Will create branch if it does not exist
+          if [[ $( git branch -r | grep "$BUILT_BRANCH" ) ]]; then
+            git checkout "${BUILT_BRANCH}"
+          else
+            git checkout -b "${BUILT_BRANCH}"
+          fi
+
+          # Merge the former branch
+          git merge - --no-edit
+
+          git stash pop
+          git add .
+          git commit -m "Adding built changes"
+          git push --set-upstream origin "${BUILT_BRANCH}"
