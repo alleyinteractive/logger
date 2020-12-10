@@ -49,6 +49,9 @@ jobs:
           # Merge the former branch
           git merge - --no-edit
 
+          rm -rf .github
+          git commit -m "Merging in unbuilt branch"
+
           git stash pop
           git add .
           git commit -m "Adding built changes"
