@@ -43,11 +43,22 @@ function ai_logger_render_table( array $data ) {
 						<?php ai_logger_render_table( (array) $value ); ?>
 					</table>
 				<?php elseif ( is_scalar( $value ) ) : ?>
-					<code><?php echo esc_html( $value ); ?></code>
+					<code>
+					<?php
+					if ( wp_startswith( $value, '{' ) || wp_startswith( $value, '[' ) ) {
+						$maybe_json_value = json_decode( $value );
+						if ( ! empty( $maybe_json_value ) ) {
+							$value = wp_json_encode( $maybe_json_value, JSON_PRETTY_PRINT );
+						}
+					}
+
+					echo esc_html( $value );
+					?>
+				</code>
 				<?php elseif ( null === $value ) : ?>
 					<code>(null)</code>
 				<?php else : ?>
-					<code><?php echo wp_json_encode( $value ); ?></code>
+					<pre><?php echo wp_json_encode( $value, JSON_PRETTY_PRINT ); ?></pre>
 				<?php endif; ?>
 			</td>
 		</tr>
