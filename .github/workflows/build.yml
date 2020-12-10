@@ -6,7 +6,6 @@ on:
       branches:
         - master
         - develop
-        - gh-build
 
 jobs:
   built-branch:
@@ -22,7 +21,7 @@ jobs:
         id: extract_branch
       - name: Clear gitignore and .github
         shell: bash
-        run: |
+        run: q|
           rm -rf .gitignore
           rm -rf .github
       - name: Push to built branch
