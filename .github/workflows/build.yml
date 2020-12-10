@@ -15,6 +15,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: php-actions/composer@v4
+      - name: Clear gitignore
+        shell: bash
+        run: rm -rf .gitignore
       - name: Push to built branch
         uses: Automattic/action-commit-to-branch@master
         with:
