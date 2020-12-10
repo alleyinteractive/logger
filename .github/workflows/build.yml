@@ -1,0 +1,26 @@
+name: Built Branch
+
+on:
+  push:
+    push:
+      branches:
+        - master
+        - gh-build
+
+name: Update the -built branch
+
+jobs:
+  release:
+    name: Built Branch
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: php-actions/composer@v4
+      - name: Push to built branch
+        uses: Automattic/action-commit-to-branch@master
+        with:
+          branch: 'master-built'
+          commit_message: 'Build master'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
