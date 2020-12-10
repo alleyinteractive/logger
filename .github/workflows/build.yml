@@ -14,6 +14,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: Determine Composer cache directory
+        shell: bash
+        run: "echo \"COMPOSER_CACHE_DIR=$(composer config cache-dir)\" >> $GITHUB_ENV"
+      - name: Cache dependencies installed with Composer
+        uses: actions/cache@v2
+        with:
+          path: "${{ env.COMPOSER_CACHE_DIR }}"
+          key: os-${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}
+          restore-keys: |
+            os-${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}
       - uses: php-actions/composer@v4
       - name: Extract branch name
         shell: bash
@@ -34,10 +44,10 @@ jobs:
           git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git config --global user.name "$GITHUB_ACTOR"
 
+          git stash
+
           git remote update
           git fetch --all
-
-          git stash
 
           # Will create branch if it does not exist
           if [[ $( git branch -r | grep "$BUILT_BRANCH" ) ]]; then
