@@ -1,4 +1,4 @@
-name: Built Branch
+name: Update the -built branch
 
 on:
   push:
@@ -6,8 +6,6 @@ on:
       branches:
         - master
         - gh-build
-
-name: Update the -built branch
 
 jobs:
   release:
