@@ -14,3 +14,14 @@ See the [wiki](https://github.com/alleyinteractive/logger/wiki).
 ```php
 ai_logger()->info( 'Log message...' );
 ```
+
+## Installation
+
+Logger requires Composer to run properly.
+
+```bash
+composer install
+```
+
+You can use it as a submodule in your project by loading the `main-built`
+branch.
