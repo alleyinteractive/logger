@@ -40,32 +40,12 @@ jobs:
           git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git config --global user.name "$GITHUB_ACTOR"
 
-          rm -rf docker_tag output.log
-
-          git stash
-          git remote update
-          git fetch --all
-
-          echo "Checkout out built"
-
-          # Will create branch if it does not exist
-          if [[ $( git branch -r | grep "$BUILT_BRANCH" ) ]]; then
-            git checkout "${BUILT_BRANCH}"
-          else
-            git checkout -b "${BUILT_BRANCH}"
-          fi
-
-          git reset --hard HEAD
-          git stash pop
-
-          if [ -f ".deployignore" ]; then
-            rm .gitignore
-            mv .deployignore .gitignore
-          fi
+          rm .gitignore
+          mv .deployignore .gitignore
 
           rm -rf docker_tag output.log
 
-          git rm -r --cached .
-          git add .
-          git commit -m "Building changes"
-          git push --set-upstream origin "${INPUT_BRANCH}"
+          git checkout -b $BUILT_BRANCH
+
+          git add -A && git commit -m "Changes from $GITHUB_SHA"
+          git push --force -u origin "${INPUT_BRANCH}"
