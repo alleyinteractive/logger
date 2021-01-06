@@ -25,12 +25,14 @@ jobs:
           rm -rf vendor
           rm -rf .gitignore .github tests phpunit.xml Dockerfile docker_tag
           rm -rf output.log *.xml
-          find . -mindepth 2 -type d -name .git | xargs rm -rf
       - name: Install dependencies
         uses: php-actions/composer@v5
         with:
           php_version: 7.4
           composer_version: 2
+      - name: Clear git submodules
+        shell: bash
+        run: find . -mindepth 2 -type d -name .git | xargs rm -rf
       - name: Push to built branch
         uses: Automattic/action-commit-to-branch@master
         with:
