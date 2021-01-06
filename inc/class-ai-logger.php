@@ -8,33 +8,29 @@
 namespace AI_Logger;
 
 use Monolog\Logger;
+use Psr\Log\LoggerInterface;
 
 /**
  * Main class responsible for defining the logger functionality
  */
-class AI_Logger {
-
+class AI_Logger implements LoggerInterface {
 	/**
 	 * Class instance.
 	 *
 	 * @var AI_Logger
-	 * @access protected
-	 * @static
 	 */
 	protected static $instance;
 
 	/**
 	 * Logger with a Post Handler attached.
 	 *
-	 * @var Logger
+	 * @var \Monolog\Logger|\Psr\Log\LoggerInterface
 	 */
 	protected $logger;
 
 	/**
 	 * Get the instance of this singleton
 	 *
-	 * @access public
-	 * @static
 	 * @return AI_Logger
 	 */
 	public static function instance() {
@@ -54,8 +50,8 @@ class AI_Logger {
 		// Setup the global post logger.
 		$this->logger = new Logger(
 			__( 'Post Logger', 'ai-logger' ),
-			[ new Handler\Post_Handler() ],
-			[ new \Monolog\Processor\WebProcessor() ],
+			$this->get_handlers(),
+			$this->get_processors(),
 		);
 
 		\add_action( 'ai_logger_insert', [ $this, 'insert_legacy_log' ], 10, 3 );
@@ -69,6 +65,42 @@ class AI_Logger {
 	 */
 	public function get_logger(): Logger {
 		return $this->logger;
+	}
+
+	/**
+	 * Retrieve default handlers for Monolog.
+	 *
+	 * @return array
+	 */
+	protected function get_handlers(): array {
+		$handlers = [];
+
+		if ( defined( 'WP_CLI' ) && WP_CLI && ! wp_doing_cron() ) {
+			$handlers[] = new Handler\CLI_Handler();
+		} else {
+			$handlers[] = new Handler\Post_Handler();
+		}
+
+		/**
+		 * Filter the default handlers for Monolog.
+		 *
+		 * @param \Monolog\Handler\HandlerInterface[] $handlers Monolog handlers.
+		 */
+		return (array) \apply_filters( 'ai_logger_handlers', $handlers );
+	}
+
+	/**
+	 * Retrieve default processors for Monolog.
+	 *
+	 * @return array
+	 */
+	protected function get_processors(): array {
+		/**
+		 * Filter the default processors for Monolog.
+		 *
+		 * @param \Monolog\Processor\ProcessorInterface[] $processors Monolog processors.
+		 */
+		return (array) apply_filters( 'ai_logger_processors', [ new \Monolog\Processor\WebProcessor() ] );
 	}
 
 	/**
@@ -107,5 +139,124 @@ class AI_Logger {
 				$args
 			)
 		);
+	}
+
+	/**
+	 * System is unusable.
+	 *
+	 * @param string  $message Log message.
+	 * @param mixed[] $context Log context.
+	 *
+	 * @return void
+	 */
+	public function emergency( $message, array $context = [] ) {
+		$this->logger->emergency( $message, $context );
+	}
+
+	/**
+	 * Action must be taken immediately.
+	 *
+	 * Example: Entire website down, database unavailable, etc. This should
+	 * trigger the SMS alerts and wake you up.
+	 *
+	 * @param string  $message Log message.
+	 * @param mixed[] $context Log context.
+	 *
+	 * @return void
+	 */
+	public function alert( $message, array $context = [] ) {
+		$this->logger->alert( $message, $context );
+	}
+
+	/**
+	 * Critical conditions.
+	 *
+	 * Example: Application component unavailable, unexpected exception.
+	 *
+	 * @param string  $message Log message.
+	 * @param mixed[] $context Log context.
+	 *
+	 * @return void
+	 */
+	public function critical( $message, array $context = [] ) {
+		$this->logger->critical( $message, $context );
+	}
+
+	/**
+	 * Runtime errors that do not require immediate action but should typically
+	 * be logged and monitored.
+	 *
+	 * @param string  $message Log message.
+	 * @param mixed[] $context Log context.
+	 *
+	 * @return void
+	 */
+	public function error( $message, array $context = [] ) {
+		$this->logger->error( $message, $context );
+	}
+
+	/**
+	 * Exceptional occurrences that are not errors.
+	 *
+	 * Example: Use of deprecated APIs, poor use of an API, undesirable things
+	 * that are not necessarily wrong.
+	 *
+	 * @param string  $message Log message.
+	 * @param mixed[] $context Log context.
+	 *
+	 * @return void
+	 */
+	public function warning( $message, array $context = [] ) {
+		$this->logger->warning( $message, $context );
+	}
+
+	/**
+	 * Normal but significant events.
+	 *
+	 * @param string  $message Log message.
+	 * @param mixed[] $context Log context.
+	 *
+	 * @return void
+	 */
+	public function notice( $message, array $context = [] ) {
+		$this->logger->notice( $message, $context );
+	}
+
+	/**
+	 * Interesting events.
+	 *
+	 * Example: User logs in, SQL logs.
+	 *
+	 * @param string  $message Log message.
+	 * @param mixed[] $context Log context.
+	 * @return void
+	 */
+	public function info( $message, array $context = [] ) {
+		$this->logger->info( $message, $context );
+	}
+
+	/**
+	 * Detailed debug information.
+	 *
+	 * @param string  $message Log message.
+	 * @param mixed[] $context Log context.
+	 *
+	 * @return void
+	 */
+	public function debug( $message, array $context = [] ) {
+		$this->logger->debug( $message, $context );
+	}
+
+	/**
+	 * Logs with an arbitrary level.
+	 *
+	 * @param mixed   $level Log level.
+	 * @param string  $message Log message.
+	 * @param mixed[] $context Log context.
+	 *
+	 * @return void
+	 */
+	public function log( $level, $message, array $context = [] ) {
+		$this->logger->log( $level, $message, $context );
 	}
 }

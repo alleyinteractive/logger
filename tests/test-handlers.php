@@ -167,7 +167,7 @@ class Test_Class_Handler extends Framework_Test_Case {
 
 		$log_message = 'Direct Log key ' . wp_rand( 1, 1000 );
 
-		AI_Logger::emergency( $log_message, [ 'context' => 'the-context' ] );
+		AI_Logger::instance()->emergency( $log_message, [ 'context' => 'the-context' ] );
 
 		// Check if the log exists.
 		$logs = get_posts(

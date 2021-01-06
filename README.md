@@ -13,6 +13,8 @@ See the [wiki](https://github.com/alleyinteractive/logger/wiki).
 
 ```php
 ai_logger()->info( 'Log message...' );
+
+\AI_Logger\AI_Logger::info( 'Another format for logging.' );
 ```
 
 ## Installation

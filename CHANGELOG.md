@@ -8,9 +8,13 @@ CHANGELOG](https://keepachangelog.com/en/1.0.0/).
 ### Added
 
 - Improve logger display in-WordPress.
+- Adds `ai_logger_handlers` and `ai_logger_processors` filters to allow Monolog
+  handlers and processors to be filtered.
 
 ### Changed
 
+- Implements `Psr\Log\LoggerInterface` on the `AI_Logger\AI_Logger` class to
+  allow the logger to support DI against the logger interface.
 - Moved to GitHub actions for continuous integration.
 
 ## 2.0.0
