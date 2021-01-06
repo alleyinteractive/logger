@@ -15,10 +15,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Extract branch name
-        shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-        id: extract_branch
+      - name: Set branch env var
+        run: echo ::set-env name=BUILT_BRANCH::${GITHUB_REF##*/}-built
       - name: Clear files and install dependencies
         shell: bash
         run: |
@@ -31,13 +29,35 @@ jobs:
           php_version: 7.4
           composer_version: 2
           args: --prefer-dist
-      - name: Clear git submodules
-        shell: bash
-        run: rm -rf ./vendor/alleyinteractive/mantle-framework/.git
       - name: Push to built branch
-        uses: Automattic/action-commit-to-branch@master
-        with:
-          branch: '${{ steps.extract_branch.outputs.branch }}-built'
-          commit_message: 'Build ${{ steps.extract_branch.outputs.branch }}'
+        shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BUILT_BRANCH: ${{ env.BUILT_BRANCH }}
+        run: |
+          git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git config --global user.name "$GITHUB_ACTOR"
+
+          git stash
+          git remote update
+          git fetch --all
+
+          # Will create branch if it does not exist
+          if [[ $( git branch -r | grep "$BUILT_BRANCH" ) ]]; then
+            git checkout "${BUILT_BRANCH}"
+          else
+            git checkout -b "${BUILT_BRANCH}"
+          fi
+
+          git reset --hard HEAD
+          git stash pop
+
+          if [ -f ".deployignore" ]; then
+            rm .gitignore
+            mv .deployignore .gitignore
+          fi
+
+          git rm -r --cached .
+          git add .
+          git commit -m "Building changes"
+          git push --set-upstream origin "${INPUT_BRANCH}"
