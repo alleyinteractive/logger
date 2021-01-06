@@ -32,7 +32,7 @@ jobs:
           composer_version: 2
       - name: Clear git submodules
         shell: bash
-        run: find . -mindepth 2 -type d -name .git | xargs rm -rf
+        run: rm -rf ./vendor/alleyinteractive/mantle-framework/.git
       - name: Push to built branch
         uses: Automattic/action-commit-to-branch@master
         with:
