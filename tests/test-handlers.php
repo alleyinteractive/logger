@@ -10,24 +10,23 @@ use AI_Logger\Handler\{
 	Exception_Handler,
 	Handler_Exception
 };
+use Mantle\Framework\Testing\Framework_Test_Case;
 use Mockery;
+use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Monolog\Logger;
 use Psr\Log\LogLevel;
 
 /**
  * Test log handlers.
  */
-class Test_Class_Handler extends \WP_UnitTestCase {
-	public function setUp() {
+class Test_Class_Handler extends Framework_Test_Case {
+	use MockeryPHPUnitIntegration;
+
+	protected function setUp(): void {
 		parent::setUp();
 
 		remove_action( 'shutdown', 'wp_ob_end_flush_all', 1 );
 		add_filter( 'ai_logger_should_write_on_shutdown', '__return_false' );
-	}
-
-	public function tearDown() {
-		parent::tearDown();
-		\Mockery::close();
 	}
 
 	public function test_post_handler() {
@@ -42,7 +41,7 @@ class Test_Class_Handler extends \WP_UnitTestCase {
 		do_action( 'shutdown' );
 
 		$log = get_post_meta( $post_id, 'test_key', false );
-		$this->assertInternalType( 'array', $log, 'Log should have log entries.' );
+		$this->assertIsArray( $log, 'Log should have log entries.' );
 
 		$entry = array_shift( $log );
 		$this->assertEquals( 'INFO', $entry['level_name'] );
@@ -75,7 +74,7 @@ class Test_Class_Handler extends \WP_UnitTestCase {
 		do_action( 'shutdown' );
 
 		$log = get_post_meta( $post_id, 'test_key', false );
-		$this->assertInternalType( 'array', $log, 'Log should have log entries.' );
+		$this->assertIsArray( $log, 'Log should have log entries.' );
 
 		$entry = array_shift( $log );
 		$this->assertEquals( 'INFO', $entry['level_name'] );
@@ -99,7 +98,7 @@ class Test_Class_Handler extends \WP_UnitTestCase {
 		do_action( 'shutdown' );
 
 		$log = get_term_meta( $term_id, 'test_key', false );
-		$this->assertInternalType( 'array', $log, 'Log should have log entries.' );
+		$this->assertIsArray( $log, 'Log should have log entries.' );
 
 		$entry = array_shift( $log );
 		$this->assertEquals( 'INFO', $entry['level_name'] );
@@ -215,4 +214,3 @@ class Test_Class_Handler extends \WP_UnitTestCase {
 		$exception_handler->handle( LogLevel::EMERGENCY, 'A real emergency!', [ 1, 2, 3 ] );
 	}
 }
-
