@@ -27,7 +27,9 @@ jobs:
       - name: Clear files and install dependencies
         shell: bash
         run: |
-          rm -rf .gitignore .github tests phpunit.xml
+          rm -rf .gitignore .github tests phpunit.xml Dockerfile docker_tag
+          rm -rf output.log *.xml
+          find . -mindepth 2 -type d -name .git | xargs rm -rf
       - name: Push to built branch
         uses: Automattic/action-commit-to-branch@master
         with:
