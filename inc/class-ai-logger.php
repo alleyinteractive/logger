@@ -124,6 +124,38 @@ class AI_Logger implements LoggerInterface {
 	}
 
 	/**
+	 * Log to a specific post.
+	 *
+	 * @param string     $key Meta key to log to.
+	 * @param int        $object_id Post ID.
+	 * @param int|string $level The minimum logging level at which this handler will be triggered.
+	 * @return LoggerInterface
+	 */
+	public function to_post( string $key, int $object_id, $level = Logger::DEBUG ): LoggerInterface {
+		return new Logger(
+			'Post Logger',
+			[ new Handler\Post_Meta_Handler( $level, true, $object_id, $key ) ],
+			$this->get_processors()
+		);
+	}
+
+	/**
+	 * Log to a specific term.
+	 *
+	 * @param string     $key Meta key to log to.
+	 * @param int        $object_id Term object.
+	 * @param int|string $level The minimum logging level at which this handler will be triggered.
+	 * @return LoggerInterface
+	 */
+	public function to_term( string $key, int $object_id, $level = Logger::DEBUG ): LoggerInterface {
+		return new Logger(
+			'Term Logger',
+			[ new Handler\Term_Meta_Handler( $level, true, $object_id, $key ) ],
+			$this->get_processors()
+		);
+	}
+
+	/**
 	 * Pass all unknown methods to the log handler.
 	 *
 	 * @param string $method Method called.
