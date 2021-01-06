@@ -15,8 +15,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Set branch env var
-        run: echo ::set-env name=BUILT_BRANCH::${GITHUB_REF##*/}-built
       - name: Clear files and install dependencies
         shell: bash
         run: |
