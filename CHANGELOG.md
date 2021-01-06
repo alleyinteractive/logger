@@ -28,3 +28,7 @@ CHANGELOG](https://keepachangelog.com/en/1.0.0/).
 
 - Moves Logger to a [Monolog-based package](https://github.com/alleyinteractive/logger/wiki/How-to-Use).
 - Provides more [Log Handlers](https://github.com/alleyinteractive/logger/wiki/Log-Handlers) to use with Monolog
+
+## 2.0.0
+
+Initial release.
