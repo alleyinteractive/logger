@@ -19,7 +19,11 @@ jobs:
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
-      - uses: php-actions/composer@v5
+      - name: Install dependencies
+        uses: php-actions/composer@v5
+        with:
+          php_version: 7.4
+          composer_version: 2
       - name: Clear files and install dependencies
         shell: bash
         run: |
