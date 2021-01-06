@@ -124,7 +124,7 @@ class AI_Logger implements LoggerInterface {
 	}
 
 	/**
-	 * Log to a specific post.
+	 * Create a logger for logging to a specific post.
 	 *
 	 * @param string     $key Meta key to log to.
 	 * @param int        $object_id Post ID.
@@ -140,7 +140,7 @@ class AI_Logger implements LoggerInterface {
 	}
 
 	/**
-	 * Log to a specific term.
+	 * Create a logger for logging to a specific term.
 	 *
 	 * @param string     $key Meta key to log to.
 	 * @param int        $object_id Term object.
