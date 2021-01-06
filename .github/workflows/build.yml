@@ -45,4 +45,4 @@ jobs:
           git checkout -b $BUILT_BRANCH
 
           git add -A && git commit -m "Changes from $GITHUB_SHA"
-          git push --force -u origin "${INPUT_BRANCH}"
+          git push --force -u origin "${BUILT_BRANCH}"
