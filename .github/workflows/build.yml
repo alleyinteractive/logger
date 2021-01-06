@@ -15,12 +15,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Clear files and install dependencies
+      - name: Clear previous vendor
         shell: bash
-        run: |
-          rm -rf vendor
-          rm -rf .gitignore .github tests phpunit.xml Dockerfile docker_tag
-          rm -rf output.log *.xml composer.lock
+        run: rm -rf vendor
       - name: Install dependencies
         uses: php-actions/composer@v5
         with:
