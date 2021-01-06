@@ -28,7 +28,7 @@ jobs:
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
-      - name: Push to built branch
+      - name: Push to -built branch
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -37,10 +37,8 @@ jobs:
           git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git config --global user.name "$GITHUB_ACTOR"
 
-          rm .gitignore
+          rm .gitignore docker_tag output.log
           mv .deployignore .gitignore
-
-          rm -rf docker_tag output.log
 
           git checkout -b $BUILT_BRANCH
 

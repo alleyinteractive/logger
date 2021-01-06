@@ -8,3 +8,9 @@ node_modules/
 .phpunit.result.cache
 Dockerfile
 output.log
+.github
+tests
+bin
+composer.lock
+phpcs.xml
+phpunit.xml
