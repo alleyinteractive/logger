@@ -2,10 +2,9 @@ name: Update the -built branch
 
 on:
   push:
-    push:
-      branches:
-        - main
-        - develop
+    branches:
+      - main
+      - develop
 
 jobs:
   built-branch:
