@@ -19,7 +19,7 @@ CHANGELOG](https://keepachangelog.com/en/1.0.0/).
   allow the logger to support DI against the logger interface.
 - Moved to GitHub actions for continuous integration.
 - Switches to Mantle Framework for unit testing.
--
+
 ## 2.0.0
 
 ### Added
