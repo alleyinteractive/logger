@@ -8,4 +8,9 @@ Providing a WordPress integration with Monolog, allowing site-wide and post and
 term specific logging.
 
 ## Documentation
-See the [wiki](https://github.com/alleyinteractive/logger/wiki)
+
+See the [wiki](https://github.com/alleyinteractive/logger/wiki).
+
+```php
+ai_logger()->info( 'Log message...' );
+```
