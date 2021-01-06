@@ -29,11 +29,15 @@ jobs:
           php_version: 7.4
           composer_version: 2
           args: --prefer-dist
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
       - name: Push to built branch
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BUILT_BRANCH: ${{ env.BUILT_BRANCH }}
+          BUILT_BRANCH: '${{ steps.extract_branch.outputs.branch }}-built'
         run: |
           git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git config --global user.name "$GITHUB_ACTOR"
