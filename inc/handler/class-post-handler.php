@@ -198,7 +198,7 @@ class Post_Handler extends AbstractProcessingHandler implements Handler_Interfac
 			}
 
 			// Create a unique transient key based on the log key and context.
-			if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG || apply_filters( 'sp_use_log_lock', false ) ) {
+			if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG || apply_filters( 'ai_logger_use_log_lock', false ) ) {
 				\set_transient( $transient_key, true, $this->throttle_limit );
 			}
 

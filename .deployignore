@@ -5,5 +5,12 @@ node_modules/
 *.sql
 *.tar.gz
 *.zip
-vendor/
 .phpunit.result.cache
+Dockerfile
+output.log
+.github
+tests
+bin
+composer.lock
+phpcs.xml
+phpunit.xml

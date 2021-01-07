@@ -30,7 +30,7 @@ if ( ! file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 		function() {
 			?>
 			<div class="notice notice-error">
-				<p><?php esc_html_e( 'AI Logger: Composer is not installed and the plugin cannot load.', 'ai-logger' ); ?></p>
+				<p><?php esc_html_e( 'AI Logger: Composer is not installed and the plugin cannot load. Try using the `main-built` branch!', 'ai-logger' ); ?></p>
 			</div>
 			<?php
 		}
@@ -46,8 +46,8 @@ require_once __DIR__ . '/inc/bootstrap.php';
 /**
  * Retrieve the core logger instance.
  *
- * @return Monolog\Logger
+ * @return \AI_Logger\AI_Logger
  */
-function ai_logger(): Monolog\Logger {
-	return \AI_Logger\AI_Logger::instance()->get_logger();
+function ai_logger(): \AI_Logger\AI_Logger {
+	return \AI_Logger\AI_Logger::instance();
 }

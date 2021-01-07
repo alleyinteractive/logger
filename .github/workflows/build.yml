@@ -2,10 +2,9 @@ name: Update the -built branch
 
 on:
   push:
-    push:
-      branches:
-        - master
-        - develop
+    branches:
+      - main
+      - develop
 
 jobs:
   built-branch:
@@ -14,55 +13,34 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Determine Composer cache directory
+      - name: Clear previous vendor
         shell: bash
-        run: "echo \"COMPOSER_CACHE_DIR=$(composer config cache-dir)\" >> $GITHUB_ENV"
-      - name: Cache dependencies installed with Composer
-        uses: actions/cache@v2
+        run: rm -rf vendor
+      - name: Install dependencies
+        uses: php-actions/composer@v5
         with:
-          path: "${{ env.COMPOSER_CACHE_DIR }}"
-          key: os-${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}
-          restore-keys: |
-            os-${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}
-      - uses: php-actions/composer@v4
+          php_version: 7.4
+          composer_version: 2
+          args: --prefer-dist
       - name: Extract branch name
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
-      - name: Clear gitignore and .github
-        shell: bash
-        run: |
-          rm -rf .gitignore
-          rm -rf .github
-      - name: Push to built branch
+      - name: Push to -built branch
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: ${{ steps.extract_branch.outputs.branch }}
           BUILT_BRANCH: '${{ steps.extract_branch.outputs.branch }}-built'
         run: |
           git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git config --global user.name "$GITHUB_ACTOR"
 
-          git stash
+          rm -rf .gitignore docker_tag output.log .github
+          mv .deployignore .gitignore
 
-          git remote update
-          git fetch --all
+          git checkout -b $BUILT_BRANCH
 
-          # Will create branch if it does not exist
-          if [[ $( git branch -r | grep "$BUILT_BRANCH" ) ]]; then
-            git checkout "${BUILT_BRANCH}"
-          else
-            git checkout -b "${BUILT_BRANCH}"
-          fi
+          git ls-files -i --exclude-from=.gitignore | xargs git rm --cached
 
-          # Merge the former branch
-          git merge - --no-edit
-
-          rm -rf .github
-          git commit -m "Merging in unbuilt branch"
-
-          git stash pop
-          git add .
-          git commit -m "Adding built changes"
-          git push --set-upstream origin "${BUILT_BRANCH}"
+          git add -A && git commit -m "Changes from $GITHUB_SHA"
+          git push --force -u origin "${BUILT_BRANCH}"
