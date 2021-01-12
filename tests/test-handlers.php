@@ -202,15 +202,16 @@ class Test_Class_Handler extends Framework_Test_Case {
 
 		define( 'WP_CLI', true );
 
-		$cli_handler = new CLI_Handler();
-		$cli_handler->handle( LogLevel::ALERT, 'An alert to log to the CLI!', [ 1, 2, 3 ] );
-		$cli_handler->handle( LogLevel::INFO, 'An info to log to the CLI!', [ 1, 2, 3 ] );
+		$logger = new Logger( 'wp-cli test', [ new CLI_Handler() ] );
+		$logger->alert( 'An alert to log to the CLI!', [ 1, 2, 3, 4 ] );
+		$logger->info( 'An info to log to the CLI!', [ 1, 2, 3, 4 ] );
 	}
 
 	public function test_exception_handler() {
 		$this->expectException( Handler_Exception::class );
+		$this->expectExceptionMessage( 'A real problem!' );
 
-		$exception_handler = new Exception_Handler();
-		$exception_handler->handle( LogLevel::EMERGENCY, 'A real emergency!', [ 1, 2, 3 ] );
+		$logger = new Logger( 'exception test', [ new Exception_Handler() ] );
+		$logger->emergency( 'A real problem!' );
 	}
 }

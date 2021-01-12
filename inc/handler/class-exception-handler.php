@@ -7,15 +7,27 @@
 
 namespace AI_Logger\Handler;
 
+use Monolog\Handler\AbstractProcessingHandler;
+use Monolog\Logger;
 use Psr\Log\LogLevel;
 
 /**
  * 'Logs' critical errors to exceptions to allow for ease of error catching.
  *
- * Logs with a log level of emergency, alert, or critical will throw
- * the `Handler_Exception` exception.
+ * By default, this will only throw an exception for critical errors and above.
  */
-class Exception_Handler implements Handler_Interface {
+class Exception_Handler extends AbstractProcessingHandler implements Handler_Interface {
+	/**
+	 * Constructor.
+	 *
+	 * @param int|string $level  The minimum logging level at which this handler will be triggered.
+	 * @param bool       $bubble Whether the messages that are handled can bubble up the stack or not.
+	 */
+	public function __construct( $level = Logger::CRITICAL, bool $bubble = true ) {
+		$this->setLevel( $level );
+		$this->bubble = $bubble;
+	}
+
 	/**
 	 * Clear the stored log, not applicable.
 	 */
@@ -24,24 +36,18 @@ class Exception_Handler implements Handler_Interface {
 	/**
 	 * Store a log entry to an exception.
 	 *
-	 * @param string $level Log level {@see Psr\Log\LogLevel}.
-	 * @param string $message Log message.
-	 * @param array  $context Context to store.
+	 * @link https://github.com/php-fig/log/blob/master/Psr/Log/AbstractLogger.php
+	 *
+	 * @param array $record Log Record.
+	 *
 	 * @throws Handler_Exception Thrown on high-level error.
 	 */
-	public function handle( $level, $message, array $context = [] ) {
-		if (
-			in_array(
-				$level,
-				[
-					LogLevel::EMERGENCY,
-					LogLevel::ALERT,
-					LogLevel::CRITICAL,
-				],
-				true
-			)
-		) {
-			throw new Handler_Exception( $message, $context );
-		}
+	protected function write( array $record ): void {
+		[
+			'context' => $context,
+			'message' => $message,
+		] = $record;
+
+		throw new Handler_Exception( $message, $context, $record );
 	}
 }

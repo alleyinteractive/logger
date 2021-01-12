@@ -7,9 +7,7 @@
 
 namespace AI_Logger;
 
-use AI_Logger\Handler\Post_Handler;
 use Monolog\Logger;
-use Psr\Log\LogLevel;
 use WP_CLI;
 
 // phpcs:disable WordPressVIPMinimum.Classes.RestrictedExtendClasses.wp_cli
@@ -39,7 +37,7 @@ class CLI extends \WP_CLI_Command {
 	 * @param array $assoc_args Associated flags for the command.
 	 */
 	public function display( $args, $assoc_args ) {
-		list ( $object_type, $object_id ) = $args;
+		[ $object_type, $object_id ] = $args;
 
 		$assoc_args = \wp_parse_args(
 			$assoc_args,

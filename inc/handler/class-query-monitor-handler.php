@@ -7,35 +7,38 @@
 
 namespace AI_Logger\Handler;
 
+use Monolog\Handler\AbstractProcessingHandler;
+
 /**
  * Log to Query Monitor.
  */
-class Query_Monitor_Handler implements Handler_Interface {
-	/**
-	 * Clear the stored log, not applicable.
-	 */
-	public function clear() { }
-
+class Query_Monitor_Handler extends AbstractProcessingHandler {
 	/**
 	 * Write the log to the Query Monitor on the page.
 	 *
-	 * @param string $level Log level {@see Psr\Log\LogLevel}.
-	 * @param string $message Log message.
-	 * @param array  $context Context to store.
+	 * @link https://github.com/php-fig/log/blob/master/Psr/Log/AbstractLogger.php
+	 *
+	 * @param array $record Log Record.
 	 */
-	public function handle( string $level, string $message, array $context = [] ) {
+	protected function write( array $record ): void {
 		if ( ! did_action( 'plugins_loaded' ) ) {
 			// After wpcom_vip_qm_require().
 			\add_action(
 				'plugins_loaded',
-				function () use ( $level, $message, $context ) {
-					$this->handle( $level, $message, $context ); // phpcs:ignore WordPressVIPMinimum.Variables.VariableAnalysis.UndefinedVariable
+				function () use ( $record ) {
+					$this->write( $record ); // phpcs:ignore WordPressVIPMinimum.Variables.VariableAnalysis.UndefinedVariable
 				},
 				100
 			);
 
 			return;
 		}
+
+		[
+			'context' => $context,
+			'level'   => $level,
+			'message' => $message,
+		] = $record;
 
 		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound, WordPress.NamingConventions.ValidHookName.UseUnderscores
 		\do_action( "qm/{$level}", $message, $context );
