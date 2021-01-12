@@ -8,7 +8,8 @@ use AI_Logger\Handler\{
 	Post_Meta_Handler,
 	Term_Meta_Handler,
 	Exception_Handler,
-	Handler_Exception
+	Handler_Exception,
+    Query_Monitor_Handler
 };
 use Mantle\Framework\Testing\Framework_Test_Case;
 use Mockery;
@@ -212,5 +213,54 @@ class Test_Class_Handler extends Framework_Test_Case {
 
 		$logger = new Logger( 'exception test', [ new Exception_Handler() ] );
 		$logger->emergency( 'A real problem!' );
+	}
+
+	public function test_exception_handler_methods() {
+		try {
+			$logger = new Logger( 'exception test', [ new Exception_Handler() ] );
+			$logger->emergency( 'A real problem!', [ 1, 2, 3, 4 ] );
+
+			// Never to be reached.
+			$this->assertTrue( false );
+		} catch ( Handler_Exception $e ) {
+			$this->assertIsArray( $e->get_record() );
+
+			[ 'message' => $message, 'level' => $level ] = $e->get_record();
+
+			$this->assertEquals( 'A real problem!', $message );
+			$this->assertEquals( Logger::EMERGENCY, $level );
+
+			$this->assertEquals( [ 1, 2, 3, 4 ], $e->get_context() );
+		}
+	}
+
+	public function test_query_monitor_handler() {
+		$this->expectApplied( 'qm/info' )->once();
+		$this->expectApplied( 'qm/error' )->twice();
+
+		$logger = new Logger( 'qm test', [ new Query_Monitor_Handler() ] );
+
+		$logger->info( 'info log' );
+		$logger->error( 'error log' );
+		$logger->error( 'another error log' );
+	}
+
+	public function test_query_monitor_handler_plugins_loaded() {
+		global $wp_actions;
+		unset( $wp_actions['plugins_loaded'] );
+
+		$logger = new Logger( 'qm test', [ new Query_Monitor_Handler() ] );
+
+		$logger->info( 'info log' );
+		$logger->error( 'error log' );
+		$logger->error( 'another error log' );
+
+		$this->assertHookNotApplied( 'qm/info' );
+		$this->assertHookNotApplied( 'qm/error' );
+
+		do_action( 'plugins_loaded' );
+
+		$this->assertHookApplied( 'qm/info' );
+		$this->assertHookApplied( 'qm/error' );
 	}
 }

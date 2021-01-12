@@ -12,6 +12,10 @@ use WP_CLI;
 
 // phpcs:disable WordPressVIPMinimum.Classes.RestrictedExtendClasses.wp_cli
 
+if ( ! class_exists( 'WP_CLI_Command' ) ) {
+	return;
+}
+
 /**
  * AI_Logger CLI Command
  *

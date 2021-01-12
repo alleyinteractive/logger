@@ -1,14 +1,20 @@
 <phpunit
-    bootstrap="tests/bootstrap.php"
-    backupGlobals="false"
-    colors="true"
-    convertErrorsToExceptions="true"
-    convertNoticesToExceptions="true"
-    convertWarningsToExceptions="true"
-    >
-    <testsuites>
-        <testsuite name="ai-logger-testsuite">
-            <directory prefix="test-" suffix=".php">./tests/</directory>
-        </testsuite>
-    </testsuites>
+	bootstrap="tests/bootstrap.php"
+	backupGlobals="false"
+	colors="true"
+	convertErrorsToExceptions="true"
+	convertNoticesToExceptions="true"
+	convertWarningsToExceptions="true"
+>
+	<testsuites>
+		<testsuite name="ai-logger-testsuite">
+			<directory prefix="test-" suffix=".php">./tests/</directory>
+		</testsuite>
+	</testsuites>
+
+	<coverage cacheDirectory=".phpunit.cache/code-coverage" processUncoveredFiles="true">
+		<include>
+			<directory suffix=".php">inc</directory>
+		</include>
+	</coverage>
 </phpunit>

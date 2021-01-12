@@ -15,7 +15,7 @@ use Monolog\Logger;
  *
  * By default, this will only throw an exception for critical errors and above.
  */
-class Exception_Handler extends AbstractProcessingHandler implements Handler_Interface {
+class Exception_Handler extends AbstractProcessingHandler {
 	/**
 	 * Constructor.
 	 *
@@ -26,11 +26,6 @@ class Exception_Handler extends AbstractProcessingHandler implements Handler_Int
 		$this->setLevel( $level );
 		$this->bubble = $bubble;
 	}
-
-	/**
-	 * Clear the stored log, not applicable.
-	 */
-	public function clear() { }
 
 	/**
 	 * Store a log entry to an exception.

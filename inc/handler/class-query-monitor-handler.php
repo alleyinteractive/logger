@@ -8,6 +8,7 @@
 namespace AI_Logger\Handler;
 
 use Monolog\Handler\AbstractProcessingHandler;
+use Monolog\Logger;
 
 /**
  * Log to Query Monitor.
@@ -40,7 +41,9 @@ class Query_Monitor_Handler extends AbstractProcessingHandler {
 			'message' => $message,
 		] = $record;
 
+		$level_to_string = strtolower( Logger::getLevelName( $level ) );
+
 		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound, WordPress.NamingConventions.ValidHookName.UseUnderscores
-		\do_action( "qm/{$level}", $message, $context );
+		\do_action( "qm/{$level_to_string}", $message, $context );
 	}
 }
