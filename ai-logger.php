@@ -3,7 +3,7 @@
  * Plugin Name: AI Logger
  * Plugin URI: https://github.com/alleyinteractive/logger
  * Description: A logger tool that stores errors and messages as a custom post type
- * Version: 2.0.0
+ * Version: 2.1.0
  * Author: Alley Interactive, Jared Cobb
  * Author URI: https://alley.co/
  * Requires at least: 5.4

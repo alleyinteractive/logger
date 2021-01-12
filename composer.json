@@ -1,7 +1,7 @@
 {
     "name": "alleyinteractive/logger",
     "type": "wordpress-plugin",
-    "description": "A logger tool that stores errors and messages as a custom post type.",
+    "description": "A Monolog-based logging tool for WordPress. Supports storing log message in a custom post type or in individual posts and terms. ",
     "homepage": "https://github.com/alleyinteractive/logger",
     "license": "GPL-2.0-or-later",
     "authors": [

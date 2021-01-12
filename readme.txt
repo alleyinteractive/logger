@@ -2,8 +2,8 @@
 Contributors: alleyinteractive, jaredcobb
 Requires at least: 5.4
 Tested up to: 5.4
-Requires PHP: 7.3
-Stable tag: 2.0.0
+Requires PHP: 7.4
+Stable tag: 2.1.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -24,5 +24,36 @@ error.
 
 == Changelog ==
 
-= 1.0.0 =
-* Initial release.
+= 2.1.0 =
+
+### Added
+
+- Improve logger display in-WordPress.
+- Adds `ai_logger_handlers` and `ai_logger_processors` filters to allow Monolog
+  handlers and processors to be filtered.
+- Adds `ai_logger()->to_post()` and `ai_logger()->to_term()` methods for easily
+  creating a logger with a post/term handler
+
+### Changed
+
+- Implements `Psr\Log\LoggerInterface` on the `AI_Logger\AI_Logger` class to
+  allow the logger to support DI against the logger interface.
+- Moved to GitHub actions for continuous integration. - Switches to Mantle
+Framework for unit testing.
+
+= 2.0.0 =
+
+### Added
+
+- Provides a helpful `ai_logger()` and maintains the existing `ai_logger_insert`
+hook for inserting global post logs. - Provides [better log display
+interface](https://github.com/alleyinteractive/logger/wiki/Viewing-Logs) and log
+meta box display for object-specific logs.
+
+### Changed
+
+- Moves Logger to a [Monolog-based
+package](https://github.com/alleyinteractive/logger/wiki/How-to-Use). - Provides
+more [Log
+Handlers](https://github.com/alleyinteractive/logger/wiki/Log-Handlers) to use
+with Monolog = 1.0.0 = * Initial release.
