@@ -9,7 +9,6 @@ namespace AI_Logger\Handler;
 
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Logger;
-use Psr\Log\LogLevel;
 
 /**
  * 'Logs' critical errors to exceptions to allow for ease of error catching.

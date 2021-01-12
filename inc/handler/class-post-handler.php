@@ -9,7 +9,6 @@ namespace AI_Logger\Handler;
 
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Logger;
-use Psr\Log\LogLevel;
 
 /**
  * Post Log Handler
@@ -54,15 +53,6 @@ class Post_Handler extends AbstractProcessingHandler implements Handler_Interfac
 	protected $original_site_id;
 
 	/**
-	 * A predefined list of log levels that are permitted.
-	 * These are stored as terms in the Level taxonomy.
-	 *
-	 * @var array
-	 * @access protected
-	 */
-	protected $allowed_levels = [];
-
-	/**
 	 * The time limit that this logger should wait before
 	 * attempting to insert another UNIQUE log entry in seconds
 	 *
@@ -79,23 +69,6 @@ class Post_Handler extends AbstractProcessingHandler implements Handler_Interfac
 	 */
 	public function __construct( $level = Logger::DEBUG, bool $bubble = true ) {
 		parent::__construct( $level, $bubble );
-
-		/**
-		 * Log levels according to RFC 5424.
-		 *
-		 * @link https://tools.ietf.org/html/rfc5424
-		 */
-		$this->allowed_levels = array(
-			LogLevel::EMERGENCY => __( 'Emergency', 'ai-logger' ),
-			LogLevel::ALERT     => __( 'Alert', 'ai-logger' ),
-			LogLevel::CRITICAL  => __( 'Critical', 'ai-logger' ),
-			LogLevel::ERROR     => __( 'Error', 'ai-logger' ),
-			LogLevel::WARNING   => __( 'Warning', 'ai-logger' ),
-			LogLevel::NOTICE    => __( 'Notice', 'ai-logger' ),
-			LogLevel::INFO      => __( 'Info', 'ai-logger' ),
-			LogLevel::DEBUG     => __( 'Debug', 'ai-logger' ),
-			'log'               => __( 'Log', 'ai-logger' ),
-		);
 
 		$this->throttle_limit   = (int) apply_filters( 'ai_logger_throttle_limit', MINUTE_IN_SECONDS * 15 );
 		$this->original_site_id = \get_current_blog_id();

@@ -3,8 +3,8 @@ namespace AI_Logger\Tests;
 
 use AI_Logger\AI_Logger;
 use AI_Logger\Handler\{
-    CLI_Handler,
-    Post_Handler,
+	CLI_Handler,
+	Post_Handler,
 	Post_Meta_Handler,
 	Term_Meta_Handler,
 	Exception_Handler,
@@ -14,7 +14,6 @@ use Mantle\Framework\Testing\Framework_Test_Case;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Monolog\Logger;
-use Psr\Log\LogLevel;
 
 /**
  * Test log handlers.
