@@ -7,7 +7,8 @@ Stable tag: 2.1.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-A logger tool that stores errors and messages as a custom post type
+A Monolog-based logging tool for WordPress. Supports storing log message in a
+custom post type or in individual posts and terms.
 
 == Description ==
 
