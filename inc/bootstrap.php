@@ -7,10 +7,10 @@
 
 namespace AI_Logger;
 
-require_once __DIR__ . '/autoload.php';
+use function Mantle\Framework\generate_wp_autoloader;
 
 try {
-	\spl_autoload_register( generate_autoloader( __NAMESPACE__, __DIR__ ) );
+	\spl_autoload_register( generate_wp_autoloader( __NAMESPACE__, __DIR__ ) );
 } catch ( \Exception $exception ) {
 	wp_die( esc_html__( 'Error generating autoloader.', 'ai-logger' ) );
 }

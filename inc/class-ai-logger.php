@@ -156,24 +156,6 @@ class AI_Logger implements LoggerInterface {
 	}
 
 	/**
-	 * Pass all unknown methods to the log handler.
-	 *
-	 * @param string $method Method called.
-	 * @param array  $args Arguments for the method.
-	 */
-	public static function __callStatic( string $method, array $args = [] ) {
-		return call_user_func_array(
-			[ static::instance()->get_logger(), 'log' ],
-			array_merge(
-				[
-					$method,
-				],
-				$args
-			)
-		);
-	}
-
-	/**
 	 * System is unusable.
 	 *
 	 * @param string  $message Log message.
