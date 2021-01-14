@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         uses: php-actions/composer@v4
         with:
-          php_version: 7.4
+          php_version: 7.3
           composer_version: 2
           args: --prefer-dist
       - name: Extract branch name
