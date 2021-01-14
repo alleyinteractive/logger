@@ -7,36 +7,27 @@
 
 namespace AI_Logger\Handler;
 
+use Monolog\Handler\AbstractProcessingHandler;
+
 /**
  * WP-CLI Handler to pipe logs to the wp-cli output.
  */
-class CLI_Handler implements Handler_Interface {
-	/**
-	 * Clear the stored log, not applicable.
-	 */
-	public function clear() { }
-
+class CLI_Handler extends AbstractProcessingHandler {
 	/**
 	 * Write a log to the wp-cli.
 	 *
-	 * @param string $level Log level {@see Psr\Log\LogLevel}.
-	 * @param string $message Log message.
-	 * @param array  $context Context to store.
+	 * @link https://github.com/php-fig/log/blob/master/Psr/Log/AbstractLogger.php
+	 *
+	 * @param array $record Log Record.
 	 */
-	public function handle( string $level, string $message, array $context = [] ) {
+	protected function write( array $record ): void {
+		[ 'formatted' => $formatted ] = $record;
+
 		// Ignore if the request isn't through WP-CLI.
 		if ( ! defined( 'WP_CLI' ) || ! WP_CLI ) {
 			return;
 		}
 
-		\WP_CLI::log(
-			\sprintf(
-				'log %s %s: %s %s',
-				$level,
-				\current_time( 'H:i:s' ),
-				$message,
-				! empty( $context ) ? '(' . \wp_json_encode( $context ) . ')' : ''
-			)
-		);
+		\WP_CLI::log( $formatted );
 	}
 }

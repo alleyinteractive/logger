@@ -73,8 +73,19 @@ class AI_Logger_JS {
 		$level           = $args['level'] ?? 'info';
 		$args['context'] = $args['context'] ?? 'front-end';
 
+		$logger = ai_logger();
+
 		// Create the log entry.
-		ai_logger()->$level( $message, $args );
+		if ( ! method_exists( $logger, $level ) ) {
+			wp_send_json_error(
+				[
+					'error' => __( 'Invalid log level.', 'ai-logger' ),
+				],
+				400
+			);
+		}
+
+		$logger->$level( $message, $args );
 
 		// Respond.
 		wp_send_json_success(
