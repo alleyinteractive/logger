@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - develop
+      - "7.3"
 
 jobs:
   built-branch:
