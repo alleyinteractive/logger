@@ -22,7 +22,7 @@ jobs:
         with:
           php_version: 7.3
           composer_version: 2
-          args: --prefer-dist
+          args: --prefer-dist --no-dev
       - name: Extract branch name
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
