@@ -19,7 +19,7 @@ ai_logger()->info( 'Log message...' );
 
 ## Installation
 
-Logger requires Composer to run properly.
+Logger requires PHP 7.4 and Composer to run properly.
 
 ```bash
 composer install
