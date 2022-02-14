@@ -2,7 +2,7 @@
 namespace AI_Logger\Tests;
 
 use AI_Logger\AI_Logger;
-use Mantle\Framework\Testing\Framework_Test_Case;
+use Mantle\Testing\Framework_Test_Case;
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;

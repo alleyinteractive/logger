@@ -7,14 +7,12 @@
 
 namespace AI_Logger;
 
-use function Mantle\Framework\generate_wp_autoloader;
+use Alley_Interactive\Autoloader\Autoloader;
 
-try {
-	\spl_autoload_register( generate_wp_autoloader( __NAMESPACE__, __DIR__ ) );
-} catch ( \Exception $exception ) {
-	wp_die( esc_html__( 'Error generating autoloader.', 'ai-logger' ) );
-}
+// Register the autoloader.
+Autoloader::generate( __NAMESPACE__, __DIR__ )->register();
 
+// Instantiate the logger.
 AI_Logger::instance();
 
 add_action(
