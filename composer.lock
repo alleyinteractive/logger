@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "876c0bf505cd40a0d3940e4bd2179778",
+    "content-hash": "8606ca3727c19460b76fe7095f0cd1a3",
     "packages": [
         {
             "name": "alleyinteractive/alley-coding-standards",
@@ -6964,7 +6964,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.4"
+        "php": "^7.4|^8.0"
     },
     "platform-dev": [],
     "plugin-api-version": "2.2.0"
