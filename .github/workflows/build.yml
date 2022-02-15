@@ -40,7 +40,7 @@ jobs:
 
           git checkout -b $BUILT_BRANCH
 
-          git ls-files -i --exclude-from=.gitignore | xargs git rm --cached
+          # git ls-files -i --exclude-from=.gitignore | xargs git rm --cached
 
           git add -A && git commit -m "Changes from $GITHUB_SHA"
           git push --force -u origin "${BUILT_BRANCH}"

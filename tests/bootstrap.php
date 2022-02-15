@@ -3,11 +3,11 @@
  * Logger Test Bootstrap
  */
 
-use function Mantle\Framework\Testing\tests_add_filter;
+use function Mantle\Testing\tests_add_filter;
 
 define( 'MULTISITE', true );
 
-Mantle\Framework\Testing\install(
+Mantle\Testing\install(
 	function() {
 		tests_add_filter(
 			'muplugins_loaded',

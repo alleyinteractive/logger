@@ -11,7 +11,7 @@ use AI_Logger\Handler\{
 	Handler_Exception,
     Query_Monitor_Handler
 };
-use Mantle\Framework\Testing\Framework_Test_Case;
+use Mantle\Testing\Framework_Test_Case;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Monolog\Logger;
