@@ -285,8 +285,6 @@ class Test_Class_Handler extends Framework_Test_Case {
 		$logger->log( Logger::INFO, 'a message to log' );
 		$logger->log( Logger::INFO, 'a message to ignore' );
 
-		// var_dump($test_handler);
-
 		$this->assertTrue( $test_handler->hasInfo( [ 'message' => 'a message to log' ] ) );
 		$this->assertFalse( $test_handler->hasInfo( [ 'message' => 'a message to ignore' ] ) );
 	}
