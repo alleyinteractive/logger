@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8606ca3727c19460b76fe7095f0cd1a3",
+    "content-hash": "92813ee26845410550499c860d99fa65",
     "packages": [
         {
             "name": "alleyinteractive/alley-coding-standards",
@@ -40,17 +40,71 @@
             "time": "2021-02-26T16:08:31+00:00"
         },
         {
-            "name": "alleyinteractive/wordpress-autoloader",
-            "version": "0.1.0",
+            "name": "alleyinteractive/composer-wordpress-autoloader",
+            "version": "0.2.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/alleyinteractive/wordpress-autoloader.git",
-                "reference": "7b8efc57ac449dece17135bc0b485240ef68077f"
+                "url": "https://github.com/alleyinteractive/composer-wordpress-autoloader.git",
+                "reference": "f01074ed8e31c0cc6f2841cd733450c4e2962b50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alleyinteractive/wordpress-autoloader/zipball/7b8efc57ac449dece17135bc0b485240ef68077f",
-                "reference": "7b8efc57ac449dece17135bc0b485240ef68077f",
+                "url": "https://api.github.com/repos/alleyinteractive/composer-wordpress-autoloader/zipball/f01074ed8e31c0cc6f2841cd733450c4e2962b50",
+                "reference": "f01074ed8e31c0cc6f2841cd733450c4e2962b50",
+                "shasum": ""
+            },
+            "require": {
+                "alleyinteractive/wordpress-autoloader": "^0.1",
+                "composer-plugin-api": "^2.0",
+                "php": ">=7.4",
+                "squizlabs/php_codesniffer": "^2.0 || ^3.0 || ^4.0"
+            },
+            "require-dev": {
+                "composer/composer": "^2.0",
+                "phpunit/phpunit": "^8.5.8 || ^9.3.3"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "ComposerWordPressAutoloader\\Plugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "ComposerWordPressAutoloader\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Alley Interactive",
+                    "email": "info@alley.co"
+                },
+                {
+                    "name": "Sean Fisher",
+                    "email": "sean@alley.co"
+                }
+            ],
+            "description": "Autoload files using WordPress File Conventions",
+            "support": {
+                "issues": "https://github.com/alleyinteractive/composer-wordpress-autoloader/issues",
+                "source": "https://github.com/alleyinteractive/composer-wordpress-autoloader/tree/0.2.0"
+            },
+            "time": "2022-02-16T20:04:47+00:00"
+        },
+        {
+            "name": "alleyinteractive/wordpress-autoloader",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/alleyinteractive/wordpress-autoloader.git",
+                "reference": "7cefe1cdb92da234abb6b7c3268f7c203bcd4888"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alleyinteractive/wordpress-autoloader/zipball/7cefe1cdb92da234abb6b7c3268f7c203bcd4888",
+                "reference": "7cefe1cdb92da234abb6b7c3268f7c203bcd4888",
                 "shasum": ""
             },
             "require": {
@@ -79,9 +133,9 @@
             "description": "Autoload files using WordPress File Conventions",
             "support": {
                 "issues": "https://github.com/alleyinteractive/wordpress-autoloader/issues",
-                "source": "https://github.com/alleyinteractive/wordpress-autoloader/tree/0.1.0"
+                "source": "https://github.com/alleyinteractive/wordpress-autoloader/tree/0.1.1"
             },
-            "time": "2022-02-02T02:48:36+00:00"
+            "time": "2022-02-15T22:51:02+00:00"
         },
         {
             "name": "automattic/vipwpcs",
@@ -699,15 +753,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/alleyinteractive/mantle-framework.git",
-                "reference": "cb3d2a996fe17f3a8b3327fb89972e0635aca5cf"
+                "reference": "26edb83254c3c5a279f26ce5c50435d929dbb6f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alleyinteractive/mantle-framework/zipball/cb3d2a996fe17f3a8b3327fb89972e0635aca5cf",
-                "reference": "cb3d2a996fe17f3a8b3327fb89972e0635aca5cf",
+                "url": "https://api.github.com/repos/alleyinteractive/mantle-framework/zipball/26edb83254c3c5a279f26ce5c50435d929dbb6f4",
+                "reference": "26edb83254c3c5a279f26ce5c50435d929dbb6f4",
                 "shasum": ""
             },
             "require": {
+                "alleyinteractive/composer-wordpress-autoloader": "^0.2",
                 "alleyinteractive/wp-asset-manager": "^0.1",
                 "dragonmantank/cron-expression": "^3.1",
                 "fakerphp/faker": "^1.16",
@@ -719,7 +774,7 @@
                 "monolog/monolog": "^2.0",
                 "nesbot/carbon": "^2.53",
                 "nette/php-generator": "^3.6",
-                "psr/container": "^1.1.1|^2.0.1",
+                "psr/container": "^1.1.1 || ^2.0.1",
                 "symfony/finder": "^5.3",
                 "symfony/http-foundation": "^5.3",
                 "symfony/http-kernel": "^5.3",
@@ -734,10 +789,20 @@
                 "alleyinteractive/alley-coding-standards": "^0.3.0",
                 "mockery/mockery": "^1.3",
                 "nunomaduro/collision": "^5.0",
-                "phpunit/phpunit": "^8.5.8|^9.3.3"
+                "phpunit/phpunit": "^8.5.8 || ^9.3.3"
             },
             "default-branch": true,
             "type": "library",
+            "extra": {
+                "wordpress-autoloader": {
+                    "autoload": {
+                        "Mantle\\": "src/mantle/"
+                    },
+                    "autoload-dev": {
+                        "Mantle\\Tests\\": "tests/"
+                    }
+                }
+            },
             "autoload": {
                 "files": [
                     "src/autoload.php",
@@ -761,7 +826,7 @@
                 "issues": "https://github.com/alleyinteractive/mantle-framework/issues",
                 "source": "https://github.com/alleyinteractive/mantle-framework/tree/main"
             },
-            "time": "2022-02-11T22:08:46+00:00"
+            "time": "2022-02-16T20:19:06+00:00"
         },
         {
             "name": "alleyinteractive/wp-asset-manager",
@@ -1599,7 +1664,7 @@
         },
         {
             "name": "illuminate/bus",
-            "version": "v8.83.0",
+            "version": "v8.83.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/bus.git",
@@ -1652,16 +1717,16 @@
         },
         {
             "name": "illuminate/collections",
-            "version": "v8.83.0",
+            "version": "v8.83.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
-                "reference": "3933ab6b032167c0f7a598388e211c0810acf5d3"
+                "reference": "5cf7ed1c0a1b8049576b29f5cab5c822149aaa91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/collections/zipball/3933ab6b032167c0f7a598388e211c0810acf5d3",
-                "reference": "3933ab6b032167c0f7a598388e211c0810acf5d3",
+                "url": "https://api.github.com/repos/illuminate/collections/zipball/5cf7ed1c0a1b8049576b29f5cab5c822149aaa91",
+                "reference": "5cf7ed1c0a1b8049576b29f5cab5c822149aaa91",
                 "shasum": ""
             },
             "require": {
@@ -1702,11 +1767,11 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-01-24T16:41:15+00:00"
+            "time": "2022-02-15T14:40:58+00:00"
         },
         {
             "name": "illuminate/container",
-            "version": "v8.83.0",
+            "version": "v8.83.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/container.git",
@@ -1757,7 +1822,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v8.83.0",
+            "version": "v8.83.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -1805,7 +1870,7 @@
         },
         {
             "name": "illuminate/events",
-            "version": "v8.83.0",
+            "version": "v8.83.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/events.git",
@@ -1860,7 +1925,7 @@
         },
         {
             "name": "illuminate/filesystem",
-            "version": "v8.83.0",
+            "version": "v8.83.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/filesystem.git",
@@ -1922,7 +1987,7 @@
         },
         {
             "name": "illuminate/macroable",
-            "version": "v8.83.0",
+            "version": "v8.83.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
@@ -1968,7 +2033,7 @@
         },
         {
             "name": "illuminate/pipeline",
-            "version": "v8.83.0",
+            "version": "v8.83.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/pipeline.git",
@@ -2016,7 +2081,7 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v8.83.0",
+            "version": "v8.83.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
@@ -2084,7 +2149,7 @@
         },
         {
             "name": "illuminate/view",
-            "version": "v8.83.0",
+            "version": "v8.83.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/view.git",
@@ -2466,16 +2531,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.56.0",
+            "version": "2.57.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "626ec8cbb724cd3c3400c3ed8f730545b744e3f4"
+                "reference": "4a54375c21eea4811dbd1149fe6b246517554e78"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/626ec8cbb724cd3c3400c3ed8f730545b744e3f4",
-                "reference": "626ec8cbb724cd3c3400c3ed8f730545b744e3f4",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/4a54375c21eea4811dbd1149fe6b246517554e78",
+                "reference": "4a54375c21eea4811dbd1149fe6b246517554e78",
                 "shasum": ""
             },
             "require": {
@@ -2558,7 +2623,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-01-21T17:08:38+00:00"
+            "time": "2022-02-13T18:13:33+00:00"
         },
         {
             "name": "nette/php-generator",
