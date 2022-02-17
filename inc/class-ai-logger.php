@@ -73,7 +73,9 @@ class AI_Logger implements LoggerInterface {
 	 * @return array
 	 */
 	protected function get_handlers(): array {
-		$handlers = [];
+		$handlers = [
+			new Handler\Filter_Handler(),
+		];
 
 		if ( defined( 'WP_CLI' ) && WP_CLI && ! wp_doing_cron() ) {
 			$handlers[] = new Handler\CLI_Handler();

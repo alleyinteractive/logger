@@ -28,7 +28,7 @@ class Settings {
 	/**
 	 * Get the instance of this singleton
 	 *
-	 * @return AI_Logger
+	 * @return static
 	 */
 	public static function instance() {
 		if ( ! isset( static::$instance ) ) {
@@ -62,7 +62,7 @@ class Settings {
 			'ai-logger',
 			'logger_filter',
 			[
-				'description' => __( 'Filters out error messages matching a given string. Patterns are separated by new lines.', 'ai-logger' ),
+				'description' => __( 'Filters out error messages matching a given string. Patterns regular expressions and separated by new lines.', 'ai-logger' ),
 				'field'       => 'filter_error_message',
 				'type'        => 'textarea',
 			]
@@ -127,7 +127,7 @@ class Settings {
 	 *
 	 * @param array $options Options to update.
 	 */
-	public function update( array $options ) {
+	public function set( array $options ) {
 		$this->options = $options;
 
 		update_option( 'ai-logger', $this->options );
