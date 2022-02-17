@@ -122,6 +122,16 @@ class Settings {
 		return $this->options[ $slug ] ?? null;
 	}
 
+	/**
+	 * Update the settings.
+	 *
+	 * @param array $options Options to update.
+	 */
+	public function update( array $options ) {
+		$this->options = $options;
+
+		update_option( 'ai-logger', $this->options );
+	}
 
 	/**
 	 * Render the settings field.
