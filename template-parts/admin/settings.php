@@ -4,7 +4,7 @@
  *
  * phpcs:disable VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
  *
- * @package Zephr
+ * @package AI_Logger
  */
 
 ?>
