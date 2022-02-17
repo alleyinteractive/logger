@@ -14,6 +14,7 @@ Autoloader::generate( __NAMESPACE__, __DIR__ )->register();
 
 // Instantiate the logger.
 AI_Logger::instance();
+Settings::instance();
 
 add_action(
 	'after_setup_theme',
