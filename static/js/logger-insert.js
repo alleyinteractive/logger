@@ -1,7 +1,7 @@
 
 window.aiLogger = window.aiLogger || [];
 
-class Logger {
+class AI_Logger {
   /**
    * Constructor.
    *
@@ -39,4 +39,4 @@ class Logger {
   }
 }
 
-window.aiLogger = new Logger(...window.aiLogger || []);
+window.aiLogger = new AI_Logger(...window.aiLogger || []);
