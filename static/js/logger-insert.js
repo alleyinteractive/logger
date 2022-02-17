@@ -19,8 +19,13 @@ class Logger {
    * @param {Array} record Log record.
    */
   async push(...args) {
-    const [ message, logArgs ] = args;
+    const [ message, logArgs = {} ] = args;
     const { nonce, url } = window.aiLoggerConfig;
+
+    // Include a default trace with the arguments.
+    if (logArgs && 'undefined' === typeof logArgs.trace) {
+      logArgs.trace = new Error().stack;
+    }
 
     // Include the current request information.
     logArgs.url = window.location.href;
