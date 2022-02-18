@@ -26,7 +26,7 @@ class Settings {
 	protected $options;
 
 	/**
-	 * Get the instance of this singleton
+	 * Get the instance of this singleton.
 	 *
 	 * @return static
 	 */
