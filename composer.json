@@ -14,7 +14,7 @@
         "php": "^7.4|^8.0",
         "monolog/monolog": "^2.0",
         "psr/log": "^1.1",
-        "alleyinteractive/wordpress-autoloader": "^0.1.0"
+        "alleyinteractive/composer-wordpress-autoloader": "^0.2.0"
       },
       "require-dev": {
         "alleyinteractive/alley-coding-standards": "^0.3",
@@ -26,11 +26,21 @@
         "apcu-autoloader": true,
         "optimize-autoloader": true,
         "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "alleyinteractive/composer-wordpress-autoloader": true
         }
+    },
+    "extra": {
+      "wordpress-autoloader": {
+        "autoload": {
+          "AI_Logger\\": "inc/"
+        }
+      }
     },
     "scripts": {
         "phpcs": "phpcs --standard=./phpcs.xml .",
-        "phpunit": "phpunit"
+        "phpcbf": "phpcbf --standard=./phpcs.xml .",
+        "phpunit": "phpunit",
+        "test": "@phpunit"
     }
 }

@@ -8,12 +8,15 @@ use AI_Logger\Handler\{
 	Post_Meta_Handler,
 	Term_Meta_Handler,
 	Exception_Handler,
-	Handler_Exception,
+    Filter_Handler,
+    Handler_Exception,
     Query_Monitor_Handler
 };
+use AI_Logger\Settings;
 use Mantle\Testing\Framework_Test_Case;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 
 /**
@@ -27,6 +30,8 @@ class Test_Class_Handler extends Framework_Test_Case {
 
 		remove_action( 'shutdown', 'wp_ob_end_flush_all', 1 );
 		add_filter( 'ai_logger_should_write_on_shutdown', '__return_false' );
+
+		Settings::instance()->set( [] );
 	}
 
 	public function test_post_handler() {
@@ -262,5 +267,25 @@ class Test_Class_Handler extends Framework_Test_Case {
 
 		$this->assertHookApplied( 'qm/info' );
 		$this->assertHookApplied( 'qm/error' );
+	}
+
+	public function test_log_filters() {
+		$test_handler = new TestHandler();
+		$logger = new Logger( 'test', [
+			new Filter_Handler(),
+			$test_handler,
+		] );
+
+		Settings::instance()->set(
+			[
+				'filter_error_message' => "another\nignore",
+			]
+		);
+
+		$logger->log( Logger::INFO, 'a message to log' );
+		$logger->log( Logger::INFO, 'a message to ignore' );
+
+		$this->assertTrue( $test_handler->hasInfo( [ 'message' => 'a message to log' ] ) );
+		$this->assertFalse( $test_handler->hasInfo( [ 'message' => 'a message to ignore' ] ) );
 	}
 }

@@ -12,7 +12,7 @@ Mantle\Testing\install(
 		tests_add_filter(
 			'muplugins_loaded',
 			function() {
-				require __DIR__ . '/../ai-logger.php';
+				require_once __DIR__ . '/../ai-logger.php';
 			}
 		);
 	}
