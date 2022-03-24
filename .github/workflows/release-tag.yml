@@ -1,4 +1,4 @@
-name: Create a -built release
+name: Create a -built tag
 
 on:
   push:
@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Clear previous vendor
         shell: bash
-        run: rm -rf vendor
+        run: rm -rf vendor && rm -rf composer.lock
       - name: Install dependencies
         uses: php-actions/composer@v4
         with:
@@ -32,6 +32,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BUILT_BRANCH: '${{ steps.vars.outputs.tag }}-built'
+          TAG_NAME: 'v${{ steps.vars.outputs.tag }}-built'
         run: |
           git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git config --global user.name "$GITHUB_ACTOR"
@@ -41,8 +42,7 @@ jobs:
 
           git checkout -b $BUILT_BRANCH
 
-          git add -A && git commit -m "Built changes for ${{ steps.vars.outputs.tag }}"
+          git add -A && git commit -m "Built changes for ${{ TAG_NAME }}"
 
-          git tag -a "${{ steps.vars.outputs.tag }}-built" -m "Build assets for ${{ steps.vars.outputs.tag }}"
-          # git push --force -u origin "${BUILT_BRANCH}"
-          git push origin "refs/tags/${{ steps.vars.outputs.tag }}-built"
+          git tag -a "${{ TAG_NAME }}-built" -m "Build assets for ${{ TAG_NAME }}"
+          git push origin "refs/tags/${{ TAG_NAME }}"
