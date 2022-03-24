@@ -2,6 +2,7 @@ on:
   push:
     tags:
     - 'v*-built' # Create releases for built branches (eg. v2.0.8-built)
+    - 'test-*-built'
 
 name: Create -built release
 
