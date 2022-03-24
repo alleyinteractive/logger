@@ -1,0 +1,14 @@
+{
+	"name": "alleyinteractive/alley-coding-standards",
+	"description": "PHPCS sniffs for Alley Interactive",
+	"type": "phpcodesniffer-standard",
+	"license": "GPL-2.0-or-later",
+	"require": {
+		"squizlabs/php_codesniffer": "^3.5.0",
+		"dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
+		"wp-coding-standards/wpcs": "^2.3.0",
+		"automattic/vipwpcs": "^2.2.0",
+		"phpcompatibility/phpcompatibility-wp": "^2.1.0"
+	},
+	"require-dev": {}
+}
