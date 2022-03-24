@@ -1,14 +1,13 @@
-name: Update the -built branch
+name: Create a -built release
 
 on:
-  push:
-    branches:
-      - main
-      - develop
+  tags:
+    - 'v*.*.*'
+    - '!*-built'
 
 jobs:
   built-branch:
-    name: Built Branch
+    name: Create Built Release
     runs-on: ubuntu-latest
 
     steps:
@@ -24,13 +23,13 @@ jobs:
           args: --prefer-dist --no-dev
       - name: Extract branch name
         shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-        id: extract_branch
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+        id: vars
       - name: Push to -built branch
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BUILT_BRANCH: '${{ steps.extract_branch.outputs.branch }}-built'
+          BUILT_BRANCH: '${{ steps.vars.outputs.tag }}-built'
         run: |
           git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git config --global user.name "$GITHUB_ACTOR"
@@ -40,5 +39,8 @@ jobs:
 
           git checkout -b $BUILT_BRANCH
 
-          git add -A && git commit -m "Changes from $GITHUB_SHA"
-          git push --force -u origin "${BUILT_BRANCH}"
+          git add -A && git commit -m "Built changes from $GITHUB_SHA"
+
+          git tag -a "${{ steps.vars.outputs.tag }}-built" -m "Build assets for ${{ steps.vars.outputs.tag }}"
+          # git push --force -u origin "${BUILT_BRANCH}"
+          git push origin "refs/tags/${{ steps.vars.outputs.tag }}-built"
