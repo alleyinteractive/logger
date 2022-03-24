@@ -42,7 +42,7 @@ jobs:
 
           git checkout -b $BUILT_BRANCH
 
-          git add -A && git commit -m "Built changes for ${{ TAG_NAME }}"
+          git add -A && git commit -m "Built changes for $TAG_NAME"
 
-          git tag -a "${{ TAG_NAME }}-built" -m "Build assets for ${{ TAG_NAME }}"
-          git push origin "refs/tags/${{ TAG_NAME }}"
+          git tag -a "$TAG_NAME-built" -m "Build assets for $TAG_NAME"
+          git push origin "refs/tags/$TAG_NAME"
