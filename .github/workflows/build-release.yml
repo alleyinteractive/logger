@@ -3,6 +3,7 @@ name: Create a -built release
 on:
   tags:
     - 'v*.*.*'
+    - 'test.*'
     - '!*-built'
 
 jobs:
