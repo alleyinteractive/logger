@@ -41,7 +41,7 @@ jobs:
 
           git checkout -b $BUILT_BRANCH
 
-          git add -A && git commit -m "Built changes from $GITHUB_SHA"
+          git add -A && git commit -m "Built changes for ${{ steps.vars.outputs.tag }}"
 
           git tag -a "${{ steps.vars.outputs.tag }}-built" -m "Build assets for ${{ steps.vars.outputs.tag }}"
           # git push --force -u origin "${BUILT_BRANCH}"
