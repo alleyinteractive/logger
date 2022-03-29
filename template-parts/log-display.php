@@ -43,7 +43,7 @@ function ai_logger_render_table( array $data ) {
 						<?php ai_logger_render_table( (array) $value ); ?>
 					</table>
 				<?php elseif ( is_scalar( $value ) ) : ?>
-					<pre><?php
+					<pre><?php // phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentBeforeOpen, Squiz.PHP.EmbeddedPhp.ContentAfterOpen
 					if ( wp_startswith( $value, '{' ) || wp_startswith( $value, '[' ) ) {
 						$maybe_json_value = json_decode( $value );
 						if ( ! empty( $maybe_json_value ) ) {
