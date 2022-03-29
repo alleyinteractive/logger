@@ -3,7 +3,7 @@
  * Plugin Name: AI Logger
  * Plugin URI: https://github.com/alleyinteractive/logger
  * Description: A Monolog-based logging tool for WordPress. Supports storing log message in a custom post type or in individual posts and terms.
- * Version: 2.1.0
+ * Version: 2.1.3
  * Author: Alley Interactive, Jared Cobb
  * Author URI: https://alley.co/
  * Requires at least: 5.4
