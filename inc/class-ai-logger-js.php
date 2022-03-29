@@ -32,7 +32,7 @@ class AI_Logger_JS {
 	 * Enqueue and localize assets.
 	 */
 	public function enqueue() {
-		wp_enqueue_script( 'ai-logger-insert', AI_LOGGER_URL . '/static/js/logger-insert.js', [], '0.1', true );
+		wp_enqueue_script( 'ai-logger-insert', AI_LOGGER_URL . 'static/js/logger-insert.js', [], '0.1', true );
 		wp_localize_script(
 			'ai-logger-insert',
 			'aiLoggerConfig',
