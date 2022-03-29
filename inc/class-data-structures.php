@@ -164,6 +164,9 @@ class Data_Structures {
 			'normal',
 			'high'
 		);
+
+		// Remove the 'publish' meta box.
+		remove_meta_box( 'submitdiv', static::POST_TYPE, 'side' );
 	}
 
 	/**

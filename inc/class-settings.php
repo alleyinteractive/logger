@@ -44,6 +44,11 @@ class Settings {
 	protected function __construct() {
 		add_action( 'admin_init', [ $this, 'on_admin_init' ] );
 		add_action( 'admin_menu', [ $this, 'on_admin_menu' ] );
+		add_action( 'admin_enqueue_scripts', [ $this, 'on_admin_enqueue_scripts' ] );
+
+		// Enforce a single column layout on ai_log posts.
+		add_filter( 'screen_layout_columns', [ $this, 'on_screen_layout_columns' ], 10, 2 );
+		add_filter( 'get_user_option_screen_layout_' . Data_Structures::POST_TYPE, fn () => 1 );
 	}
 
 	/**
@@ -266,5 +271,39 @@ class Settings {
 				esc_html( $box_label )
 			);
 		}
+	}
+
+	/**
+	 * Enqueue admin styles for ai_log posts.
+	 */
+	public function on_admin_enqueue_scripts() {
+		$screen = get_current_screen();
+
+		if ( empty( $screen ) || Data_Structures::POST_TYPE !== $screen->post_type ) {
+			return;
+		}
+
+		wp_enqueue_style(
+			'ai-logger-admin',
+			AI_LOGGER_URL . 'static/css/admin.css',
+			[],
+			'0.1',
+		);
+	}
+
+	/**
+	 * Set the screen layout to default to one column.
+	 *
+	 * @param array  $columns Screen columns.
+	 * @param string $screen_id Screen ID.
+	 * @return array
+	 */
+	public function on_screen_layout_columns( $columns, $screen_id ) {
+		if ( Data_Structures::POST_TYPE !== $screen_id ) {
+			return $columns;
+		}
+
+		$columns[ Data_Structures::POST_TYPE ] = 1;
+		return $columns;
 	}
 }
