@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<ruleset name="phpcodesniffer-composer-installer">
+	<description>Coding standards for WordPress Autoloader</description>
+
+	<arg name="extensions" value="php" />
+
+	<!-- Show sniff codes in all reports, and progress when running -->
+	<arg value="vsnp" />
+
+	<!-- Strip the filepaths down to the relevant bit. -->
+	<arg name="basepath" value="." />
+
+	<file>.</file>
+	<exclude-pattern>*/.github/*</exclude-pattern>
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+
+	<rule ref="Alley-Interactive" />
+
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="Alley_Interactive\Autoloader" />
+				<element value="Autoloader" />
+			</property>
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.Files.FileName.InvalidClassFileName">
+		<exclude-pattern>tests/*</exclude-pattern>
+	</rule>
+
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<exclude-pattern>tests/*</exclude-pattern>
+	</rule>
+</ruleset>
