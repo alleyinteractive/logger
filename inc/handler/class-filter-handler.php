@@ -78,6 +78,8 @@ class Filter_Handler extends Handler {
 		$message_filters = explode( "\n", $message_filters );
 
 		foreach ( (array) $message_filters as $filter ) {
+			$filter = trim( $filter );
+
 			if ( preg_match( "/{$filter}/", $record['message'] ) ) {
 				return true;
 			}
