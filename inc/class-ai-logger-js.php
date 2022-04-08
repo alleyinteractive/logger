@@ -70,8 +70,10 @@ class AI_Logger_JS {
 		}
 
 		// Setup some default arguments.
-		$level           = $args['level'] ?? 'info';
-		$args['context'] = $args['context'] ?? 'front-end';
+		$level = $args['level'] ?? 'info';
+
+		$args['context']   = $args['context'] ?? 'front-end';
+		$args['useragent'] = $args['useragent'] ?? sanitize_text_field( $_SERVER['HTTP_USER_AGENT'] ?? '' );
 
 		$logger = ai_logger();
 

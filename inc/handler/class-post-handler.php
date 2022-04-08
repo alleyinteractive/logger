@@ -97,7 +97,9 @@ class Post_Handler extends AbstractProcessingHandler implements Handler_Interfac
 		$user = wp_get_current_user();
 
 		// Capture the stack trace.
-		$record['extra']['backtrace'] = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_debug_backtrace
+		if ( empty( $log['context'] ) || 'front-end' !== $log['context'] ) {
+			$record['extra']['backtrace'] = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_debug_backtrace
+		}
 
 		if ( $user ) {
 			$record['extra']['user'] = [
