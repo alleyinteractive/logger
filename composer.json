@@ -28,7 +28,10 @@
             "dealerdirect/phpcodesniffer-composer-installer": true
         },
         "apcu-autoloader": true,
-        "optimize-autoloader": true
+        "optimize-autoloader": true,
+        "platform": {
+          "php": "7.4"
+        }
     },
     "extra": {
         "wordpress-autoloader": {
