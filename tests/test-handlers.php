@@ -13,7 +13,7 @@ use AI_Logger\Handler\{
     Query_Monitor_Handler
 };
 use AI_Logger\Settings;
-use Mantle\Testing\Framework_Test_Case;
+use Mantle\Testkit\Test_Case;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Monolog\Handler\TestHandler;
@@ -22,7 +22,7 @@ use Monolog\Logger;
 /**
  * Test log handlers.
  */
-class Test_Class_Handler extends Framework_Test_Case {
+class Test_Class_Handler extends Test_Case {
 	use MockeryPHPUnitIntegration;
 
 	protected function setUp(): void {
