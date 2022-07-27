@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9bf842c791e21a7d4fda43aea9138ece",
+    "content-hash": "368851554b8a5d2052a9941768ddbf61",
     "packages": [
         {
             "name": "alleyinteractive/composer-wordpress-autoloader",
@@ -699,7 +699,7 @@
         },
         {
             "name": "illuminate/bus",
-            "version": "v8.83.14",
+            "version": "v8.83.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/bus.git",
@@ -752,16 +752,16 @@
         },
         {
             "name": "illuminate/collections",
-            "version": "v8.83.14",
+            "version": "v8.83.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
-                "reference": "fc232e89c0214dba5d2b431220a24b02d480a472"
+                "reference": "705a4e1ef93cd492c45b9b3e7911cccc990a07f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/collections/zipball/fc232e89c0214dba5d2b431220a24b02d480a472",
-                "reference": "fc232e89c0214dba5d2b431220a24b02d480a472",
+                "url": "https://api.github.com/repos/illuminate/collections/zipball/705a4e1ef93cd492c45b9b3e7911cccc990a07f4",
+                "reference": "705a4e1ef93cd492c45b9b3e7911cccc990a07f4",
                 "shasum": ""
             },
             "require": {
@@ -802,11 +802,11 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-03-25T14:53:23+00:00"
+            "time": "2022-06-23T15:29:49+00:00"
         },
         {
             "name": "illuminate/container",
-            "version": "v8.83.14",
+            "version": "v8.83.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/container.git",
@@ -857,7 +857,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v8.83.14",
+            "version": "v8.83.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -905,7 +905,7 @@
         },
         {
             "name": "illuminate/events",
-            "version": "v8.83.14",
+            "version": "v8.83.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/events.git",
@@ -960,7 +960,7 @@
         },
         {
             "name": "illuminate/filesystem",
-            "version": "v8.83.14",
+            "version": "v8.83.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/filesystem.git",
@@ -1022,7 +1022,7 @@
         },
         {
             "name": "illuminate/macroable",
-            "version": "v8.83.14",
+            "version": "v8.83.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
@@ -1068,7 +1068,7 @@
         },
         {
             "name": "illuminate/pipeline",
-            "version": "v8.83.14",
+            "version": "v8.83.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/pipeline.git",
@@ -1116,16 +1116,16 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v8.83.14",
+            "version": "v8.83.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "89245b6e19017f627a35af3874ad9251b76b02cc"
+                "reference": "c3d643e77082786ae8a51502c757e9b1a3ee254e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/89245b6e19017f627a35af3874ad9251b76b02cc",
-                "reference": "89245b6e19017f627a35af3874ad9251b76b02cc",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/c3d643e77082786ae8a51502c757e9b1a3ee254e",
+                "reference": "c3d643e77082786ae8a51502c757e9b1a3ee254e",
                 "shasum": ""
             },
             "require": {
@@ -1180,11 +1180,11 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-05-09T16:28:53+00:00"
+            "time": "2022-06-27T13:26:30+00:00"
         },
         {
             "name": "illuminate/view",
-            "version": "v8.83.14",
+            "version": "v8.83.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/view.git",
@@ -1439,28 +1439,28 @@
         },
         {
             "name": "mantle-framework/config",
-            "version": "v0.2.0",
+            "version": "v0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mantle-framework/config.git",
-                "reference": "5bf4637ae41b7099212f6d7975cce19b79ac21fd"
+                "reference": "73d6ff62c6c978b23713937276a7e8fd657dd50b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mantle-framework/config/zipball/5bf4637ae41b7099212f6d7975cce19b79ac21fd",
-                "reference": "5bf4637ae41b7099212f6d7975cce19b79ac21fd",
+                "url": "https://api.github.com/repos/mantle-framework/config/zipball/73d6ff62c6c978b23713937276a7e8fd657dd50b",
+                "reference": "73d6ff62c6c978b23713937276a7e8fd657dd50b",
                 "shasum": ""
             },
             "require": {
                 "alleyinteractive/composer-wordpress-autoloader": "^0.4",
-                "mantle-framework/contracts": "^0.2",
-                "mantle-framework/support": "^0.2",
+                "mantle-framework/contracts": "^0.4",
+                "mantle-framework/support": "^0.4",
                 "php": "^7.4|^8.0"
             },
             "type": "project",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "0.2-dev"
+                    "dev-main": "0.4-dev"
                 },
                 "wordpress-autoloader": {
                     "autoload": {
@@ -1480,27 +1480,27 @@
             ],
             "description": "The Mantle Framework Config Package",
             "support": {
-                "source": "https://github.com/mantle-framework/config/tree/v0.2.0"
+                "source": "https://github.com/mantle-framework/config/tree/v0.4.0"
             },
-            "time": "2022-05-10T14:39:28+00:00"
+            "time": "2022-06-27T22:25:24+00:00"
         },
         {
             "name": "mantle-framework/container",
-            "version": "v0.2.0",
+            "version": "v0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mantle-framework/container.git",
-                "reference": "901b93fbc1fb82c7083655bf5ea7bfb79f3bcc4c"
+                "reference": "36a7a260f8d0926670bc9ae00a9264a16e7b7847"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mantle-framework/container/zipball/901b93fbc1fb82c7083655bf5ea7bfb79f3bcc4c",
-                "reference": "901b93fbc1fb82c7083655bf5ea7bfb79f3bcc4c",
+                "url": "https://api.github.com/repos/mantle-framework/container/zipball/36a7a260f8d0926670bc9ae00a9264a16e7b7847",
+                "reference": "36a7a260f8d0926670bc9ae00a9264a16e7b7847",
                 "shasum": ""
             },
             "require": {
                 "alleyinteractive/composer-wordpress-autoloader": "^0.4",
-                "mantle-framework/contracts": "^0.2",
+                "mantle-framework/contracts": "^0.4",
                 "php": "^7.4|^8.0",
                 "psr/container": "^1.1.1 || ^2.0.1"
             },
@@ -1510,7 +1510,7 @@
             "type": "project",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "0.2-dev"
+                    "dev-main": "0.4-dev"
                 },
                 "wordpress-autoloader": {
                     "autoload": {
@@ -1530,22 +1530,22 @@
             ],
             "description": "The Mantle Framework Container Package",
             "support": {
-                "source": "https://github.com/mantle-framework/container/tree/v0.2.0"
+                "source": "https://github.com/mantle-framework/container/tree/v0.4.0"
             },
-            "time": "2022-05-10T14:39:24+00:00"
+            "time": "2022-06-27T22:25:15+00:00"
         },
         {
             "name": "mantle-framework/contracts",
-            "version": "v0.2.0",
+            "version": "v0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mantle-framework/contracts.git",
-                "reference": "62e538eba3274aaf9a1cad88c618af009a1488ab"
+                "reference": "1ed8440f4f43f903d2418e22134b4b1a47e1089b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mantle-framework/contracts/zipball/62e538eba3274aaf9a1cad88c618af009a1488ab",
-                "reference": "62e538eba3274aaf9a1cad88c618af009a1488ab",
+                "url": "https://api.github.com/repos/mantle-framework/contracts/zipball/1ed8440f4f43f903d2418e22134b4b1a47e1089b",
+                "reference": "1ed8440f4f43f903d2418e22134b4b1a47e1089b",
                 "shasum": ""
             },
             "require": {
@@ -1559,7 +1559,7 @@
             "type": "project",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "0.2-dev"
+                    "dev-main": "0.4-dev"
                 },
                 "wordpress-autoloader": {
                     "autoload": {
@@ -1579,28 +1579,28 @@
             ],
             "description": "The Mantle Framework Contracts Package",
             "support": {
-                "source": "https://github.com/mantle-framework/contracts/tree/v0.2.0"
+                "source": "https://github.com/mantle-framework/contracts/tree/v0.4.0"
             },
-            "time": "2022-05-10T14:39:29+00:00"
+            "time": "2022-06-27T22:25:17+00:00"
         },
         {
             "name": "mantle-framework/database",
-            "version": "v0.2.0",
+            "version": "v0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mantle-framework/database.git",
-                "reference": "565241812c659d3814733122b16963da4c4604fa"
+                "reference": "4e444866e777e58d0f58545eb8b2f03f293c4d96"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mantle-framework/database/zipball/565241812c659d3814733122b16963da4c4604fa",
-                "reference": "565241812c659d3814733122b16963da4c4604fa",
+                "url": "https://api.github.com/repos/mantle-framework/database/zipball/4e444866e777e58d0f58545eb8b2f03f293c4d96",
+                "reference": "4e444866e777e58d0f58545eb8b2f03f293c4d96",
                 "shasum": ""
             },
             "require": {
                 "alleyinteractive/composer-wordpress-autoloader": "^0.4",
-                "mantle-framework/contracts": "^0.2",
-                "mantle-framework/support": "^0.2",
+                "mantle-framework/contracts": "^0.4",
+                "mantle-framework/support": "^0.4",
                 "php": "^7.4|^8.0",
                 "psr/container": "^1.1.1 || ^2.0.1",
                 "symfony/finder": "^5.3"
@@ -1608,7 +1608,7 @@
             "type": "project",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "0.2-dev"
+                    "dev-main": "0.4-dev"
                 },
                 "wordpress-autoloader": {
                     "autoload": {
@@ -1628,29 +1628,29 @@
             ],
             "description": "The Mantle Framework Database Package",
             "support": {
-                "source": "https://github.com/mantle-framework/database/tree/v0.2.0"
+                "source": "https://github.com/mantle-framework/database/tree/v0.4.0"
             },
-            "time": "2022-05-20T20:21:35+00:00"
+            "time": "2022-06-27T22:25:19+00:00"
         },
         {
             "name": "mantle-framework/events",
-            "version": "v0.2.0",
+            "version": "v0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mantle-framework/events.git",
-                "reference": "fc58d31f202c578c418521f56ad231de43993575"
+                "reference": "5ce8424bbdebde560bf16f3d073bc68d9c2dd714"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mantle-framework/events/zipball/fc58d31f202c578c418521f56ad231de43993575",
-                "reference": "fc58d31f202c578c418521f56ad231de43993575",
+                "url": "https://api.github.com/repos/mantle-framework/events/zipball/5ce8424bbdebde560bf16f3d073bc68d9c2dd714",
+                "reference": "5ce8424bbdebde560bf16f3d073bc68d9c2dd714",
                 "shasum": ""
             },
             "require": {
                 "alleyinteractive/composer-wordpress-autoloader": "^0.4",
-                "mantle-framework/container": "^0.2",
-                "mantle-framework/contracts": "^0.2",
-                "mantle-framework/support": "^0.2",
+                "mantle-framework/container": "^0.4",
+                "mantle-framework/contracts": "^0.4",
+                "mantle-framework/support": "^0.4",
                 "php": "^7.4|^8.0",
                 "psr/container": "^1.1.1 || ^2.0.1",
                 "symfony/finder": "^5.3"
@@ -1658,7 +1658,7 @@
             "type": "project",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "0.2-dev"
+                    "dev-main": "0.4-dev"
                 },
                 "wordpress-autoloader": {
                     "autoload": {
@@ -1678,22 +1678,22 @@
             ],
             "description": "The Mantle Framework Events Package",
             "support": {
-                "source": "https://github.com/mantle-framework/events/tree/v0.2.0"
+                "source": "https://github.com/mantle-framework/events/tree/v0.4.0"
             },
-            "time": "2022-05-10T14:39:29+00:00"
+            "time": "2022-06-27T22:25:14+00:00"
         },
         {
             "name": "mantle-framework/faker",
-            "version": "v0.2.0",
+            "version": "v0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mantle-framework/faker.git",
-                "reference": "99b9908b5fff5e60b83279e5a9f7d5c951763219"
+                "reference": "7070f33406855fbb013ce735830fafc4fb031954"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mantle-framework/faker/zipball/99b9908b5fff5e60b83279e5a9f7d5c951763219",
-                "reference": "99b9908b5fff5e60b83279e5a9f7d5c951763219",
+                "url": "https://api.github.com/repos/mantle-framework/faker/zipball/7070f33406855fbb013ce735830fafc4fb031954",
+                "reference": "7070f33406855fbb013ce735830fafc4fb031954",
                 "shasum": ""
             },
             "require": {
@@ -1704,7 +1704,7 @@
             "type": "project",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "0.2-dev"
+                    "dev-main": "0.4-dev"
                 },
                 "wordpress-autoloader": {
                     "autoload": {
@@ -1724,30 +1724,30 @@
             ],
             "description": "The Mantle Framework Faker Package",
             "support": {
-                "source": "https://github.com/mantle-framework/faker/tree/v0.2.0"
+                "source": "https://github.com/mantle-framework/faker/tree/v0.4.0"
             },
-            "time": "2022-05-10T14:39:29+00:00"
+            "time": "2022-06-27T22:25:22+00:00"
         },
         {
             "name": "mantle-framework/filesystem",
-            "version": "v0.2.0",
+            "version": "v0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mantle-framework/filesystem.git",
-                "reference": "ddcef37fe4e1899eca63e558aec37cd1637c2e5a"
+                "reference": "ddafc0cb7995961b933c37a631a9dff1703da144"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mantle-framework/filesystem/zipball/ddcef37fe4e1899eca63e558aec37cd1637c2e5a",
-                "reference": "ddcef37fe4e1899eca63e558aec37cd1637c2e5a",
+                "url": "https://api.github.com/repos/mantle-framework/filesystem/zipball/ddafc0cb7995961b933c37a631a9dff1703da144",
+                "reference": "ddafc0cb7995961b933c37a631a9dff1703da144",
                 "shasum": ""
             },
             "require": {
                 "alleyinteractive/composer-wordpress-autoloader": "^0.4",
                 "league/flysystem": "^1.1",
                 "league/flysystem-cached-adapter": "^1.1",
-                "mantle-framework/contracts": "^0.2",
-                "mantle-framework/support": "^0.2",
+                "mantle-framework/contracts": "^0.4",
+                "mantle-framework/support": "^0.4",
                 "php": "^7.4|^8.0",
                 "psr/container": "^1.1.1 || ^2.0.1",
                 "symfony/finder": "^5.3",
@@ -1756,7 +1756,7 @@
             "type": "project",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "0.2-dev"
+                    "dev-main": "0.4-dev"
                 },
                 "wordpress-autoloader": {
                     "autoload": {
@@ -1776,29 +1776,29 @@
             ],
             "description": "The Mantle Framework Filesystem Package",
             "support": {
-                "source": "https://github.com/mantle-framework/filesystem/tree/v0.2.0"
+                "source": "https://github.com/mantle-framework/filesystem/tree/v0.4.0"
             },
-            "time": "2022-05-10T14:39:28+00:00"
+            "time": "2022-06-27T22:25:19+00:00"
         },
         {
             "name": "mantle-framework/http",
-            "version": "v0.2.0",
+            "version": "v0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mantle-framework/http.git",
-                "reference": "e71cba75dd03efb33931e37d8aa2cbc7377039c3"
+                "reference": "b94398f09c547045f16a5ef3a29923e7d3f57d76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mantle-framework/http/zipball/e71cba75dd03efb33931e37d8aa2cbc7377039c3",
-                "reference": "e71cba75dd03efb33931e37d8aa2cbc7377039c3",
+                "url": "https://api.github.com/repos/mantle-framework/http/zipball/b94398f09c547045f16a5ef3a29923e7d3f57d76",
+                "reference": "b94398f09c547045f16a5ef3a29923e7d3f57d76",
                 "shasum": ""
             },
             "require": {
                 "illuminate/view": "^8.6",
-                "mantle-framework/contracts": "^0.2",
-                "mantle-framework/filesystem": "^0.2",
-                "mantle-framework/support": "^0.2",
+                "mantle-framework/contracts": "^0.4",
+                "mantle-framework/filesystem": "^0.4",
+                "mantle-framework/support": "^0.4",
                 "php": "^7.4|^8.0",
                 "symfony/http-foundation": "^5.3",
                 "symfony/http-kernel": "^5.3",
@@ -1809,7 +1809,7 @@
             "type": "project",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "0.2-dev"
+                    "dev-main": "0.4-dev"
                 },
                 "wordpress-autoloader": {
                     "autoload": {
@@ -1829,28 +1829,28 @@
             ],
             "description": "The Mantle Framework Http Package",
             "support": {
-                "source": "https://github.com/mantle-framework/http/tree/v0.2.0"
+                "source": "https://github.com/mantle-framework/http/tree/v0.4.0"
             },
-            "time": "2022-05-10T14:39:27+00:00"
+            "time": "2022-06-27T22:25:18+00:00"
         },
         {
             "name": "mantle-framework/support",
-            "version": "v0.2.0",
+            "version": "v0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mantle-framework/support.git",
-                "reference": "aebeef7d815936306ff02bd6f09ad9cedf100319"
+                "reference": "27770ca24676c25870186b273809836e43ce948c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mantle-framework/support/zipball/aebeef7d815936306ff02bd6f09ad9cedf100319",
-                "reference": "aebeef7d815936306ff02bd6f09ad9cedf100319",
+                "url": "https://api.github.com/repos/mantle-framework/support/zipball/27770ca24676c25870186b273809836e43ce948c",
+                "reference": "27770ca24676c25870186b273809836e43ce948c",
                 "shasum": ""
             },
             "require": {
                 "alleyinteractive/composer-wordpress-autoloader": "^0.4",
-                "mantle-framework/contracts": "^0.2",
-                "monolog/monolog": "^2.0",
+                "mantle-framework/contracts": "^0.4",
+                "monolog/monolog": "^2.7",
                 "nesbot/carbon": "^2.53",
                 "php": "^7.4|^8.0",
                 "symfony/finder": "^5.3",
@@ -1865,7 +1865,7 @@
             "type": "project",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "0.2-dev"
+                    "dev-main": "0.4-dev"
                 },
                 "wordpress-autoloader": {
                     "autoload": {
@@ -1890,30 +1890,30 @@
             ],
             "description": "The Mantle Framework Support Package",
             "support": {
-                "source": "https://github.com/mantle-framework/support/tree/v0.2.0"
+                "source": "https://github.com/mantle-framework/support/tree/v0.4.0"
             },
-            "time": "2022-05-23T15:18:06+00:00"
+            "time": "2022-06-27T22:25:50+00:00"
         },
         {
             "name": "mantle-framework/testing",
-            "version": "v0.2.0",
+            "version": "v0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mantle-framework/testing.git",
-                "reference": "54882a24c7121a262721f27c057b04e1a66113b7"
+                "reference": "49d99548ef0af5db13aedcc32e29b91b05a48f50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mantle-framework/testing/zipball/54882a24c7121a262721f27c057b04e1a66113b7",
-                "reference": "54882a24c7121a262721f27c057b04e1a66113b7",
+                "url": "https://api.github.com/repos/mantle-framework/testing/zipball/49d99548ef0af5db13aedcc32e29b91b05a48f50",
+                "reference": "49d99548ef0af5db13aedcc32e29b91b05a48f50",
                 "shasum": ""
             },
             "require": {
                 "alleyinteractive/composer-wordpress-autoloader": "^0.4",
-                "mantle-framework/contracts": "^0.2",
-                "mantle-framework/database": "^0.2",
-                "mantle-framework/http": "^0.2",
-                "mantle-framework/support": "^0.2",
+                "mantle-framework/contracts": "^0.4",
+                "mantle-framework/database": "^0.4",
+                "mantle-framework/http": "^0.4",
+                "mantle-framework/support": "^0.4",
                 "php": "^7.4|^8.0"
             },
             "suggest": {
@@ -1922,7 +1922,7 @@
             "type": "project",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "0.2-dev"
+                    "dev-main": "0.4-dev"
                 },
                 "wordpress-autoloader": {
                     "autoload": {
@@ -1947,40 +1947,40 @@
             ],
             "description": "The Mantle Framework Testing Package",
             "support": {
-                "source": "https://github.com/mantle-framework/testing/tree/v0.2.0"
+                "source": "https://github.com/mantle-framework/testing/tree/v0.4.0"
             },
-            "time": "2022-05-24T13:49:32+00:00"
+            "time": "2022-06-27T22:25:49+00:00"
         },
         {
             "name": "mantle-framework/testkit",
-            "version": "v0.2.0",
+            "version": "v0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mantle-framework/testkit.git",
-                "reference": "706581c81901ae7011122cd835b4e102b3185ae6"
+                "reference": "9693383ce88a016d906708967fc5b9202cc81f9f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mantle-framework/testkit/zipball/706581c81901ae7011122cd835b4e102b3185ae6",
-                "reference": "706581c81901ae7011122cd835b4e102b3185ae6",
+                "url": "https://api.github.com/repos/mantle-framework/testkit/zipball/9693383ce88a016d906708967fc5b9202cc81f9f",
+                "reference": "9693383ce88a016d906708967fc5b9202cc81f9f",
                 "shasum": ""
             },
             "require": {
                 "alleyinteractive/composer-wordpress-autoloader": "^0.4",
-                "mantle-framework/config": "^0.2",
-                "mantle-framework/container": "^0.2",
-                "mantle-framework/contracts": "^0.2",
-                "mantle-framework/events": "^0.2",
-                "mantle-framework/faker": "^0.2",
-                "mantle-framework/support": "^0.2",
-                "mantle-framework/testing": "^0.2",
+                "mantle-framework/config": "^0.4",
+                "mantle-framework/container": "^0.4",
+                "mantle-framework/contracts": "^0.4",
+                "mantle-framework/events": "^0.4",
+                "mantle-framework/faker": "^0.4",
+                "mantle-framework/support": "^0.4",
+                "mantle-framework/testing": "^0.4",
                 "php": "^7.4|^8.0",
                 "phpunit/phpunit": "^9.3.3"
             },
             "type": "project",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "0.2-dev"
+                    "dev-main": "0.4-dev"
                 },
                 "wordpress-autoloader": {
                     "autoload": {
@@ -2000,9 +2000,9 @@
             ],
             "description": "The Mantle Framework Teskit Package",
             "support": {
-                "source": "https://github.com/mantle-framework/testkit/tree/v0.2.0"
+                "source": "https://github.com/mantle-framework/testkit/tree/v0.4.0"
             },
-            "time": "2022-05-18T19:05:42+00:00"
+            "time": "2022-06-27T22:25:55+00:00"
         },
         {
             "name": "mockery/mockery",
@@ -2137,16 +2137,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.58.0",
+            "version": "2.59.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "97a34af22bde8d0ac20ab34b29d7bfe360902055"
+                "reference": "a9000603ea337c8df16cc41f8b6be95a65f4d0f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/97a34af22bde8d0ac20ab34b29d7bfe360902055",
-                "reference": "97a34af22bde8d0ac20ab34b29d7bfe360902055",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/a9000603ea337c8df16cc41f8b6be95a65f4d0f5",
+                "reference": "a9000603ea337c8df16cc41f8b6be95a65f4d0f5",
                 "shasum": ""
             },
             "require": {
@@ -2161,11 +2161,12 @@
                 "doctrine/orm": "^2.7",
                 "friendsofphp/php-cs-fixer": "^3.0",
                 "kylekatarnls/multi-tester": "^2.0",
+                "ondrejmirtes/better-reflection": "*",
                 "phpmd/phpmd": "^2.9",
                 "phpstan/extension-installer": "^1.0",
-                "phpstan/phpstan": "^0.12.54 || ^1.0",
-                "phpunit/php-file-iterator": "^2.0.5",
-                "phpunit/phpunit": "^7.5.20 || ^8.5.23",
+                "phpstan/phpstan": "^0.12.99 || ^1.7.14",
+                "phpunit/php-file-iterator": "^2.0.5 || ^3.0.6",
+                "phpunit/phpunit": "^7.5.20 || ^8.5.26 || ^9.5.20",
                 "squizlabs/php_codesniffer": "^3.4"
             },
             "bin": [
@@ -2222,15 +2223,19 @@
             },
             "funding": [
                 {
-                    "url": "https://opencollective.com/Carbon",
-                    "type": "open_collective"
+                    "url": "https://github.com/sponsors/kylekatarnls",
+                    "type": "github"
                 },
                 {
-                    "url": "https://tidelift.com/funding/github/packagist/nesbot/carbon",
+                    "url": "https://opencollective.com/Carbon#sponsor",
+                    "type": "opencollective"
+                },
+                {
+                    "url": "https://tidelift.com/subscription/pkg/packagist-nesbot-carbon?utm_source=packagist-nesbot-carbon&utm_medium=referral&utm_campaign=readme",
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-04-25T19:31:17+00:00"
+            "time": "2022-06-29T21:43:55+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -4491,7 +4496,7 @@
         },
         {
             "name": "symfony/deprecation-contracts",
-            "version": "v2.5.1",
+            "version": "v2.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/deprecation-contracts.git",
@@ -4538,7 +4543,7 @@
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/deprecation-contracts/tree/v2.5.1"
+                "source": "https://github.com/symfony/deprecation-contracts/tree/v2.5.2"
             },
             "funding": [
                 {
@@ -4558,16 +4563,16 @@
         },
         {
             "name": "symfony/error-handler",
-            "version": "v5.4.8",
+            "version": "v5.4.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/error-handler.git",
-                "reference": "c1fcde614dfe99d62a83b796a53b8bad358b266a"
+                "reference": "c116cda1f51c678782768dce89a45f13c949455d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/error-handler/zipball/c1fcde614dfe99d62a83b796a53b8bad358b266a",
-                "reference": "c1fcde614dfe99d62a83b796a53b8bad358b266a",
+                "url": "https://api.github.com/repos/symfony/error-handler/zipball/c116cda1f51c678782768dce89a45f13c949455d",
+                "reference": "c116cda1f51c678782768dce89a45f13c949455d",
                 "shasum": ""
             },
             "require": {
@@ -4609,7 +4614,7 @@
             "description": "Provides tools to manage errors and ease debugging PHP code",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/error-handler/tree/v5.4.8"
+                "source": "https://github.com/symfony/error-handler/tree/v5.4.9"
             },
             "funding": [
                 {
@@ -4625,20 +4630,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-04-12T15:48:08+00:00"
+            "time": "2022-05-21T13:57:48+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v5.4.3",
+            "version": "v5.4.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "dec8a9f58d20df252b9cd89f1c6c1530f747685d"
+                "reference": "8e6ce1cc0279e3ff3c8ff0f43813bc88d21ca1bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/dec8a9f58d20df252b9cd89f1c6c1530f747685d",
-                "reference": "dec8a9f58d20df252b9cd89f1c6c1530f747685d",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/8e6ce1cc0279e3ff3c8ff0f43813bc88d21ca1bc",
+                "reference": "8e6ce1cc0279e3ff3c8ff0f43813bc88d21ca1bc",
                 "shasum": ""
             },
             "require": {
@@ -4694,7 +4699,7 @@
             "description": "Provides tools that allow your application components to communicate with each other by dispatching events and listening to them",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/event-dispatcher/tree/v5.4.3"
+                "source": "https://github.com/symfony/event-dispatcher/tree/v5.4.9"
             },
             "funding": [
                 {
@@ -4710,11 +4715,11 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-01-02T09:53:40+00:00"
+            "time": "2022-05-05T16:45:39+00:00"
         },
         {
             "name": "symfony/event-dispatcher-contracts",
-            "version": "v2.5.1",
+            "version": "v2.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher-contracts.git",
@@ -4773,7 +4778,7 @@
                 "standards"
             ],
             "support": {
-                "source": "https://github.com/symfony/event-dispatcher-contracts/tree/v2.5.1"
+                "source": "https://github.com/symfony/event-dispatcher-contracts/tree/v2.5.2"
             },
             "funding": [
                 {
@@ -4856,16 +4861,16 @@
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v5.4.8",
+            "version": "v5.4.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "ff2818d1c3d49860bcae1f2cbb5eb00fcd3bf9e2"
+                "reference": "e7793b7906f72a8cc51054fbca9dcff7a8af1c1e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/ff2818d1c3d49860bcae1f2cbb5eb00fcd3bf9e2",
-                "reference": "ff2818d1c3d49860bcae1f2cbb5eb00fcd3bf9e2",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/e7793b7906f72a8cc51054fbca9dcff7a8af1c1e",
+                "reference": "e7793b7906f72a8cc51054fbca9dcff7a8af1c1e",
                 "shasum": ""
             },
             "require": {
@@ -4909,7 +4914,7 @@
             "description": "Defines an object-oriented layer for the HTTP specification",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/http-foundation/tree/v5.4.8"
+                "source": "https://github.com/symfony/http-foundation/tree/v5.4.10"
             },
             "funding": [
                 {
@@ -4925,20 +4930,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-04-22T08:14:12+00:00"
+            "time": "2022-06-19T13:13:40+00:00"
         },
         {
             "name": "symfony/http-kernel",
-            "version": "v5.4.8",
+            "version": "v5.4.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-kernel.git",
-                "reference": "cf7e61106abfc19b305ca0aedc41724ced89a02a"
+                "reference": "255ae3b0a488d78fbb34da23d3e0c059874b5948"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/cf7e61106abfc19b305ca0aedc41724ced89a02a",
-                "reference": "cf7e61106abfc19b305ca0aedc41724ced89a02a",
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/255ae3b0a488d78fbb34da23d3e0c059874b5948",
+                "reference": "255ae3b0a488d78fbb34da23d3e0c059874b5948",
                 "shasum": ""
             },
             "require": {
@@ -5021,7 +5026,7 @@
             "description": "Provides a structured process for converting a Request into a Response",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/http-kernel/tree/v5.4.8"
+                "source": "https://github.com/symfony/http-kernel/tree/v5.4.10"
             },
             "funding": [
                 {
@@ -5037,20 +5042,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-04-27T17:22:21+00:00"
+            "time": "2022-06-26T16:57:59+00:00"
         },
         {
             "name": "symfony/mime",
-            "version": "v5.4.8",
+            "version": "v5.4.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/mime.git",
-                "reference": "af49bc163ec3272f677bde3bc44c0d766c1fd662"
+                "reference": "02265e1e5111c3cd7480387af25e82378b7ab9cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/mime/zipball/af49bc163ec3272f677bde3bc44c0d766c1fd662",
-                "reference": "af49bc163ec3272f677bde3bc44c0d766c1fd662",
+                "url": "https://api.github.com/repos/symfony/mime/zipball/02265e1e5111c3cd7480387af25e82378b7ab9cc",
+                "reference": "02265e1e5111c3cd7480387af25e82378b7ab9cc",
                 "shasum": ""
             },
             "require": {
@@ -5104,7 +5109,7 @@
                 "mime-type"
             ],
             "support": {
-                "source": "https://github.com/symfony/mime/tree/v5.4.8"
+                "source": "https://github.com/symfony/mime/tree/v5.4.10"
             },
             "funding": [
                 {
@@ -5120,7 +5125,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-04-12T15:48:08+00:00"
+            "time": "2022-06-09T12:22:40+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -5206,16 +5211,16 @@
         },
         {
             "name": "symfony/polyfill-intl-idn",
-            "version": "v1.25.0",
+            "version": "v1.26.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-idn.git",
-                "reference": "749045c69efb97c70d25d7463abba812e91f3a44"
+                "reference": "59a8d271f00dd0e4c2e518104cc7963f655a1aa8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/749045c69efb97c70d25d7463abba812e91f3a44",
-                "reference": "749045c69efb97c70d25d7463abba812e91f3a44",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/59a8d271f00dd0e4c2e518104cc7963f655a1aa8",
+                "reference": "59a8d271f00dd0e4c2e518104cc7963f655a1aa8",
                 "shasum": ""
             },
             "require": {
@@ -5229,7 +5234,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.23-dev"
+                    "dev-main": "1.26-dev"
                 },
                 "thanks": {
                     "name": "symfony/polyfill",
@@ -5273,7 +5278,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-intl-idn/tree/v1.25.0"
+                "source": "https://github.com/symfony/polyfill-intl-idn/tree/v1.26.0"
             },
             "funding": [
                 {
@@ -5289,20 +5294,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-09-14T14:02:44+00:00"
+            "time": "2022-05-24T11:49:31+00:00"
         },
         {
             "name": "symfony/polyfill-intl-normalizer",
-            "version": "v1.25.0",
+            "version": "v1.26.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-normalizer.git",
-                "reference": "8590a5f561694770bdcd3f9b5c69dde6945028e8"
+                "reference": "219aa369ceff116e673852dce47c3a41794c14bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-intl-normalizer/zipball/8590a5f561694770bdcd3f9b5c69dde6945028e8",
-                "reference": "8590a5f561694770bdcd3f9b5c69dde6945028e8",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-normalizer/zipball/219aa369ceff116e673852dce47c3a41794c14bd",
+                "reference": "219aa369ceff116e673852dce47c3a41794c14bd",
                 "shasum": ""
             },
             "require": {
@@ -5314,7 +5319,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.23-dev"
+                    "dev-main": "1.26-dev"
                 },
                 "thanks": {
                     "name": "symfony/polyfill",
@@ -5357,7 +5362,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-intl-normalizer/tree/v1.25.0"
+                "source": "https://github.com/symfony/polyfill-intl-normalizer/tree/v1.26.0"
             },
             "funding": [
                 {
@@ -5373,20 +5378,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-02-19T12:13:01+00:00"
+            "time": "2022-05-24T11:49:31+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.25.0",
+            "version": "v1.26.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "0abb51d2f102e00a4eefcf46ba7fec406d245825"
+                "reference": "9344f9cb97f3b19424af1a21a3b0e75b0a7d8d7e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/0abb51d2f102e00a4eefcf46ba7fec406d245825",
-                "reference": "0abb51d2f102e00a4eefcf46ba7fec406d245825",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/9344f9cb97f3b19424af1a21a3b0e75b0a7d8d7e",
+                "reference": "9344f9cb97f3b19424af1a21a3b0e75b0a7d8d7e",
                 "shasum": ""
             },
             "require": {
@@ -5401,7 +5406,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.23-dev"
+                    "dev-main": "1.26-dev"
                 },
                 "thanks": {
                     "name": "symfony/polyfill",
@@ -5440,7 +5445,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.25.0"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.26.0"
             },
             "funding": [
                 {
@@ -5456,20 +5461,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-11-30T18:21:41+00:00"
+            "time": "2022-05-24T11:49:31+00:00"
         },
         {
             "name": "symfony/polyfill-php72",
-            "version": "v1.25.0",
+            "version": "v1.26.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php72.git",
-                "reference": "9a142215a36a3888e30d0a9eeea9766764e96976"
+                "reference": "bf44a9fd41feaac72b074de600314a93e2ae78e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php72/zipball/9a142215a36a3888e30d0a9eeea9766764e96976",
-                "reference": "9a142215a36a3888e30d0a9eeea9766764e96976",
+                "url": "https://api.github.com/repos/symfony/polyfill-php72/zipball/bf44a9fd41feaac72b074de600314a93e2ae78e2",
+                "reference": "bf44a9fd41feaac72b074de600314a93e2ae78e2",
                 "shasum": ""
             },
             "require": {
@@ -5478,7 +5483,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.23-dev"
+                    "dev-main": "1.26-dev"
                 },
                 "thanks": {
                     "name": "symfony/polyfill",
@@ -5516,7 +5521,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php72/tree/v1.25.0"
+                "source": "https://github.com/symfony/polyfill-php72/tree/v1.26.0"
             },
             "funding": [
                 {
@@ -5532,20 +5537,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-05-27T09:17:38+00:00"
+            "time": "2022-05-24T11:49:31+00:00"
         },
         {
             "name": "symfony/polyfill-php73",
-            "version": "v1.25.0",
+            "version": "v1.26.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php73.git",
-                "reference": "cc5db0e22b3cb4111010e48785a97f670b350ca5"
+                "reference": "e440d35fa0286f77fb45b79a03fedbeda9307e85"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php73/zipball/cc5db0e22b3cb4111010e48785a97f670b350ca5",
-                "reference": "cc5db0e22b3cb4111010e48785a97f670b350ca5",
+                "url": "https://api.github.com/repos/symfony/polyfill-php73/zipball/e440d35fa0286f77fb45b79a03fedbeda9307e85",
+                "reference": "e440d35fa0286f77fb45b79a03fedbeda9307e85",
                 "shasum": ""
             },
             "require": {
@@ -5554,7 +5559,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.23-dev"
+                    "dev-main": "1.26-dev"
                 },
                 "thanks": {
                     "name": "symfony/polyfill",
@@ -5595,7 +5600,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php73/tree/v1.25.0"
+                "source": "https://github.com/symfony/polyfill-php73/tree/v1.26.0"
             },
             "funding": [
                 {
@@ -5611,20 +5616,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-06-05T21:20:04+00:00"
+            "time": "2022-05-24T11:49:31+00:00"
         },
         {
             "name": "symfony/polyfill-php80",
-            "version": "v1.25.0",
+            "version": "v1.26.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php80.git",
-                "reference": "4407588e0d3f1f52efb65fbe92babe41f37fe50c"
+                "reference": "cfa0ae98841b9e461207c13ab093d76b0fa7bace"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/4407588e0d3f1f52efb65fbe92babe41f37fe50c",
-                "reference": "4407588e0d3f1f52efb65fbe92babe41f37fe50c",
+                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/cfa0ae98841b9e461207c13ab093d76b0fa7bace",
+                "reference": "cfa0ae98841b9e461207c13ab093d76b0fa7bace",
                 "shasum": ""
             },
             "require": {
@@ -5633,7 +5638,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.23-dev"
+                    "dev-main": "1.26-dev"
                 },
                 "thanks": {
                     "name": "symfony/polyfill",
@@ -5678,7 +5683,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php80/tree/v1.25.0"
+                "source": "https://github.com/symfony/polyfill-php80/tree/v1.26.0"
             },
             "funding": [
                 {
@@ -5694,7 +5699,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-03-04T08:16:47+00:00"
+            "time": "2022-05-10T07:21:04+00:00"
         },
         {
             "name": "symfony/routing",
@@ -5788,16 +5793,16 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v5.4.8",
+            "version": "v5.4.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "f5c0f6d1f20993b2606f3a5f36b1dc8c1899170b"
+                "reference": "1639abc1177d26bcd4320e535e664cef067ab0ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/f5c0f6d1f20993b2606f3a5f36b1dc8c1899170b",
-                "reference": "f5c0f6d1f20993b2606f3a5f36b1dc8c1899170b",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/1639abc1177d26bcd4320e535e664cef067ab0ca",
+                "reference": "1639abc1177d26bcd4320e535e664cef067ab0ca",
                 "shasum": ""
             },
             "require": {
@@ -5865,7 +5870,7 @@
             "description": "Provides tools to internationalize your application",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/translation/tree/v5.4.8"
+                "source": "https://github.com/symfony/translation/tree/v5.4.9"
             },
             "funding": [
                 {
@@ -5881,20 +5886,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-04-22T08:14:12+00:00"
+            "time": "2022-05-06T12:33:37+00:00"
         },
         {
             "name": "symfony/translation-contracts",
-            "version": "v2.5.1",
+            "version": "v2.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation-contracts.git",
-                "reference": "1211df0afa701e45a04253110e959d4af4ef0f07"
+                "reference": "136b19dd05cdf0709db6537d058bcab6dd6e2dbe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation-contracts/zipball/1211df0afa701e45a04253110e959d4af4ef0f07",
-                "reference": "1211df0afa701e45a04253110e959d4af4ef0f07",
+                "url": "https://api.github.com/repos/symfony/translation-contracts/zipball/136b19dd05cdf0709db6537d058bcab6dd6e2dbe",
+                "reference": "136b19dd05cdf0709db6537d058bcab6dd6e2dbe",
                 "shasum": ""
             },
             "require": {
@@ -5943,7 +5948,7 @@
                 "standards"
             ],
             "support": {
-                "source": "https://github.com/symfony/translation-contracts/tree/v2.5.1"
+                "source": "https://github.com/symfony/translation-contracts/tree/v2.5.2"
             },
             "funding": [
                 {
@@ -5959,20 +5964,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-01-02T09:53:40+00:00"
+            "time": "2022-06-27T16:58:25+00:00"
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v5.4.8",
+            "version": "v5.4.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "cdcadd343d31ad16fc5e006b0de81ea307435053"
+                "reference": "af52239a330fafd192c773795520dc2dd62b5657"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/cdcadd343d31ad16fc5e006b0de81ea307435053",
-                "reference": "cdcadd343d31ad16fc5e006b0de81ea307435053",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/af52239a330fafd192c773795520dc2dd62b5657",
+                "reference": "af52239a330fafd192c773795520dc2dd62b5657",
                 "shasum": ""
             },
             "require": {
@@ -6032,7 +6037,7 @@
                 "dump"
             ],
             "support": {
-                "source": "https://github.com/symfony/var-dumper/tree/v5.4.8"
+                "source": "https://github.com/symfony/var-dumper/tree/v5.4.9"
             },
             "funding": [
                 {
@@ -6048,7 +6053,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-04-26T13:19:20+00:00"
+            "time": "2022-05-21T10:24:18+00:00"
         },
         {
             "name": "theseer/tokenizer",
