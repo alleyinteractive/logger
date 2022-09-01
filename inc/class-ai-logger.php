@@ -12,6 +12,8 @@ use Psr\Log\LoggerInterface;
 
 /**
  * Main class responsible for defining the logger functionality
+ *
+ * @mixin \Monolog\Logger
  */
 class AI_Logger implements LoggerInterface {
 	/**
@@ -59,8 +61,30 @@ class AI_Logger implements LoggerInterface {
 	}
 
 	/**
+	 * Retrieve the logger instance.
+	 *
+	 * @return Logger
+	 */
+	public function logger(): Logger {
+		return $this->logger;
+	}
+
+	/**
+	 * Retrieve a logger instance with specific handlers attached.
+	 *
+	 * @param \Monolog\Handler\Handler[] $handlers Handlers to attach to the logger.
+	 * @return static
+	 */
+	public function with_handlers( array $handlers ) {
+		$logger = clone $this;
+		$logger->logger->setHandlers( $handlers );
+		return $logger;
+	}
+
+	/**
 	 * Getter for the Logger instance.
 	 *
+	 * @deprecated Renamed to {@see AI_Logger::logger()}
 	 * @return Logger
 	 */
 	public function get_logger(): Logger {
@@ -129,15 +153,15 @@ class AI_Logger implements LoggerInterface {
 	 * Create a logger for logging to a specific post.
 	 *
 	 * @param string     $key Meta key to log to.
-	 * @param int        $object_id Post ID.
+	 * @param int        $post_id Post ID.
 	 * @param int|string $level The minimum logging level at which this handler will be triggered.
-	 * @return LoggerInterface
+	 * @return static
 	 */
-	public function to_post( string $key, int $object_id, $level = Logger::DEBUG ): LoggerInterface {
-		return new Logger(
-			'Post Logger',
-			[ new Handler\Post_Meta_Handler( $level, true, $object_id, $key ) ],
-			$this->get_processors()
+	public function to_post( string $key, int $post_id, $level = Logger::DEBUG ) {
+		return $this->with_handlers(
+			[
+				new Handler\Post_Meta_Handler( $post_id, $key, $level, true ),
+			]
 		);
 	}
 
@@ -145,15 +169,15 @@ class AI_Logger implements LoggerInterface {
 	 * Create a logger for logging to a specific term.
 	 *
 	 * @param string     $key Meta key to log to.
-	 * @param int        $object_id Term object.
+	 * @param int        $term_id Term object.
 	 * @param int|string $level The minimum logging level at which this handler will be triggered.
-	 * @return LoggerInterface
+	 * @return static
 	 */
-	public function to_term( string $key, int $object_id, $level = Logger::DEBUG ): LoggerInterface {
-		return new Logger(
-			'Term Logger',
-			[ new Handler\Term_Meta_Handler( $level, true, $object_id, $key ) ],
-			$this->get_processors()
+	public function to_term( string $key, int $term_id, $level = Logger::DEBUG ) {
+		return $this->with_handlers(
+			[
+				new Handler\Term_Meta_Handler( $term_id, $key, $level, true ),
+			]
 		);
 	}
 
@@ -274,5 +298,16 @@ class AI_Logger implements LoggerInterface {
 	 */
 	public function log( $level, $message, array $context = [] ) {
 		$this->logger->log( $level, $message, $context );
+	}
+
+	/**
+	 * Forward any calls to Monolog.
+	 *
+	 * @param string $name Method name.
+	 * @param array  $arguments Method arguments.
+	 * @return mixed
+	 */
+	public function __call( string $name, $arguments ) {
+		return $this->logger->$name( ...$arguments );
 	}
 }

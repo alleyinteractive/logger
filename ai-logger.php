@@ -16,6 +16,8 @@
  * @author jaredcobb
  */
 
+use Monolog\Logger;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -50,4 +52,42 @@ require_once __DIR__ . '/inc/bootstrap.php';
  */
 function ai_logger(): \AI_Logger\AI_Logger {
 	return \AI_Logger\AI_Logger::instance();
+}
+
+/**
+ * Create a Query Monitor Logger instance.
+ *
+ * @param string $level The log level to use.
+ * @return \AI_Logger\AI_Logger
+ */
+function ai_logger_to_qm( string $level = Logger::DEBUG ): \AI_Logger\AI_Logger {
+	return ai_logger()->with_handlers(
+		[
+			new \AI_Logger\Handler\Query_Monitor_Handler( $level ),
+		]
+	);
+}
+
+/**
+ * Create a post logger instance.
+ *
+ * @param int    $post_id Post ID.
+ * @param string $meta_key Meta key to log to.
+ * @param string $level The log level to use.
+ * @return \AI_Logger\AI_Logger
+ */
+function ai_logger_to_post( int $post_id, string $meta_key = 'log', string $level = Logger::DEBUG ): \AI_Logger\AI_Logger {
+	return ai_logger()->to_post( $meta_key, $post_id, $level );
+}
+
+/**
+ * Create a term logger instance.
+ *
+ * @param int    $term_id Term ID.
+ * @param string $meta_key Meta key to log to.
+ * @param string $level The log level to use.
+ * @return \AI_Logger\AI_Logger
+ */
+function ai_logger_to_term( int $term_id, string $meta_key = 'log', string $level = Logger::DEBUG ): \AI_Logger\AI_Logger {
+	return ai_logger()->to_term( $meta_key, $term_id, $level );
 }

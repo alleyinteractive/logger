@@ -44,6 +44,9 @@
         "phpcbf": "phpcbf --standard=./phpcs.xml .",
         "phpcs": "phpcs --standard=./phpcs.xml .",
         "phpunit": "phpunit",
-        "test": "@phpunit"
+        "test": [
+          "@phpcs",
+          "@phpunit"
+        ]
     }
 }
