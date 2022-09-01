@@ -3,7 +3,7 @@ Contributors: alleyinteractive, jaredcobb
 Requires at least: 5.4
 Tested up to: 5.4
 Requires PHP: 7.4
-Stable tag: 2.1.3
+Stable tag: 2.2.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -24,6 +24,10 @@ error.
 1. Activate the plugin through the 'Plugins' menu in WordPress
 
 == Changelog ==
+
+= 2.2.0 =
+
+- Dependency updates.
 
 = 2.1.0 =
 
