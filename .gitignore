@@ -5,8 +5,12 @@ node_modules/
 *.sql
 *.tar.gz
 *.zip
-vendor/
 .phpunit.result.cache
-.phpunit.cache
-coverage/
-.vscode
+Dockerfile
+output.log
+.github
+tests
+bin
+composer.lock
+phpcs.xml
+phpunit.xml
