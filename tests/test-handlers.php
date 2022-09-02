@@ -40,7 +40,7 @@ class Test_Class_Handler extends Test_Case {
 		$this->assertEmpty( get_post_meta( $post_id, 'test_key', false ), 'Log should be empty.' );
 
 		// Write the log.
-		$post_logger = new Logger( 'Unit Test', [ new Post_Meta_Handler( Logger::DEBUG, true, $post_id, 'test_key' ) ] );
+		$post_logger = new Logger( 'Unit Test', [ new Post_Meta_Handler( $post_id, 'test_key', Logger::DEBUG, true ) ] );
 		$post_logger->info( 'Test message' );
 
 		do_action( 'shutdown' );
@@ -59,7 +59,7 @@ class Test_Class_Handler extends Test_Case {
 		$this->assertEmpty( get_post_meta( $post_id, 'test_key', false ), 'Log should be empty.' );
 
 		// Write the log.
-		$post_logger = new Logger( 'Unit Test', [ new Post_Meta_Handler( Logger::DEBUG, true, $post_id, 'test_key' ) ] );
+		$post_logger = new Logger( 'Unit Test', [ new Post_Meta_Handler( $post_id, 'test_key', Logger::DEBUG, true ) ] );
 		$post_logger->info( 'Test message' );
 
 		$new_blog_id = $this->factory->blog->create();
@@ -97,7 +97,7 @@ class Test_Class_Handler extends Test_Case {
 		$this->assertEmpty( get_term_meta( $term_id, 'test_key', false ), 'Log should be empty.' );
 
 		// Write the log.
-		$post_logger = new Logger( 'Unit Test', [ new Term_Meta_Handler( Logger::DEBUG, true, $term_id, 'test_key' ) ] );
+		$post_logger = new Logger( 'Unit Test', [ new Term_Meta_Handler( $term_id, 'test_key', Logger::DEBUG, true ) ] );
 		$post_logger->info( 'Test message' );
 
 		do_action( 'shutdown' );

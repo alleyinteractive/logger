@@ -13,6 +13,7 @@
 		<exclude name="WordPress.NamingConventions.ValidPostTypeSlug.NotStringLiteral" />
 		<exclude name="Generic.Arrays.DisallowLongArraySyntax.Found" />
 		<exclude name="VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable" />
+		<exclude name="WordPress.NamingConventions.PrefixAllGlobals.ShortPrefixPassed" />
 	</rule>
 
 	<arg value="ps" />
@@ -20,14 +21,10 @@
 
 	<exclude-pattern>tests/</exclude-pattern>
 
-	<rule ref="WordPress">
-		<exclude name="WordPress.NamingConventions.ValidPostTypeSlug.NotStringLiteral" />
-	</rule>
-
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
 		<properties>
 			<property name="prefixes" type="array">
-				<element value="AI_Logger"/>
+				<element value="AI_Logger" />
 			</property>
 		</properties>
 	</rule>

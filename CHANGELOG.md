@@ -5,6 +5,10 @@ CHANGELOG](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## 2.2.0
+
+- Dependency bumps.
+
 ## 2.1.0
 
 ### Added

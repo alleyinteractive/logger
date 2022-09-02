@@ -36,7 +36,7 @@ class Test_Logger extends Test_Case {
 	public function test_logger_pass_through() {
 		$logger = AI_Logger::instance();
 		$handler = new TestHandler();
-		$logger->get_logger()->setHandlers( [ $handler ] );
+		$logger->logger()->setHandlers( [ $handler ] );
 
 		$logger->alert( 'A alert message.' );
 		$this->assertTrue( $handler->hasAlert( [ 'message' => 'A alert message.' ] ) );
@@ -78,7 +78,7 @@ class Test_Logger extends Test_Case {
 		$instance = Non_Static_Logger::instance();
 
 		$this->assertTrue( $_SERVER['__filter_invoked'] );
-		$this->assertInstanceOf( NullHandler::class, $instance->get_logger()->getHandlers()[0] );
+		$this->assertInstanceOf( NullHandler::class, $instance->logger()->getHandlers()[0] );
 	}
 }
 

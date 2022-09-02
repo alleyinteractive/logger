@@ -51,12 +51,12 @@ abstract class Meta_Handler extends AbstractProcessingHandler implements Handler
 	/**
 	 * Constructor.
 	 *
-	 * @param int|string $level  The minimum logging level at which this handler will be triggered.
-	 * @param bool       $bubble Whether the messages that are handled can bubble up the stack or not.
 	 * @param int        $object_id Object ID to use.
 	 * @param string     $log_key Meta key to use, defaults to 'log'.
+	 * @param int|string $level  The minimum logging level at which this handler will be triggered.
+	 * @param bool       $bubble Whether the messages that are handled can bubble up the stack or not.
 	 */
-	public function __construct( $level = Logger::DEBUG, bool $bubble = true, int $object_id, string $log_key = 'log' ) {
+	public function __construct( int $object_id, string $log_key = 'log', string $level = Logger::DEBUG, bool $bubble = true ) {
 		parent::__construct( $level, $bubble );
 
 		$this->object_id        = $object_id;
