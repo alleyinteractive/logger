@@ -26,7 +26,7 @@ define( 'AI_LOGGER_PATH', __DIR__ );
 define( 'AI_LOGGER_URL', trailingslashit( plugins_url( '/', __FILE__ ) ) );
 
 // Check if Composer is installed.
-if ( ! file_exists( __DIR__ . '/vendor/wordpress-autoload.php' ) ) {
+if ( ! file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 	\add_action(
 		'admin_notices',
 		function() {
@@ -42,7 +42,7 @@ if ( ! file_exists( __DIR__ . '/vendor/wordpress-autoload.php' ) ) {
 }
 
 // Include core dependencies.
-require_once __DIR__ . '/vendor/wordpress-autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/inc/bootstrap.php';
 
 /**
