@@ -5,6 +5,9 @@ CHANGELOG](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+- Dependency bumps.
+- Drops support for PHP 7.4.
+
 ## 2.2.0
 
 - Dependency bumps.
