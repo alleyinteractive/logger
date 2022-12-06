@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2d3481d0dcc167e01e28f16835752e6b",
+    "content-hash": "20e44ad2f0bddcb8c03133fc25065e24",
     "packages": [
         {
             "name": "alleyinteractive/composer-wordpress-autoloader",
@@ -211,30 +211,30 @@
         },
         {
             "name": "psr/log",
-            "version": "1.1.4",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "d49695b909c3b7628b6289db5479a1c204601f11"
+                "reference": "ef29f6d262798707a9edd554e2b82517ef3a9376"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/d49695b909c3b7628b6289db5479a1c204601f11",
-                "reference": "d49695b909c3b7628b6289db5479a1c204601f11",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/ef29f6d262798707a9edd554e2b82517ef3a9376",
+                "reference": "ef29f6d262798707a9edd554e2b82517ef3a9376",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": ">=8.0.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "2.0.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Psr\\Log\\": "Psr/Log/"
+                    "Psr\\Log\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -255,30 +255,30 @@
                 "psr-3"
             ],
             "support": {
-                "source": "https://github.com/php-fig/log/tree/1.1.4"
+                "source": "https://github.com/php-fig/log/tree/2.0.0"
             },
-            "time": "2021-05-03T11:20:27+00:00"
+            "time": "2021-07-14T16:41:46+00:00"
         }
     ],
     "packages-dev": [
         {
             "name": "alleyinteractive/alley-coding-standards",
-            "version": "v0.4.0",
+            "version": "dev-feature/dependencies",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alleyinteractive/alley-coding-standards.git",
-                "reference": "0dde8b8a0e7677e840504c6de889b2592d2b8a62"
+                "reference": "475bca73fb1c605f49f372f34ef03379edf8f351"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alleyinteractive/alley-coding-standards/zipball/0dde8b8a0e7677e840504c6de889b2592d2b8a62",
-                "reference": "0dde8b8a0e7677e840504c6de889b2592d2b8a62",
+                "url": "https://api.github.com/repos/alleyinteractive/alley-coding-standards/zipball/475bca73fb1c605f49f372f34ef03379edf8f351",
+                "reference": "475bca73fb1c605f49f372f34ef03379edf8f351",
                 "shasum": ""
             },
             "require": {
-                "automattic/vipwpcs": "^2.2.0",
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
-                "phpcompatibility/phpcompatibility-wp": "^2.1.0",
+                "automattic/vipwpcs": "^2.3.3",
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.7.2",
+                "phpcompatibility/phpcompatibility-wp": "^2.1.4",
                 "squizlabs/php_codesniffer": "^3.5.0",
                 "wp-coding-standards/wpcs": "^2.3.0"
             },
@@ -294,9 +294,9 @@
             ],
             "support": {
                 "issues": "https://github.com/alleyinteractive/alley-coding-standards/issues",
-                "source": "https://github.com/alleyinteractive/alley-coding-standards/tree/v0.4.0"
+                "source": "https://github.com/alleyinteractive/alley-coding-standards/tree/feature/dependencies"
             },
-            "time": "2022-12-06T19:43:20+00:00"
+            "time": "2022-12-06T20:01:24+00:00"
         },
         {
             "name": "alleyinteractive/wp-concurrent-remote-requests",
@@ -6844,7 +6844,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "alleyinteractive/alley-coding-standards": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
