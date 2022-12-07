@@ -5,6 +5,10 @@ CHANGELOG](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+- Dependency bumps.
+- Drops support for PHP 7.4.
+- Adding support for `psr/log` support for v1 through v3.
+
 ## 2.2.0
 
 - Dependency bumps.
