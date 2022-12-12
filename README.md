@@ -18,12 +18,11 @@ See the [wiki](https://github.com/alleyinteractive/logger/wiki) for complete inf
 Logger requires PHP 8.0 and Composer to run properly.
 
 ```bash
-composer install
+composer require alleyinteractive/logger
 ```
 
-You can use it as a submodule in your project by loading the `main-built`
-branch.
-
+You can also install the plugin as a submodule by using the `*-built` tag of a
+release.
 
 ## Usage
 
