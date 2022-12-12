@@ -7,7 +7,9 @@
 
 namespace AI_Logger;
 
+use AI_Logger\Handler\Post_Handler;
 use Monolog\Logger;
+use Psr\Log\LogLevel;
 use WP_CLI;
 
 // phpcs:disable WordPressVIPMinimum.Classes.RestrictedExtendClasses.wp_cli
@@ -144,19 +146,25 @@ class CLI extends \WP_CLI_Command {
 	/**
 	 * Generate some logs for the site-wide handler.
 	 *
-	 * @synopsis [--count=<value>]
+	 * @synopsis [--count=<value>] [--log-context=<value>]
+	 *
 	 * @param array $args Arguments for the command.
 	 * @param array $assoc_args Associated flags for the command.
 	 */
-	public function generate_for_blog( $args, $assoc_args ) {
+	public function generate( $args, $assoc_args ) {
 		$assoc_args = \wp_parse_args(
 			$assoc_args,
 			[
-				'count' => 20,
+				'count'       => 20,
+				'log-context' => 'wp-cli generator',
 			]
 		);
 
-		$logger = AI_Logger::instance()->logger();
+		$logger = ai_logger()->with_handlers(
+			[
+				new Post_Handler(),
+			]
+		);
 
 		$levels = [
 			LogLevel::EMERGENCY,
@@ -174,7 +182,7 @@ class CLI extends \WP_CLI_Command {
 			$logger->$level(
 				'Example log message: ' . ( $i + 1 ),
 				[
-					'context'         => 'wp-cli generator',
+					'context'         => $assoc_args['log-context'],
 					'example_context' => $i,
 				]
 			);
