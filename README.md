@@ -15,7 +15,7 @@ See the [wiki](https://github.com/alleyinteractive/logger/wiki) for complete inf
 
 ## Installation
 
-Logger requires PHP 7.4 and Composer to run properly.
+Logger requires PHP 8.0 and Composer to run properly.
 
 ```bash
 composer install
