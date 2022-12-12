@@ -7,7 +7,7 @@ Suite](https://github.com/alleyinteractive/logger/workflows/Testing%20Suite/badg
 Providing a WordPress integration with Monolog, allowing site-wide and post and
 term specific logging.
 
-<img width="1018" alt="Screen Shot 2020-05-14 at 4 13 47 PM" src="https://user-images.githubusercontent.com/346399/81981285-197bd880-95fe-11ea-8645-1bb0fa3569a8.png">
+![Screenshot of Example Log](https://user-images.githubusercontent.com/346399/81981285-197bd880-95fe-11ea-8645-1bb0fa3569a8.png)
 
 ## Documentation
 
