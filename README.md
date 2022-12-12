@@ -75,6 +75,12 @@ ai_logger()->with_context(
 )->info( 'This will log to the example-context with key=>value.' );
 ```
 
+You can also pass the context to `ai_logger()` directly:
+
+```php
+ai_logger( 'example-context' )->info( 'This will log to the example-context.' );
+```
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed
