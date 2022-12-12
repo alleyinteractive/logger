@@ -32,7 +32,7 @@ if ( ! file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 		function() {
 			?>
 			<div class="notice notice-error">
-				<p><?php esc_html_e( 'AI Logger: Composer is not installed and the plugin cannot load. Try using the `main-built` branch!', 'ai-logger' ); ?></p>
+				<p><?php esc_html_e( 'AI Logger: Composer is not installed and the plugin cannot load. Try using the `develop-built` branch or a `*-built` tag.', 'ai-logger' ); ?></p>
 			</div>
 			<?php
 		}
