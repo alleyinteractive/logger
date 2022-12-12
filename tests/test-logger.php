@@ -80,6 +80,56 @@ class Test_Logger extends Test_Case {
 		$this->assertTrue( $_SERVER['__filter_invoked'] );
 		$this->assertInstanceOf( NullHandler::class, $instance->logger()->getHandlers()[0] );
 	}
+
+	public function test_with_context_string() {
+		$handler = new TestHandler();
+
+		$logger = ai_logger()
+			->with_handlers( [ $handler ] )
+			->with_context( 'example-context' );
+
+		$logger->info( 'Test message', [ 'test' => 'value' ] );
+
+		$this->assertTrue(
+			$handler->hasInfo(
+				[
+					'message' => 'Test message',
+					'context' => [
+						'context' => 'example-context',
+						'test'    => 'value'
+					],
+				],
+			)
+		);
+	}
+
+	public function test_with_context() {
+		$handler = new TestHandler();
+
+		$logger = ai_logger()
+			->with_handlers( [ $handler ] )
+			->with_context(
+				[
+					'context' => 'term',
+					'default' => 'value',
+				]
+			);
+
+		$logger->info( 'Test message', [ 'test' => 'value' ] );
+
+		$this->assertTrue(
+			$handler->hasInfo(
+				[
+					'message' => 'Test message',
+					'context' => [
+						'context' => 'term',
+						'default' => 'value',
+						'test'    => 'value'
+					],
+				],
+			)
+		);
+	}
 }
 
 

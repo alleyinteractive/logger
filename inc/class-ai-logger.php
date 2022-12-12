@@ -77,7 +77,36 @@ class AI_Logger implements LoggerInterface {
 	 */
 	public function with_handlers( array $handlers ) {
 		$logger = clone $this;
+
 		$logger->logger->setHandlers( $handlers );
+
+		return $logger;
+	}
+
+	/**
+	 * Retrieve a logger instance with default context attached.
+	 *
+	 * @param array|string $context Context to attach to the logger. If a string
+	 *                              is passed, it will be used as the 'context' key
+	 *                              that is stored as a taxonomy term for the log record.
+	 * @return static
+	 */
+	public function with_context( array|string $context ) {
+		if ( is_string( $context ) ) {
+			$context = [ 'context' => $context ];
+		}
+
+		$logger = clone $this;
+
+		$logger->logger->pushProcessor(
+			function ( $record ) use ( $context ) {
+				$record['context'] = array_merge( $context, $record['context'] ?? [] );
+
+				return $record;
+			}
+		);
+
+
 		return $logger;
 	}
 
