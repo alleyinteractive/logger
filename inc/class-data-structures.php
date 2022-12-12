@@ -39,6 +39,7 @@ class Data_Structures {
 		\add_action( 'init', [ $this, 'create_post_type' ] );
 		\add_action( 'init', [ $this, 'create_taxonomy' ] );
 		\add_action( 'add_meta_boxes', [ $this, 'add_meta_boxes' ] );
+		\add_action( 'restrict_manage_posts', [ $this, 'add_taxonomy_filters' ] );
 	}
 
 	/**
@@ -57,8 +58,8 @@ class Data_Structures {
 					'new_item'           => __( 'New Log', 'ai-logger' ),
 					'view_item'          => __( 'View Log', 'ai-logger' ),
 					'search_items'       => __( 'Search Logs', 'ai-logger' ),
-					'not_found'          => __( 'No Logs found', 'ai-logger' ),
-					'not_found_in_trash' => __( 'No Logs found in Trash', 'ai-logger' ),
+					'not_found'          => __( 'No logs found', 'ai-logger' ),
+					'not_found_in_trash' => __( 'No logs found in Trash', 'ai-logger' ),
 					'parent_item_colon'  => __( 'Parent Log:', 'ai-logger' ),
 					'menu_name'          => __( 'Logs', 'ai-logger' ),
 				],
@@ -93,7 +94,7 @@ class Data_Structures {
 			static::TAXONOMY_CONTEXT,
 			static::POST_TYPE,
 			[
-				'labels'            => [
+				'labels'             => [
 					'name'                  => __( 'Context', 'ai-logger' ),
 					'singular_name'         => __( 'Context', 'ai-logger' ),
 					'search_items'          => __( 'Search Contexts', 'ai-logger' ),
@@ -109,12 +110,13 @@ class Data_Structures {
 					'menu_name'             => __( 'Contexts', 'ai-logger' ),
 					'not_found'             => __( 'No levels found', 'ai-logger' ),
 				],
-				'public'            => false,
-				'show_ui'           => true,
-				'show_in_menu'      => true,
-				'show_admin_column' => true,
-				'show_in_nav_menus' => false,
-				'show_tagcloud'     => false,
+				'public'             => false,
+				'publicly_queryable' => false,
+				'show_ui'            => true,
+				'show_in_menu'       => true,
+				'show_admin_column'  => true,
+				'show_in_nav_menus'  => false,
+				'show_tagcloud'      => false,
 			]
 		);
 
@@ -122,7 +124,7 @@ class Data_Structures {
 			static::TAXONOMY_LEVEL,
 			static::POST_TYPE,
 			[
-				'labels'            => [
+				'labels'             => [
 					'name'                  => __( 'Level', 'ai-logger' ),
 					'singular_name'         => __( 'Level', 'ai-logger' ),
 					'search_items'          => __( 'Search Levels', 'ai-logger' ),
@@ -138,10 +140,11 @@ class Data_Structures {
 					'menu_name'             => __( 'Levels', 'ai-logger' ),
 					'not_found'             => __( 'No levels found', 'ai-logger' ),
 				],
-				'public'            => false,
-				'show_admin_column' => true,
-				'show_in_nav_menus' => false,
-				'show_tagcloud'     => false,
+				'public'             => false,
+				'publicly_queryable' => is_admin(),
+				'show_admin_column'  => true,
+				'show_in_nav_menus'  => false,
+				'show_tagcloud'      => false,
 			]
 		);
 	}
@@ -182,5 +185,46 @@ class Data_Structures {
 		}
 
 		include AI_LOGGER_PATH . '/template-parts/log-display.php'; // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingCustomConstant
+	}
+
+	/**
+	 * Add taxonomy filters to allow the user to filter by context/level.
+	 *
+	 * @param string $post_type Current post type.
+	 */
+	public function add_taxonomy_filters( $post_type = '' ) {
+		if ( static::POST_TYPE !== $post_type ) {
+			return;
+		}
+
+		$this->taxonomy_dropdown( static::TAXONOMY_CONTEXT );
+		$this->taxonomy_dropdown( static::TAXONOMY_LEVEL );
+	}
+
+	/**
+	 * Render the taxonomy dropdown for a given taxonomy.
+	 *
+	 * @param string $taxonomy Taxonomy name.
+	 */
+	protected function taxonomy_dropdown( string $taxonomy ) {
+		$taxonomy_obj = get_taxonomy( $taxonomy );
+
+		if ( empty( $taxonomy_obj ) ) {
+			return;
+		}
+
+		wp_dropdown_categories(
+			[
+				'show_option_all' => esc_html( "Show All {$taxonomy_obj->label}" ),
+				'taxonomy'        => $taxonomy,
+				'name'            => $taxonomy,
+				'id'              => $taxonomy,
+				'hierarchical'    => true,
+				'selected'        => get_query_var( $taxonomy ),
+				'value_field'     => 'slug',
+				'show_count'      => false,
+				'hide_empty'      => false,
+			]
+		);
 	}
 }
