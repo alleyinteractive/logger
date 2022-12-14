@@ -3,11 +3,11 @@
  * Plugin Name: AI Logger
  * Plugin URI: https://github.com/alleyinteractive/logger
  * Description: A Monolog-based logging tool for WordPress. Supports storing log message in a custom post type or in individual posts and terms.
- * Version: 2.2.0
- * Author: Alley Interactive, Jared Cobb
- * Author URI: https://alley.co/
- * Requires at least: 5.4
- * Tested up to: 5.4
+ * Version: 2.3.0
+ * Author: Alley Interactive
+ * Author URI: https://alley.com/
+ * Requires at least: 5.9
+ * Tested up to: 5.9
  *
  * Text Domain: ai-logger
  * Domain Path: /languages/
@@ -31,7 +31,7 @@ if ( ! file_exists( __DIR__ . '/vendor/wordpress-autoload.php' ) ) {
 		function() {
 			?>
 			<div class="notice notice-error">
-				<p><?php esc_html_e( 'AI Logger: Composer is not installed and the plugin cannot load. Try using the `main-built` branch!', 'ai-logger' ); ?></p>
+				<p><?php esc_html_e( 'AI Logger: Composer is not installed and the plugin cannot load. Try using the `develop-built` branch or a `*-built` tag.', 'ai-logger' ); ?></p>
 			</div>
 			<?php
 		}
