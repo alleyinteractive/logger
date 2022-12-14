@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: AI Logger
+ * Plugin Name: Alley Logger
  * Plugin URI: https://github.com/alleyinteractive/logger
  * Description: A Monolog-based logging tool for WordPress. Supports storing log message in a custom post type or in individual posts and terms.
  * Version: 2.2.0
@@ -90,4 +90,27 @@ function ai_logger_to_post( int $post_id, string $meta_key = 'log', string $leve
  */
 function ai_logger_to_term( int $term_id, string $meta_key = 'log', string $level = Logger::DEBUG ): \AI_Logger\AI_Logger {
 	return ai_logger()->to_term( $meta_key, $term_id, $level );
+}
+
+/**
+ * Create a new post meta box to display logs stored in post meta.
+ *
+ * @param string $meta_key Meta key for the logs.
+ * @param string $title    Title for the meta box.
+ * @return \AI_Logger\Meta_Box\Post_Meta_Box
+ */
+function ai_logger_post_meta_box( string $meta_key, string $title ): \AI_Logger\Meta_Box\Post_Meta_Box {
+	return new \AI_Logger\Meta_Box\Post_Meta_Box( $meta_key, $title );
+}
+
+/**
+ * Create a new term meta box to display logs stored in term meta.
+ *
+ * @param string $meta_key   Meta key for the logs.
+ * @param string $title      Title for the meta box.
+ * @param array  $taxonomies Taxonomies to display the meta box on.
+ * @return \AI_Logger\Meta_Box\Term_Meta_Box
+ */
+function ai_logger_term_meta_box( string $meta_key, string $title, array $taxonomies ): \AI_Logger\Meta_Box\Term_Meta_Box {
+	return new \AI_Logger\Meta_Box\Term_Meta_Box( $meta_key, $title, $taxonomies );
 }
