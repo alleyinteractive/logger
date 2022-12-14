@@ -6,8 +6,10 @@ CHANGELOG](https://keepachangelog.com/en/1.0.0/).
 ## 2.3.0
 
 - Dependency bumps.
-- Drops support for PHP 7.4.
+- Drops support for PHP 7.4. Requires 8.0.
 - Adding support for `psr/log` support for v1 through v3.
+- Adds support for logging with default context (`ai_logger()->with_context(...)`).
+- Improves log filtering in admin.
 
 ## 2.2.0
 

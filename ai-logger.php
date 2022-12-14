@@ -13,7 +13,6 @@
  * Domain Path: /languages/
  *
  * @package AI_Logger
- * @author jaredcobb
  */
 
 use Monolog\Logger;
@@ -26,7 +25,7 @@ define( 'AI_LOGGER_PATH', __DIR__ );
 define( 'AI_LOGGER_URL', trailingslashit( plugins_url( '/', __FILE__ ) ) );
 
 // Check if Composer is installed.
-if ( ! file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
+if ( ! file_exists( __DIR__ . '/vendor/wordpress-autoload.php' ) ) {
 	\add_action(
 		'admin_notices',
 		function() {
@@ -42,15 +41,20 @@ if ( ! file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 }
 
 // Include core dependencies.
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/vendor/wordpress-autoload.php';
 require_once __DIR__ . '/inc/bootstrap.php';
 
 /**
  * Retrieve the core logger instance.
  *
+ * @param array|string|null $context Default context to apply to the logger, optional.
  * @return \AI_Logger\AI_Logger
  */
-function ai_logger(): \AI_Logger\AI_Logger {
+function ai_logger( array|string|null $context = null ): \AI_Logger\AI_Logger {
+	if ( $context ) {
+		return \AI_Logger\AI_Logger::instance()->with_context( $context );
+	}
+
 	return \AI_Logger\AI_Logger::instance();
 }
 

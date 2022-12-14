@@ -57,6 +57,29 @@ ai_logger_to_term( $term_id, 'meta-key' )->info( 'This will log to the <meta-key
 ai_logger_to_qm()->info( 'This will show up in Query Monitor!' );
 ```
 
+### Logging with Default Context
+
+```php
+ai_logger()->with_context( 'example-context' )->info( 'This will log to the example-context.' );
+```
+
+Also supports an array of default log context:
+
+```php
+ai_logger()->with_context(
+	[
+		'context' => 'example-context',
+		'key'     => 'value',
+	]
+)->info( 'This will log to the example-context with key=>value.' );
+```
+
+You can also pass the context to `ai_logger()` directly:
+
+```php
+ai_logger( 'example-context' )->info( 'This will log to the example-context.' );
+```
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed
