@@ -7,7 +7,7 @@ Suite](https://github.com/alleyinteractive/logger/workflows/Testing%20Suite/badg
 Providing a WordPress integration with Monolog, allowing site-wide and post and
 term specific logging.
 
-<img width="1018" alt="Screen Shot 2020-05-14 at 4 13 47 PM" src="https://user-images.githubusercontent.com/346399/81981285-197bd880-95fe-11ea-8645-1bb0fa3569a8.png">
+![Screenshot of Example Log](https://user-images.githubusercontent.com/346399/81981285-197bd880-95fe-11ea-8645-1bb0fa3569a8.png)
 
 ## Documentation
 
@@ -15,15 +15,14 @@ See the [wiki](https://github.com/alleyinteractive/logger/wiki) for complete inf
 
 ## Installation
 
-Logger requires PHP 7.4 and Composer to run properly.
+Logger requires PHP 8.0 and Composer to run properly.
 
 ```bash
-composer install
+composer require alleyinteractive/logger
 ```
 
-You can use it as a submodule in your project by loading the `main-built`
-branch.
-
+You can also install the plugin as a submodule by using the `*-built` tag of a
+release.
 
 ## Usage
 
@@ -58,6 +57,29 @@ ai_logger_to_term( $term_id, 'meta-key' )->info( 'This will log to the <meta-key
 ai_logger_to_qm()->info( 'This will show up in Query Monitor!' );
 ```
 
+### Logging with Default Context
+
+```php
+ai_logger()->with_context( 'example-context' )->info( 'This will log to the example-context.' );
+```
+
+Also supports an array of default log context:
+
+```php
+ai_logger()->with_context(
+	[
+		'context' => 'example-context',
+		'key'     => 'value',
+	]
+)->info( 'This will log to the example-context with key=>value.' );
+```
+
+You can also pass the context to `ai_logger()` directly:
+
+```php
+ai_logger( 'example-context' )->info( 'This will log to the example-context.' );
+```
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed
@@ -67,7 +89,7 @@ recently.
 
 This project is actively maintained by [Alley
 Interactive](https://github.com/alleyinteractive). Like what you see? [Come work
-with us](https://alley.co/careers/).
+with us](https://alley.com/careers/).
 
 ![Alley logo](https://avatars.githubusercontent.com/u/1733454?s=200&v=4)
 
