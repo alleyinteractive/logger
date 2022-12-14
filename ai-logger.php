@@ -13,7 +13,6 @@
  * Domain Path: /languages/
  *
  * @package AI_Logger
- * @author jaredcobb
  */
 
 use Monolog\Logger;
@@ -48,9 +47,14 @@ require_once __DIR__ . '/inc/bootstrap.php';
 /**
  * Retrieve the core logger instance.
  *
+ * @param array|string|null $context Default context to apply to the logger, optional.
  * @return \AI_Logger\AI_Logger
  */
-function ai_logger(): \AI_Logger\AI_Logger {
+function ai_logger( array|string|null $context = null ): \AI_Logger\AI_Logger {
+	if ( $context ) {
+		return \AI_Logger\AI_Logger::instance()->with_context( $context );
+	}
+
 	return \AI_Logger\AI_Logger::instance();
 }
 
