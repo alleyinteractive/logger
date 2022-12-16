@@ -84,6 +84,25 @@ class AI_Logger implements LoggerInterface {
 	}
 
 	/**
+	 * Retrieve a logger instance with specific processors attached.
+	 *
+	 * @param \Monolog\Processor\ProcessorInterface[] $processors Processors to attach to the logger.
+	 * @return static
+	 */
+	public function with_processors( array $processors ) {
+		$logger = clone $this;
+
+		// Clear all processors with popProcessor().
+		while ( $logger->logger->popProcessor() ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedWhile
+			// Do nothing.
+		}
+
+		$logger->logger->pushProcessor( $processors );
+
+		return $logger;
+	}
+
+	/**
 	 * Retrieve a logger instance with default context attached.
 	 *
 	 * @param array|string $context Context to attach to the logger. If a string
