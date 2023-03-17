@@ -26,8 +26,7 @@ define( 'AI_LOGGER_URL', trailingslashit( plugins_url( '/', __FILE__ ) ) );
 
 // Check if Composer is installed.
 if ( ! file_exists( __DIR__ . '/vendor/wordpress-autoload.php' ) ) {
-	// Don't bail if Monolog is already loaded (logger could be installed as a
-	// Composer dependency).
+	// Don't bail if Monolog is already loaded (logger could be installed as a Composer dependency).
 	if ( ! class_exists( Logger::class ) ) {
 		\add_action(
 			'admin_notices',
