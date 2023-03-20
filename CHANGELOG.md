@@ -3,7 +3,11 @@
 This library adheres to [Semantic Versioning](https://semver.org/) and [Keep a
 CHANGELOG](https://keepachangelog.com/en/1.0.0/).
 
-## 2.4.0
+## 2.3.2
+
+- Add return types to logger to appease `psr/log` v3.
+
+## 2.3.1
 
 - Renamed the main plugin file from `ai-logger.php` to `logger.php`.
 
