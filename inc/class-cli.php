@@ -61,7 +61,7 @@ class CLI extends \WP_CLI_Command {
 		WP_CLI\Utils\format_items(
 			'table',
 			array_map(
-				function( $log ) {
+				function ( $log ) {
 					return [
 						'level'     => $log[0],
 						'message'   => $log[1],

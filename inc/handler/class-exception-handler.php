@@ -42,6 +42,6 @@ class Exception_Handler extends AbstractProcessingHandler {
 			'message' => $message,
 		] = $record;
 
-		throw new Handler_Exception( $message, $context, $record );
+		throw new Handler_Exception( $message, $context, $record ); // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
 	}
 }

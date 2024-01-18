@@ -30,7 +30,7 @@ if ( ! file_exists( __DIR__ . '/vendor/wordpress-autoload.php' ) ) {
 	if ( ! class_exists( Logger::class ) ) {
 		\add_action(
 			'admin_notices',
-			function() {
+			function () {
 				?>
 				<div class="notice notice-error">
 					<p><?php esc_html_e( 'AI Logger: Composer is not installed and the plugin cannot load. Try using the `develop-built` branch or a `*-built` tag.', 'ai-logger' ); ?></p>
