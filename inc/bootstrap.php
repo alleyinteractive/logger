@@ -13,7 +13,7 @@ Settings::instance();
 
 add_action(
 	'after_setup_theme',
-	function() {
+	function () {
 		/**
 		 * Flag if Javascript logging is enabled.
 		 *
