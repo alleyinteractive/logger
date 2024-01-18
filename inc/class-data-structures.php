@@ -40,7 +40,6 @@ class Data_Structures {
 		\add_action( 'init', [ $this, 'create_taxonomy' ] );
 		\add_action( 'add_meta_boxes', [ $this, 'add_meta_boxes' ] );
 		\add_action( 'restrict_manage_posts', [ $this, 'add_taxonomy_filters' ] );
-
 	}
 
 	/**
