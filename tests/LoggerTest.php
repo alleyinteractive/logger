@@ -8,7 +8,7 @@ use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use Psr\Log\LoggerInterface;
 
-class Test_Logger extends Test_Case {
+class LoggerTest extends Test_Case {
 	public function test_psr_instance() {
 		$this->assertInstanceOf( LoggerInterface::class, AI_Logger::instance() );
 	}
