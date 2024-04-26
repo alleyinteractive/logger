@@ -10,7 +10,7 @@ namespace AI_Logger\Meta_Box;
 /**
  * Logger Meta Box
  *
- * Expose stored logs to the front-end.
+ * Expose stored logs to the front-end for logs stored against a post or term.
  */
 abstract class Meta_Box {
 	/**
@@ -80,6 +80,6 @@ abstract class Meta_Box {
 			);
 		}
 
-		include AI_LOGGER_PATH . '/template-parts/meta-box.php'; // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingCustomConstant
+		include AI_LOGGER_PATH . '/template-parts/object-log-record.php'; // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingCustomConstant
 	}
 }

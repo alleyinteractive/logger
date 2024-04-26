@@ -240,7 +240,7 @@ class Settings {
 			esc_attr( $args['field'] ),
 			esc_attr( $args['rows'] ),
 			esc_attr( $args['cols'] ),
-			esc_textarea( $value )
+			esc_textarea( (string) $value )
 		);
 	}
 
