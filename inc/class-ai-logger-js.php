@@ -59,7 +59,7 @@ class AI_Logger_JS {
 
 		// Clean up the arguments array.
 		if ( isset( $_POST['args'] ) ) {
-			$args = wp_unslash( $_POST['args'] );
+			$args = wp_unslash( $_POST['args'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			if ( is_string( $args ) ) {
 				$args = json_decode( $args, true );
 			}
@@ -73,7 +73,7 @@ class AI_Logger_JS {
 		$level = $args['level'] ?? 'info';
 
 		$args['context']   = $args['context'] ?? 'front-end';
-		$args['useragent'] = $args['useragent'] ?? sanitize_text_field( $_SERVER['HTTP_USER_AGENT'] ?? '' );
+		$args['useragent'] = $args['useragent'] ?? sanitize_text_field( $_SERVER['HTTP_USER_AGENT'] ?? '' ); // phpcs:ignore WordPressVIPMinimum.Variables.RestrictedVariables.cache_constraints___SERVER__HTTP_USER_AGENT__
 
 		$logger = ai_logger();
 

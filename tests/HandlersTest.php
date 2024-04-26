@@ -22,7 +22,7 @@ use Monolog\Logger;
 /**
  * Test log handlers.
  */
-class Test_Class_Handler extends Test_Case {
+class HandlersTest extends Test_Case {
 	use MockeryPHPUnitIntegration;
 
 	protected function setUp(): void {
