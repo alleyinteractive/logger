@@ -229,6 +229,11 @@ class Post_Handler extends AbstractProcessingHandler implements Handler_Interfac
 			return false;
 		}
 
+		// Allow unrestricted logging if filtered.
+		if ( \apply_filters( 'ai_logger_unrestricted_logging', false ) ) {
+			return true;
+		}
+
 		/**
 		 * The throttling transient has expired if get_transient returns false,
 		 * and a new insert should be permitted.
