@@ -80,6 +80,6 @@ abstract class Meta_Box {
 			);
 		}
 
-		include AI_LOGGER_PATH . '/template-parts/object-log-record.php'; // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingCustomConstant
+		include AI_LOGGER_PATH . '/template-parts/object-log-display.php'; // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingCustomConstant
 	}
 }

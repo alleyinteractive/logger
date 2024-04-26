@@ -184,7 +184,7 @@ class Data_Structures {
 			return;
 		}
 
-		include AI_LOGGER_PATH . '/template-parts/log-record.php'; // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingCustomConstant
+		include AI_LOGGER_PATH . '/template-parts/log-display.php'; // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingCustomConstant
 	}
 
 	/**

@@ -7,11 +7,11 @@
 
 use AI_Logger\Data_Structures;
 
+use function Mantle\Support\Helpers\str;
+
 if ( empty( $log ) ) {
 	return;
 }
-
-dump($log);
 
 /**
  * Render the legacy backtrace.
@@ -43,10 +43,70 @@ function ai_logger_render_legacy_backtrace( array $backtrace ): void {
 /**
  * Render the backtrace powered by spatie/backtrace.
  *
- * @param array<\Spatie\Backtrace\Frame> $backtrace Backtrace to render.
+ * @param array<\AI_Logger\Backtrace\Frame> $backtrace Backtrace to render.
  */
 function ai_logger_render_backtrace( array $backtrace ): void {
-	dd($backtrace);
+	?>
+	<div class="ai-log-backtrace">
+		<?php
+		foreach ( $backtrace as $i => $item ) {
+			?>
+			<details <?php if ( 0 === $i ) { echo 'open'; } ?>>
+				<summary>
+					<strong><?php echo esc_html( str( $item->file )->after( ABSPATH ) ); ?></strong>
+					<?php esc_html_e( 'in', 'ai-logger' ); ?>
+					<?php if ( ! empty( $item->class ) ) : ?>
+						<strong><?php echo esc_html( $item->class . '::' . $item->method ); ?></strong>
+					<?php else : ?>
+						<strong><?php echo esc_html( $item->method ); ?></strong>
+					<?php endif; ?>
+					<?php if ( ! empty( $item->lineNumber ) ) : ?>
+						<?php esc_html_e( 'at line', 'ai-logger' ); ?>
+						<strong><?php echo esc_html( $item->lineNumber ); ?></strong>
+					<?php endif; ?>
+				</summary>
+
+				<?php if ( ! empty( $item->snippet ) && is_array( $item->snippet ) ) : ?>
+					<?php
+					$attributes = '';
+
+					if ( count( $item->snippet ) > 1 ) {
+						$attributes = sprintf(
+							'data-start="%d" data-line-offset="%d" data-line="%s"',
+							(int) array_key_first( $item->snippet ),
+							(int) array_key_first( $item->snippet ),
+							(int) $item->lineNumber,
+						);
+					}
+
+					printf(
+						'<pre class="language-php %s" %s><code class="language-php">%s</code></pre>',
+						count( $item->snippet ) > 1 ? 'line-numbers' : '',
+						$attributes,
+						esc_html( implode( PHP_EOL, $item->snippet ) ),
+					);
+					?>
+				<?php else : ?>
+					<p><?php esc_html_e( 'No snippet available.', 'ai-logger' ); ?></p>
+				<?php endif; ?>
+			</details>
+			<?php
+		}
+		?>
+	</div>
+
+	<!-- TODO move to wp_enqueue_* -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-highlight/prism-line-highlight.min.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+	<script>
+	// Prism.highlightAll();
+	</script>
+	<?php
 }
 
 /**
@@ -55,20 +115,19 @@ function ai_logger_render_backtrace( array $backtrace ): void {
  * @param array $data Data to render.
  */
 function ai_logger_render_table( array $data ): void {
-	?>
-	<?php foreach ( $data as $key => $value ) : ?>
+	foreach ( $data as $key => $value ) {
+		// Prevent backtrace display here as it is displayed separately.
+		if ( 'backtrace' === $key ) {
+			continue;
+		}
+
+		?>
 		<tr>
 			<td>
 				<code><?php echo esc_html( $key ); ?></code>
 			</td>
 			<td>
-				<?php if ( 'backtrace' === $key && is_array( $value ) && ! empty( $value ) ) : ?>
-					<?php if ( is_array( $value[0] ) ) : ?>
-						<?php ai_logger_render_legacy_backtrace( $value ); ?>
-					<?php else : ?>
-						<?php ai_logger_render_backtrace( $value ); ?>
-					<?php endif; ?>
-				<?php elseif ( 'user' === $key ) : ?>
+				<?php if ( 'user' === $key ) : ?>
 					<table>
 						<?php ai_logger_render_table( (array) $value ); ?>
 					</table>
@@ -92,7 +151,7 @@ function ai_logger_render_table( array $data ): void {
 			</td>
 		</tr>
 		<?php
-	endforeach;
+	}
 }
 
 $ai_logger_date_format = 'M d, Y h:i:s A O';
@@ -170,6 +229,16 @@ $ai_logger_date_format = 'M d, Y h:i:s A O';
 				<?php ai_logger_render_table( $log['context'] ); ?>
 			</tbody>
 		</table>
+	<?php endif; ?>
+
+	<!-- Backtrace Display -->
+	<?php if ( ! empty( $log['extra']['backtrace'] ) ) : ?>
+		<h4><?php esc_html_e( 'Backtrace', 'ai-logger' ); ?></h4>
+		<?php if ( isset( $log['extra']['backtrace'][0] ) && is_array( $log['extra']['backtrace'][0] ) ) : ?>
+			<?php ai_logger_render_legacy_backtrace( $log['extra']['backtrace'] ); ?>
+		<?php else : ?>
+			<?php ai_logger_render_backtrace( $log['extra']['backtrace'] ); ?>
+		<?php endif; ?>
 	<?php endif; ?>
 
 	<?php if ( ! empty( $log['extra'] ) ) : ?>
