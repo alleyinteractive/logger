@@ -29,9 +29,9 @@ function ai_logger_render_legacy_backtrace( array $backtrace ): void {
 				$function = ! empty( $item['class'] ) ? $item['class'] . '::' . $item['function'] : $item['function'];
 				printf(
 					'<code>%s</code> in <strong>%s</strong> at line <strong>%s</strong>',
-					esc_html( $item['file'] ?? 'n/a' ),
+					esc_html( str( $item['file'] ?? 'n/a' )->after( ABSPATH ) ),
 					esc_html( $function ),
-					esc_html( $item['line'] ?? '?' )
+					esc_html( $item['line'] ?? '(unknown)' )
 				);
 				?>
 			</li>
@@ -51,7 +51,13 @@ function ai_logger_render_backtrace( array $backtrace ): void {
 		<?php
 		foreach ( $backtrace as $i => $item ) {
 			?>
-			<details <?php if ( 0 === $i ) { echo 'open'; } ?>>
+			<details
+				<?php
+				if ( 0 === $i ) {
+					echo 'open';
+				}
+				?>
+			>
 				<summary>
 					<strong><?php echo esc_html( str( $item->file )->after( ABSPATH ) ); ?></strong>
 					<?php esc_html_e( 'in', 'ai-logger' ); ?>
@@ -82,7 +88,7 @@ function ai_logger_render_backtrace( array $backtrace ): void {
 					printf(
 						'<pre class="language-php %s" %s><code class="language-php">%s</code></pre>',
 						count( $item->snippet ) > 1 ? 'line-numbers' : '',
-						$attributes,
+						$attributes, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						esc_html( implode( PHP_EOL, $item->snippet ) ),
 					);
 					?>
@@ -94,18 +100,6 @@ function ai_logger_render_backtrace( array $backtrace ): void {
 		}
 		?>
 	</div>
-
-	<!-- TODO move to wp_enqueue_* -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.css" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-highlight/prism-line-highlight.min.css" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
-	<script>
-	// Prism.highlightAll();
-	</script>
 	<?php
 }
 

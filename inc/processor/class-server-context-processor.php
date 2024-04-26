@@ -16,7 +16,7 @@ class Server_Context_Processor implements ProcessorInterface {
 	/**
 	 * Adds server context to the log record.
 	 *
-	 * @param array $record The record to process
+	 * @param array $record The record to process.
 	 * @return array The processed record
 	 */
 	public function __invoke( array $record ): array {

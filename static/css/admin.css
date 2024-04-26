@@ -28,11 +28,14 @@ Logger Admin Styles
 }
 
 /* Style the <pre> tags */
+.post-type-ai_log .ai-log-display pre {
+  margin: 0;
+}
+
 .post-type-ai_log .ai-log-display pre:not([class*="language-"]) {
   background: rgba(0, 0, 0, 0.07);
   max-width: 100%;
-  overflow-x: scroll;
-  padding: 3px 5px 2px 5px;
+  padding: 5px;
 }
 
 /* Style the backtrace */
@@ -58,5 +61,6 @@ Logger Admin Styles
 }
 
 .ai-log-backtrace details p {
-  margin: 10px;
+  padding: 10px;
+  margin: 0;
 }

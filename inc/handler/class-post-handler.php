@@ -102,12 +102,16 @@ class Post_Handler extends AbstractProcessingHandler implements Handler_Interfac
 			// Store the backtrace for only this handler. Not created as a processor
 			// to avoid bloat of backtrace on all log types.
 			$record['extra']['backtrace'] = Backtrace::create()->startingFromFrame(
-				fn ( SpatieFrame $frame ) => ! in_array( $frame->class, [
-					static::class,
-					AI_Logger::class,
-					\Monolog\Handler\AbstractProcessingHandler::class,
-					\Monolog\Logger::class,
-				], true )
+				fn ( SpatieFrame $frame ) => ! in_array(
+					$frame->class,
+					[
+						static::class,
+						AI_Logger::class,
+						\Monolog\Handler\AbstractProcessingHandler::class,
+						\Monolog\Logger::class,
+					],
+					true 
+				)
 			)
 				->frames();
 
