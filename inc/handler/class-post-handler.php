@@ -126,7 +126,7 @@ class Post_Handler extends AbstractProcessingHandler implements Handler_Interfac
 			 * @param int   $frames Number of code frames to store.
 			 * @param array $record Log record.
 			 */
-			$frames = min( (int) apply_filters( 'ai_logger_backtrace_code_frames', 5, $record ), count( $record['extra']['backtrace'] ) );
+			$frames = min( (int) apply_filters( 'ai_logger_backtrace_code_frames', 8, $record ), count( $record['extra']['backtrace'] ) );
 
 			if ( $frames > 0 ) {
 				/**

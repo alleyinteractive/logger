@@ -48,8 +48,13 @@ Logger Admin Styles
 }
 
 .ai-log-backtrace details summary {
+  border-bottom: 1px solid transparent;
   cursor: pointer;
   padding: 8px;
+}
+
+.ai-log-backtrace details[open] summary {
+  border-bottom-color: #ddd;
 }
 
 .ai-log-backtrace details summary:hover {
