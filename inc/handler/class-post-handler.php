@@ -138,8 +138,6 @@ class Post_Handler extends AbstractProcessingHandler implements Handler_Interfac
 					$record['extra']['backtrace'][ $i ]->load_snippet( max( $frame_lines, 20 ) );
 				}
 			}
-
-			dd($record['extra']['backtrace']);
 		}
 
 		/**
