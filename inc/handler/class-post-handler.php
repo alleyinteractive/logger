@@ -110,7 +110,7 @@ class Post_Handler extends AbstractProcessingHandler implements Handler_Interfac
 						\Monolog\Handler\AbstractProcessingHandler::class,
 						\Monolog\Logger::class,
 					],
-					true 
+					true
 				)
 			)
 				->frames();

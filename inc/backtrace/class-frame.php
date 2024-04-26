@@ -1,4 +1,10 @@
 <?php
+/**
+ * Frame class file
+ *
+ * @package AI_Logger
+ */
+
 namespace AI_Logger\Backtrace;
 
 use Spatie\Backtrace\Frame as SpatieFrame;
@@ -23,7 +29,7 @@ class Frame extends SpatieFrame {
 	 * @return Frame
 	 */
 	public static function from_base( SpatieFrame $frame ): self {
-		return new self(
+		$instance = new self(
 			$frame->file,
 			$frame->lineNumber,
 			$frame->arguments,
@@ -32,6 +38,16 @@ class Frame extends SpatieFrame {
 			$frame->applicationFrame,
 			$frame->textSnippet
 		);
+
+		// Escape the class name to prevent issues when storing backslashes.
+		if ( ! empty( $instance->class ) ) {
+			// Convert backslashes to forward slashes for storage. For an unknown
+			// reason, the backslashes are being stripped out when storing the class
+			// name. This is a workaround to prevent that.
+			$instance->class = str_replace( '\\', '/', $instance->class );
+		}
+
+		return $instance;
 	}
 
 	/**

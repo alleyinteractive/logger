@@ -62,7 +62,7 @@ function ai_logger_render_backtrace( array $backtrace ): void {
 					<strong><?php echo esc_html( str( $item->file )->after( ABSPATH ) ); ?></strong>
 					<?php esc_html_e( 'in', 'ai-logger' ); ?>
 					<?php if ( ! empty( $item->class ) ) : ?>
-						<strong><?php echo esc_html( $item->class . '::' . $item->method ); ?></strong>
+						<strong><?php echo esc_html( str( $item->class )->replace( '/', '\\' ) . '::' . $item->method ); ?></strong>
 					<?php else : ?>
 						<strong><?php echo esc_html( $item->method ); ?></strong>
 					<?php endif; ?>
