@@ -3,6 +3,13 @@
 This library adheres to [Semantic Versioning](https://semver.org/) and [Keep a
 CHANGELOG](https://keepachangelog.com/en/1.0.0/).
 
+## Unreleased
+
+### Added
+
+- New filter `ai_logger_unrestricted_logging` to allow unrestricted logging
+  without checking if the log was recently seen.
+
 ## 2.3.2
 
 - Add return types to logger to appease `psr/log` v3.

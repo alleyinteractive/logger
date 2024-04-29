@@ -235,6 +235,16 @@ class Post_Handler extends AbstractProcessingHandler implements Handler_Interfac
 		}
 
 		/**
+		 * Allow unrestricted logging if filtered.
+		 *
+		 * @param bool  $unrestricted_logging Whether to allow unrestricted logging.
+		 * @param array $log Log arguments.
+		 */
+		if ( \apply_filters( 'ai_logger_unrestricted_logging', false, $log ) ) {
+			return true;
+		}
+
+		/**
 		 * The throttling transient has expired if get_transient returns false,
 		 * and a new insert should be permitted.
 		 */
@@ -242,9 +252,8 @@ class Post_Handler extends AbstractProcessingHandler implements Handler_Interfac
 	}
 
 	/**
-	 * Assign the terms associated with the new post, currently
-	 * used to apply a Log Level (info, warning, error) and the
-	 * custom context to a log
+	 * Assign the terms associated with the new post, currently used to apply a
+	 * Log Level (info, warning, error) and the custom context to a log
 	 *
 	 * @param int    $new_post_id Post ID.
 	 * @param string $term Term name.
