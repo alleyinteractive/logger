@@ -28,10 +28,17 @@ function ai_logger_render_legacy_backtrace( array $backtrace ): void {
 				<?php
 				$function = ! empty( $item['class'] ) ? $item['class'] . '::' . $item['function'] : $item['function'];
 				printf(
-					'<code>%s</code> in <strong>%s</strong> at line <strong>%s</strong>',
+					/* translators: 1: File path, 2: Function name, 3: Line number, 4: Opening tag, 5: File path, 6: Closing tag, 7: Opening tag, 8: Line number, 9: Closing tag */
+					__( '%1$s%2$s%3$s in %4$s%5$s%6$s at line %7$s%8$s%9$s', 'ai-logger' ),
+					'<code>',
 					esc_html( str( $item['file'] ?? 'n/a' )->after( ABSPATH ) ),
+					'</code>',
+					'<strong>',
 					esc_html( $function ),
-					esc_html( $item['line'] ?? '(unknown)' )
+					'</strong>',
+					'<strong>',
+					esc_html( $item['line'] ?? '?' ),
+					'</strong>',
 				);
 				?>
 			</li>
