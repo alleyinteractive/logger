@@ -12,6 +12,13 @@ namespace AI_Logger;
  */
 class Settings {
 	/**
+	 * Prism version.
+	 *
+	 * @var string
+	 */
+	public const PRISM_VERSION = '1.29.0';
+
+	/**
 	 * Class instance.
 	 *
 	 * @var static
@@ -284,13 +291,13 @@ class Settings {
 		}
 
 		wp_enqueue_style( 'ai-logger-admin', AI_LOGGER_URL . 'static/css/admin.css', [], '0.1' );
-		wp_enqueue_style( 'prism', 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css', [], '1.29.0' );
-		wp_enqueue_style( 'prism-line-numbers', 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.css', [], '1.29.0' );
-		wp_enqueue_style( 'prism-line-highlight', 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-highlight/prism-line-highlight.min.css', [], '1.29.0' );
-		wp_enqueue_script( 'prism', 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js', [], '1.29.0', true );
-		wp_enqueue_script( 'prism-autoloader', 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.js', [ 'prism' ], '1.29.0', true );
-		wp_enqueue_script( 'prism-line-numbers', 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js', [ 'prism' ], '1.29.0', true );
-		wp_enqueue_script( 'prism-line-highlight', 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-highlight/prism-line-highlight.min.js', [ 'prism' ], '1.29.0', true );
+		wp_enqueue_style( 'prism', 'https://cdnjs.cloudflare.com/ajax/libs/prism/' . static::PRISM_VERSION . '/themes/prism.min.css', [], static::PRISM_VERSION );
+		wp_enqueue_style( 'prism-line-numbers', 'https://cdnjs.cloudflare.com/ajax/libs/prism/' . static::PRISM_VERSION . '/plugins/line-numbers/prism-line-numbers.css', [], static::PRISM_VERSION );
+		wp_enqueue_style( 'prism-line-highlight', 'https://cdnjs.cloudflare.com/ajax/libs/prism/' . static::PRISM_VERSION . '/plugins/line-highlight/prism-line-highlight.min.css', [], static::PRISM_VERSION );
+		wp_enqueue_script( 'prism', 'https://cdnjs.cloudflare.com/ajax/libs/prism/' . static::PRISM_VERSION . '/prism.min.js', [], static::PRISM_VERSION, true );
+		wp_enqueue_script( 'prism-autoloader', 'https://cdnjs.cloudflare.com/ajax/libs/prism/' . static::PRISM_VERSION . '/plugins/autoloader/prism-autoloader.js', [ 'prism' ], static::PRISM_VERSION, true );
+		wp_enqueue_script( 'prism-line-numbers', 'https://cdnjs.cloudflare.com/ajax/libs/prism/' . static::PRISM_VERSION . '/plugins/line-numbers/prism-line-numbers.min.js', [ 'prism' ], static::PRISM_VERSION, true );
+		wp_enqueue_script( 'prism-line-highlight', 'https://cdnjs.cloudflare.com/ajax/libs/prism/' . static::PRISM_VERSION . '/plugins/line-highlight/prism-line-highlight.min.js', [ 'prism' ], static::PRISM_VERSION, true );
 	}
 
 	/**

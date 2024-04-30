@@ -8,6 +8,7 @@
 namespace AI_Logger;
 
 use Monolog\Logger;
+use Monolog\Processor\WebProcessor;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -177,10 +178,10 @@ class AI_Logger implements LoggerInterface {
 		return (array) apply_filters(
 			'ai_logger_processors',
 			[
-				new \Monolog\Processor\WebProcessor(),
+				new WebProcessor(),
 				new Processor\Server_Context_Processor(),
 				new Processor\WordPress_User_Processor(),
-			] 
+			]
 		);
 	}
 
