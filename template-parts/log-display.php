@@ -29,7 +29,7 @@ function ai_logger_render_legacy_backtrace( array $backtrace ): void {
 				$function = ! empty( $item['class'] ) ? $item['class'] . '::' . $item['function'] : $item['function'];
 				printf(
 					/* translators: 1: File path, 2: Function name, 3: Line number, 4: Opening tag, 5: File path, 6: Closing tag, 7: Opening tag, 8: Line number, 9: Closing tag */
-					__( '%1$s%2$s%3$s in %4$s%5$s%6$s at line %7$s%8$s%9$s', 'ai-logger' ),
+					esc_html__( '%1$s%2$s%3$s in %4$s%5$s%6$s at line %7$s%8$s%9$s', 'ai-logger' ),
 					'<code>',
 					esc_html( str( $item['file'] ?? 'n/a' )->after( ABSPATH ) ),
 					'</code>',
@@ -66,17 +66,30 @@ function ai_logger_render_backtrace( array $backtrace ): void {
 				?>
 			>
 				<summary>
-					<strong><?php echo esc_html( str( $item->file )->after( ABSPATH ) ); ?></strong>
-					<?php esc_html_e( 'in', 'ai-logger' ); ?>
-					<?php if ( ! empty( $item->class ) ) : ?>
-						<strong><?php echo esc_html( str( $item->class )->replace( '/', '\\' ) . '::' . $item->method ); ?></strong>
-					<?php else : ?>
-						<strong><?php echo esc_html( $item->method ); ?></strong>
-					<?php endif; ?>
-					<?php if ( ! empty( $item->lineNumber ) ) : ?>
-						<?php esc_html_e( 'at line', 'ai-logger' ); ?>
-						<strong><?php echo esc_html( $item->lineNumber ); ?></strong>
-					<?php endif; ?>
+					<?php
+					printf(
+						/* translators: 1: Opening tag, 2: File path, 3: Closing tag, 4: Opening tag, 5: Function name, 6: Closing tag */
+						esc_html__( '%1$s%2$s%3$s in %4$s%5$s%6$s', 'ai-logger' ),
+						'<strong>',
+						esc_html( $item->file ),
+						'</strong>',
+						'<strong>',
+						! empty( $item->class )
+							? esc_html( str( $item->class )->replace( '/', '\\' ) . '::' . $item->method )
+							: esc_html( $item->method ),
+						'</strong>',
+					);
+
+					if ( ! empty( $item->lineNumber ) ) {
+						printf(
+							/* translators: 1: Opening tag, 2: Line number, 3: Closing tag */
+							esc_html__( ' at line %1$s%2$d%3$s', 'ai-logger' ),
+							'<strong>',
+							(int) $item->lineNumber,
+							'</strong>'
+						);
+					}
+					?>
 				</summary>
 
 				<?php if ( ! empty( $item->snippet ) && is_array( $item->snippet ) ) : ?>
