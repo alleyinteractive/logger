@@ -11,3 +11,4 @@ vendor/
 coverage/
 .vscode
 .idea
+composer.lock
