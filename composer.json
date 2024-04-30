@@ -11,10 +11,12 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "alleyinteractive/composer-wordpress-autoloader": "^1.0",
         "monolog/monolog": "^2.8",
-        "psr/log": "^1.0|^2.0|^3.0"
+        "psr/log": "^1.0|^2.0|^3.0",
+        "spatie/backtrace": "^1.6",
+        "mantle-framework/support": "^1.0"
     },
     "require-dev": {
         "alleyinteractive/alley-coding-standards": "^2.0",

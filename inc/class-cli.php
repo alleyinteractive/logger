@@ -184,7 +184,14 @@ class CLI extends \WP_CLI_Command {
 				[
 					'context'         => $assoc_args['log-context'],
 					'example_context' => $i,
-				]
+					'example_data'    => [
+						'key'   => 'value',
+						'key_2' => 'value_2',
+						'key_3' => [
+							'key' => 'value',
+						],
+					],
+				],
 			);
 		}
 

@@ -29,8 +29,43 @@ Logger Admin Styles
 
 /* Style the <pre> tags */
 .post-type-ai_log .ai-log-display pre {
+  margin: 0;
+}
+
+.post-type-ai_log .ai-log-display pre:not([class*="language-"]) {
   background: rgba(0, 0, 0, 0.07);
   max-width: 100%;
-  overflow-x: scroll;
-  padding: 3px 5px 2px 5px;
+  padding: 5px;
+}
+
+/* Style the backtrace */
+.ai-log-backtrace details {
+  border: 1px solid #ddd;
+}
+
+.ai-log-backtrace details:not(:last-child) {
+  border-bottom: none;
+}
+
+.ai-log-backtrace details summary {
+  border-bottom: 1px solid transparent;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.ai-log-backtrace details[open] summary {
+  border-bottom-color: #ddd;
+}
+
+.ai-log-backtrace details summary:hover {
+  background: #f9f9f9;
+}
+
+.ai-log-backtrace details pre {
+  margin: 0;
+}
+
+.ai-log-backtrace details p {
+  padding: 10px;
+  margin: 0;
 }

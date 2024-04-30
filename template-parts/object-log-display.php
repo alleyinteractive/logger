@@ -1,6 +1,6 @@
 <?php
 /**
- * Meta Box display.
+ * Meta Box display for logs stored against a post/term.
  *
  * @package AI_Logger
  */

@@ -7,8 +7,12 @@
 
 namespace AI_Logger\Handler;
 
+use AI_Logger\AI_Logger;
+use AI_Logger\Backtrace\Frame;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Logger;
+use Spatie\Backtrace\Backtrace;
+use Spatie\Backtrace\Frame as SpatieFrame;
 
 /**
  * Post Log Handler
@@ -94,19 +98,50 @@ class Post_Handler extends AbstractProcessingHandler implements Handler_Interfac
 	 * @param array $record Log Record.
 	 */
 	protected function write( array $record ): void {
-		$user = wp_get_current_user();
-
-		// Capture the stack trace.
 		if ( empty( $log['context'] ) || 'front-end' !== $log['context'] ) {
-			$record['extra']['backtrace'] = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_debug_backtrace
-		}
+			// Store the backtrace for only this handler. Not created as a processor
+			// to avoid bloat of backtrace on all log types.
+			$record['extra']['backtrace'] = Backtrace::create()->startingFromFrame(
+				fn ( SpatieFrame $frame ) => ! in_array(
+					$frame->class,
+					[
+						static::class,
+						AI_Logger::class,
+						\Monolog\Handler\AbstractProcessingHandler::class,
+						\Monolog\Logger::class,
+					],
+					true
+				)
+			)
+				->frames();
 
-		if ( $user ) {
-			$record['extra']['user'] = [
-				'ID'         => $user->ID,
-				'user_login' => $user->user_login,
-				'user_email' => $user->user_email,
-			];
+			$record['extra']['backtrace'] = array_map(
+				fn ( SpatieFrame $frame ) => Frame::from_base( $frame ),
+				$record['extra']['backtrace'],
+			);
+
+			/**
+			 * Filter the number of code frames to store in the log.
+			 *
+			 * @param int   $frames Number of code frames to store.
+			 * @param array $record Log record.
+			 */
+			$frames = min( (int) apply_filters( 'ai_logger_backtrace_code_frames', 8, $record ), count( $record['extra']['backtrace'] ) );
+
+			if ( $frames > 0 ) {
+				/**
+				 * Filter the number of lines to store for each code frame.
+				 *
+				 * @param int   $frame_lines Number of lines to store for each code frame.
+				 * @param array $record Log record.
+				 */
+				$frame_lines = (int) apply_filters( 'ai_logger_backtrace_code_lines', 5, $record );
+
+				for ( $i = 0; $i < $frames; $i++ ) {
+					// Enforce a maximum of 20 lines per frame with a default of 5.
+					$record['extra']['backtrace'][ $i ]->load_snippet( max( $frame_lines, 20 ) );
+				}
+			}
 		}
 
 		/**
