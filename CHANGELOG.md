@@ -3,6 +3,10 @@
 This library adheres to [Semantic Versioning](https://semver.org/) and [Keep a
 CHANGELOG](https://keepachangelog.com/en/1.0.0/).
 
+## 2.4.2 - 2024-06-28
+
+- Fix an incorrectly named variable in the `Post_Handler` class.
+
 ## 2.4.1 - 2024-04-30
 
 - Re-release of 2.4.1.

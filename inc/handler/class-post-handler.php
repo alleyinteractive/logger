@@ -98,7 +98,7 @@ class Post_Handler extends AbstractProcessingHandler implements Handler_Interfac
 	 * @param array $record Log Record.
 	 */
 	protected function write( array $record ): void {
-		if ( empty( $log['context'] ) || 'front-end' !== $log['context'] ) {
+		if ( empty( $record['context'] ) || 'front-end' !== $record['context'] ) {
 			// Store the backtrace for only this handler. Not created as a processor
 			// to avoid bloat of backtrace on all log types.
 			$record['extra']['backtrace'] = Backtrace::create()->startingFromFrame(
