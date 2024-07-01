@@ -2,6 +2,7 @@
 namespace AI_Logger\Tests;
 
 use AI_Logger\AI_Logger;
+use AI_Logger\Handler\Post_Handler;
 use Mantle\Testkit\Test_Case;
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\TestHandler;
@@ -128,6 +129,30 @@ class LoggerTest extends Test_Case {
 					],
 				],
 			)
+		);
+	}
+
+	public function test_serialize_exception() {
+		$logger = ai_logger()->with_handlers(
+			[
+				$handler = new Post_Handler(),
+			]
+		);
+
+		$logger->error(
+			'This is a test',
+			[
+				'error' => new \InvalidArgumentException( 'Test Exception', 500 ),
+			]
+		);
+
+		$handler->process_queue_shutdown();
+
+		$this->assertPostExists(
+			[
+				'post_title' => 'This is a test',
+				'post_type'  => 'ai_log',
+			]
 		);
 	}
 }
