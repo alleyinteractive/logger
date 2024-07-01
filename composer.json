@@ -43,6 +43,7 @@
         "phpcbf": "phpcbf --standard=./phpcs.xml .",
         "phpcs": "phpcs --standard=./phpcs.xml .",
         "phpunit": "phpunit",
+        "scope": "php-scoper add-prefix",
         "test": [
           "@phpcs",
           "@phpunit"
