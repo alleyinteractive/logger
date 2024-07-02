@@ -13,6 +13,7 @@ use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Logger;
 use Spatie\Backtrace\Backtrace;
 use Spatie\Backtrace\Frame as SpatieFrame;
+use Throwable;
 
 /**
  * Post Log Handler
@@ -197,6 +198,27 @@ class Post_Handler extends AbstractProcessingHandler implements Handler_Interfac
 			);
 
 			if ( ! empty( $log_post_id ) ) {
+				// Sanitize the context to prevent an accidental serialize error. When serializing
+				// an exception, PHP will throw a Serialization of 'Closure' is not allowed error.
+				if ( ! empty( $log['context'] ) && is_array( $log['context'] ) ) {
+					$log['context'] = array_map(
+						function ( mixed $value ) {
+							if ( $value instanceof Throwable ) {
+								if ( method_exists( $value, '__toString' ) ) {
+									return $value->__toString();
+								} elseif ( method_exists( $value, 'getTraceAsString' ) ) {
+									return $value->getTraceAsString();
+								}
+
+								return $value->getMessage();
+							}
+
+							return $value;
+						},
+						$log['context'],
+					);
+				}
+
 				\update_post_meta( $log_post_id, '_logger_record', $log );
 
 				$this->assign_terms( $log_post_id, $level, static::TAXONOMY_LOG_LEVEL );
@@ -221,6 +243,8 @@ class Post_Handler extends AbstractProcessingHandler implements Handler_Interfac
 	 * Process the queue when shutting down.
 	 *
 	 * Ensure that all logs are properly saved when shutting down (if any are left).
+	 *
+	 * @throws Throwable If an error occurs while processing the queue during testing.
 	 */
 	public function process_queue_shutdown() {
 		if ( empty( $this->queue ) ) {
@@ -232,7 +256,21 @@ class Post_Handler extends AbstractProcessingHandler implements Handler_Interfac
 			\switch_to_blog( $this->original_site_id ); // phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.switch_to_blog_switch_to_blog
 		}
 
-		$this->process_queue();
+		try {
+			$this->process_queue();
+		} catch ( Throwable $e ) {
+			// Throw the exception if testing.
+			if ( defined( 'MANTLE_IS_TESTING' ) && MANTLE_IS_TESTING ) {
+				throw $e;
+			}
+
+			// In the event of any error, log to the actual error log if an exception
+			// is thrown to prevent an exception from bubbling up.
+			error_log( // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+				"AI Logger: Error processing queue during shutdown: {$e->getMessage()}",
+				E_ERROR,
+			);
+		}
 
 		if ( $switching ) {
 			\restore_current_blog();
