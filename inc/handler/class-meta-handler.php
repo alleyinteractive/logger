@@ -20,6 +20,8 @@ use Monolog\Logger;
  * be stored on 'shutdown'.
  */
 abstract class Meta_Handler extends AbstractProcessingHandler implements Handler_Interface {
+	use Process_Shutdown;
+
 	/**
 	 * Object ID to store in.
 	 *
@@ -95,6 +97,10 @@ abstract class Meta_Handler extends AbstractProcessingHandler implements Handler
 			$this->queue[] = $record;
 		} else {
 			$this->write_log_record( $record );
+		}
+
+		if ( ! $this->should_write_on_shutdown() ) {
+			$this->process_queue_shutdown();
 		}
 	}
 

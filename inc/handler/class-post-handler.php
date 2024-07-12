@@ -22,6 +22,8 @@ use Throwable;
  * across the site.
  */
 class Post_Handler extends AbstractProcessingHandler implements Handler_Interface {
+	use Process_Shutdown;
+
 	/**
 	 * Post type to log to.
 	 *
@@ -351,14 +353,5 @@ class Post_Handler extends AbstractProcessingHandler implements Handler_Interfac
 		if ( $term_id ) {
 			\wp_set_object_terms( $new_post_id, $term_id, $taxonomy );
 		}
-	}
-
-	/**
-	 * Check if the log should be written on shutdown.
-	 *
-	 * @return bool
-	 */
-	protected function should_write_on_shutdown(): bool {
-		return (bool) \apply_filters( 'ai_logger_should_write_on_shutdown', true );
 	}
 }
