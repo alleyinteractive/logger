@@ -3,6 +3,10 @@
 This library adheres to [Semantic Versioning](https://semver.org/) and [Keep a
 CHANGELOG](https://keepachangelog.com/en/1.0.0/).
 
+## 2.4.4 - 2024-07-12
+
+- Fix an issue where the log records won't be saved if made during a non-template request.
+
 ## 2.4.3 - 2024-07-02
 
 - Fix a serialization of closure error when using an exception in a log's context.
