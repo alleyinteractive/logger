@@ -304,11 +304,6 @@ class Post_Handler extends AbstractProcessingHandler implements Handler_Interfac
 			return false;
 		}
 
-		// Allow unrestricted logging if filtered.
-		if ( \apply_filters( 'ai_logger_unrestricted_logging', false ) ) {
-			return true;
-		}
-
 		/**
 		 * Allow unrestricted logging if filtered.
 		 *
