@@ -167,9 +167,6 @@ function ai_logger_render_table( array $data ): void {
 		<?php
 	}
 }
-
-$ai_logger_date_format = 'M d, Y h:i:s A O';
-
 ?>
 <div class="ai-log-display">
 	<h4><?php esc_html_e( 'Log Summary', 'ai-logger' ); ?></h4>
@@ -218,15 +215,25 @@ $ai_logger_date_format = 'M d, Y h:i:s A O';
 			<td><?php esc_html_e( 'Channel', 'ai-logger' ); ?></td>
 			<td><?php echo esc_html( $log['channel'] ?? '' ); ?></td>
 		</tr>
+		<?php $ai_logger_date_format = get_option( 'date_format' ) . ' ' . get_option( 'time_format' ); ?>
 		<tr>
 			<td><?php esc_html_e( 'Timestamp', 'ai-logger' ); ?></td>
-			<td><?php echo esc_html( $log['datetime']->format( $ai_logger_date_format ) ); ?></td>
+			<td>
+			<?php
+			echo esc_html(
+				sprintf(
+					/* translators: 1: Date and time, 2: Human readable time difference */
+					__( '%1$s (%2$s ago)', 'ai-logger' ),
+					$log['datetime']->setTimezone( wp_timezone() )->format( $ai_logger_date_format ),
+					human_time_diff( $log['datetime']->getTimestamp() ),
+				),
+			);
+			?>
+			</td>
 		</tr>
 		<tr>
-			<td><?php esc_html_e( 'Timestamp Local', 'ai-logger' ); ?></td>
-			<td>
-			<?php echo esc_html( $log['datetime']->setTimezone( wp_timezone() )->format( $ai_logger_date_format ) ); ?>
-			</td>
+			<td><?php esc_html_e( 'Timestamp UTC', 'ai-logger' ); ?></td>
+			<td><?php echo esc_html( $log['datetime']->format( $ai_logger_date_format ) ); ?></td>
 		</tr>
 	</table>
 
