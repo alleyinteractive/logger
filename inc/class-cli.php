@@ -197,4 +197,12 @@ class CLI extends \WP_CLI_Command {
 
 		WP_CLI::log( 'Generated ' . $assoc_args['count'] . ' log entries.' );
 	}
+
+	/**
+	 * Run the Garbage Collector.
+	 */
+	public function cleanup() {
+		AI_Logger_Garbage_Collector::run_cleanup( false );
+		WP_CLI::success( 'Cleanup complete.' );
+	}
 }

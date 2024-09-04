@@ -42,6 +42,7 @@
         "phpcbf": "phpcbf --standard=./phpcs.xml .",
         "phpcs": "phpcs --standard=./phpcs.xml .",
         "phpunit": "phpunit",
+        "release": "npx @alleyinteractive/create-release@latest",
         "test": [
           "@phpcs",
           "@phpunit"

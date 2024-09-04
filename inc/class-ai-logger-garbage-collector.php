@@ -24,6 +24,8 @@ class AI_Logger_Garbage_Collector {
 	 * Register hooks.
 	 */
 	public static function add_hooks() {
+		add_action( 'cron_schedules', [ static::class, 'add_cron_interval' ] );
+
 		if (
 			false === \has_action( static::CRON_HOOK )
 
@@ -38,9 +40,28 @@ class AI_Logger_Garbage_Collector {
 
 			// Schedule the next run if it isn't already.
 			if ( false === \wp_next_scheduled( static::CRON_HOOK ) ) {
-				\wp_schedule_single_event( time() + ( HOUR_IN_SECONDS * 3 ), static::CRON_HOOK );
+				\wp_schedule_event( time(), 'every_three_hours', static::CRON_HOOK );
 			}
 		}
+	}
+
+	/**
+	 * Add a custom cron interval.
+	 *
+	 * @param array $schedules Existing cron schedules.
+	 * @return array
+	 */
+	public static function add_cron_interval( $schedules ): array {
+		if ( ! is_array( $schedules ) ) {
+			$schedules = [];
+		}
+
+		$schedules['every_three_hours'] = [
+			'interval' => HOUR_IN_SECONDS * 3,
+			'display'  => esc_html__( 'Every 3 Hours', 'ai-logger' ),
+		];
+
+		return $schedules;
 	}
 
 	/**
