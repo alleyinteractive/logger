@@ -3,6 +3,10 @@
 This library adheres to [Semantic Versioning](https://semver.org/) and [Keep a
 CHANGELOG](https://keepachangelog.com/en/1.0.0/).
 
+## 2.6.0 - 2024-12-19
+
+- Collapse internal calls to `do_action` and `apply_filters` in the log backtrace.
+
 ## 2.5.0 - 2024-09-03
 
 - Change the garbage collector to schedule a single recurring event to clean up logs instead of `wp_schedule_single_event`.

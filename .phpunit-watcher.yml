@@ -1,0 +1,7 @@
+watch:
+  directories:
+    - tests
+    - inc
+  fileMask: '*.php'
+phpunit:
+  timeout: 300

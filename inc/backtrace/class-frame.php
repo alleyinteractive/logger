@@ -17,6 +17,13 @@ use WP_Hook;
  */
 class Frame extends SpatieFrame {
 	/**
+	 * Hook methods to ignore.
+	 *
+	 * @var array<string>
+	 */
+	const HOOK_METHODS = [ 'do_action', 'do_action_ref_array', 'apply_filters', 'apply_filters_ref_array' ];
+
+	/**
 	 * Code snippet.
 	 *
 	 * @var array
@@ -63,7 +70,7 @@ class Frame extends SpatieFrame {
 			return;
 		}
 
-		if ( ! $this->class && in_array( $this->method, [ 'do_action', 'do_action_ref_array', 'apply_filters', 'apply_filters_ref_array' ], true ) ) {
+		if ( ! $this->class && in_array( $this->method, self::HOOK_METHODS, true ) ) {
 			return;
 		}
 

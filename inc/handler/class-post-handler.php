@@ -113,8 +113,7 @@ class Post_Handler extends AbstractProcessingHandler implements Handler_Interfac
 					],
 					true
 				)
-			)
-				->frames();
+			)->frames();
 
 			$record['extra']['backtrace'] = array_map(
 				fn ( SpatieFrame $frame ) => Frame::from_base( $frame ),
