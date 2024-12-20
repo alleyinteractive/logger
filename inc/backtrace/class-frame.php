@@ -8,6 +8,7 @@
 namespace AI_Logger\Backtrace;
 
 use Spatie\Backtrace\Frame as SpatieFrame;
+use WP_Hook;
 
 /**
  * Frame extension class.
@@ -15,6 +16,13 @@ use Spatie\Backtrace\Frame as SpatieFrame;
  * Stores the frame's code snippet in the frame itself for serialization and storage.
  */
 class Frame extends SpatieFrame {
+	/**
+	 * Hook methods to ignore.
+	 *
+	 * @var array<string>
+	 */
+	const HOOK_METHODS = [ 'do_action', 'do_action_ref_array', 'apply_filters', 'apply_filters_ref_array' ];
+
 	/**
 	 * Code snippet.
 	 *
@@ -56,6 +64,16 @@ class Frame extends SpatieFrame {
 	 * @param int $line_count Number of lines to load.
 	 */
 	public function load_snippet( int $line_count ): void {
+		// Prevent snippet from being loaded for specific internal frames which
+		// don't make sense to store (such as do_action).
+		if ( WP_Hook::class === $this->class ) {
+			return;
+		}
+
+		if ( ! $this->class && in_array( $this->method, self::HOOK_METHODS, true ) ) {
+			return;
+		}
+
 		$this->snippet = $this->getSnippet( $line_count );
 	}
 }

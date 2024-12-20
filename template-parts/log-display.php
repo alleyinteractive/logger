@@ -5,6 +5,7 @@
  * @package AI_Logger
  */
 
+use AI_Logger\Backtrace\Frame;
 use AI_Logger\Data_Structures;
 
 use function Mantle\Support\Helpers\str;
@@ -48,11 +49,59 @@ function ai_logger_render_legacy_backtrace( array $backtrace ): void {
 }
 
 /**
+ * Collapse do_action/do_action_ref_array/apply_filters/apply_filters_ref_array
+ * calls in the backtrace. This is to prevent the backtrace from being
+ * cluttered with calls to these internal WordPress functions.
+ *
+ * @param array<\AI_Logger\Backtrace\Frame> $backtrace Backtrace to collapse.
+ * @return array<\AI_Logger\Backtrace\Frame> Collapsed backtrace.
+ */
+function ai_logger_collapse_hook_calls( array $backtrace ): array {
+	// Prevent compression if the query parameter is set.
+	if ( ! empty( $_GET['ai_logger_dont_compress'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		return $backtrace;
+	}
+
+	for ( $i = 0; $i < count( $backtrace ) - 1; $i++ ) { // phpcs:ignore Generic.CodeAnalysis.ForLoopShouldBeWhileLoop.ForLoop, Squiz.PHP.DisallowSizeFunctionsInLoops.Found, Generic.CodeAnalysis.ForLoopWithTestFunctionCall.NotAllowed
+		$current = $backtrace[ $i ];
+
+		if ( \WP_Hook::class !== $current->class ) {
+			continue;
+		}
+
+		if ( ! in_array( $current->method, Frame::HOOK_METHODS, true ) ) {
+			continue;
+		}
+
+		// Determine where the backtrace exits from WP_Hook. Find all the frames and
+		// remove them. This could be in 2 frames or 5.
+		for ( $si = $i + 1; $si < count( $backtrace ); $si++ ) { // phpcs:ignore Generic.CodeAnalysis.ForLoopShouldBeWhileLoop.ForLoop, Squiz.PHP.DisallowSizeFunctionsInLoops.Found, Generic.CodeAnalysis.ForLoopWithTestFunctionCall.NotAllowed
+			$next = $backtrace[ $si ];
+
+			if ( \WP_Hook::class === $next->class ) {
+				continue;
+			}
+
+			if ( in_array( $next->method, Frame::HOOK_METHODS, true ) ) {
+				continue;
+			}
+
+			array_splice( $backtrace, $i, $si - $i, [] );
+
+			break;
+		}
+	}
+
+	return $backtrace;
+}
+
+/**
  * Render the backtrace powered by spatie/backtrace.
  *
  * @param array<\AI_Logger\Backtrace\Frame> $backtrace Backtrace to render.
  */
 function ai_logger_render_backtrace( array $backtrace ): void {
+	$backtrace = ai_logger_collapse_hook_calls( $backtrace );
 	?>
 	<div class="ai-log-backtrace">
 		<?php
