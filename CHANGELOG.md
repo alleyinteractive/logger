@@ -5,6 +5,7 @@ CHANGELOG](https://keepachangelog.com/en/1.0.0/).
 
 ## 2.6.0
 
+- Upgrade minimum PHP version to 8.2.
 - Collapse internal calls to `do_action` and `apply_filters` in the log backtrace.
 - Improve `CLI_Handler` to properly format the log message with colors.
 
