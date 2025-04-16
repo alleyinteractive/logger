@@ -6,8 +6,9 @@
  * Version: 2.6.0
  * Author: Alley Interactive
  * Author URI: https://alley.com/
- * Requires at least: 5.9
- * Tested up to: 6.5.5
+ * Requires at least: 6.5
+ * Requires PHP: 8.2
+ * Tested up to: 6.8
  *
  * @package AI_Logger
  */
