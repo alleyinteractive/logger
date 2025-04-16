@@ -204,6 +204,7 @@ class HandlersTest extends Test_Case {
 	public function test_wp_cli_handler() {
 		$mock = Mockery::mock( 'alias:WP_CLI' );
 		$mock->shouldReceive( 'log' )->twice();
+		$mock->shouldReceive( 'colorize' )->andReturnUsing( fn ( $text ) => $text );
 
 		define( 'WP_CLI', true );
 
