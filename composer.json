@@ -1,51 +1,38 @@
 {
-    "name": "alleyinteractive/logger",
-    "type": "wordpress-plugin",
-    "description": "A Monolog-based logging tool for WordPress. Supports storing log message in a custom post type or in individual posts and terms. ",
-    "homepage": "https://github.com/alleyinteractive/logger",
-    "license": "GPL-2.0-or-later",
-    "authors": [
-        {
-            "name": "Alley Interactive",
-            "email": "info@alley.com"
-        }
-    ],
-    "require": {
-        "php": "^8.2",
-        "alleyinteractive/composer-wordpress-autoloader": "^1.0",
-        "monolog/monolog": "^2.8",
-        "psr/log": "^1.0|^2.0|^3.0",
-        "spatie/backtrace": "^1.6",
-        "mantle-framework/support": "^1.0"
-    },
-    "require-dev": {
-        "alleyinteractive/alley-coding-standards": "^2.0",
-        "mantle-framework/testkit": "^1.0",
-        "mockery/mockery": "^1.3"
-    },
-    "config": {
-        "allow-plugins": {
-            "alleyinteractive/composer-wordpress-autoloader": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true
-        },
-        "apcu-autoloader": true,
-        "optimize-autoloader": true
-    },
-    "extra": {
-        "wordpress-autoloader": {
-            "autoload": {
-                "AI_Logger\\": "inc/"
-            }
-        }
-    },
-    "scripts": {
-        "phpcbf": "phpcbf --standard=./phpcs.xml .",
-        "phpcs": "phpcs --standard=./phpcs.xml .",
-        "phpunit": "phpunit",
-        "release": "npx @alleyinteractive/create-release@latest",
-        "test": [
-          "@phpcs",
-          "@phpunit"
-        ]
+  "name": "alleyinteractive/logger",
+  "type": "wordpress-plugin",
+  "description": "A Monolog-based logging tool for WordPress. Supports storing log message in a custom post type or in individual posts and terms. ",
+  "homepage": "https://github.com/alleyinteractive/logger",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Alley Interactive",
+      "email": "info@alley.com"
     }
+  ],
+  "config": {
+    "allow-plugins": {
+      "alleyinteractive/composer-wordpress-autoloader": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    },
+    "apcu-autoloader": true,
+    "optimize-autoloader": true
+  },
+  "extra": {
+    "wordpress-autoloader": {
+      "autoload": {
+        "AI_Logger\\": "inc/"
+      }
+    }
+  },
+  "scripts": {
+    "phpcbf": "phpcbf --standard=./phpcs.xml .",
+    "phpcs": "phpcs --standard=./phpcs.xml .",
+    "phpunit": "phpunit",
+    "release": "npx @alleyinteractive/create-release@latest",
+    "test": [
+      "@phpcs",
+      "@phpunit"
+    ]
+  }
 }
