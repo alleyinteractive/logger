@@ -98,7 +98,7 @@ class AI_Logger implements LoggerInterface {
 			while ( $logger->logger->popProcessor() ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedWhile
 				// Do nothing.
 			}
-		} catch ( \LogicException $e ) {
+		} catch ( \LogicException $e ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch
 			// Do nothing.
 		}
 
