@@ -93,12 +93,18 @@ class AI_Logger implements LoggerInterface {
 	public function with_processors( array $processors ) {
 		$logger = clone $this;
 
-		// Clear all processors with popProcessor().
-		while ( $logger->logger->popProcessor() ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedWhile
+		try {
+			// Clear all processors with popProcessor().
+			while ( $logger->logger->popProcessor() ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedWhile
+				// Do nothing.
+			}
+		} catch ( \LogicException $e ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch
 			// Do nothing.
 		}
 
-		$logger->logger->pushProcessor( $processors );
+		foreach ( $processors as $processor ) {
+			$logger->logger->pushProcessor( $processor );
+		}
 
 		return $logger;
 	}
