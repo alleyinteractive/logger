@@ -38,13 +38,13 @@ class Frame extends SpatieFrame {
 	 */
 	public static function from_base( SpatieFrame $frame ): self {
 		$instance = new self(
-			$frame->file,
-			$frame->lineNumber,
-			$frame->arguments,
-			$frame->method,
-			$frame->class,
-			$frame->applicationFrame,
-			$frame->textSnippet
+			file: $frame->file,
+			lineNumber: $frame->lineNumber,
+			arguments: $frame->arguments,
+			method: $frame->method,
+			class: $frame->class,
+			isApplicationFrame: $frame->applicationFrame,
+			textSnippet: $frame->textSnippet
 		);
 
 		// Escape the class name to prevent issues when storing backslashes.
