@@ -1,8 +1,6 @@
 # Logger
 
-![Testing
-Suite](https://github.com/alleyinteractive/logger/workflows/Testing%20Suite/badge.svg)
-![Coding Standards](https://github.com/alleyinteractive/logger/workflows/Coding%20Standards/badge.svg)
+[![All Pull Request Tests](https://github.com/alleyinteractive/logger/actions/workflows/all-pr-tests.yml/badge.svg?branch=develop)](https://github.com/alleyinteractive/logger/actions/workflows/all-pr-tests.yml)
 
 Providing a WordPress integration with Monolog, allowing site-wide and post and
 term specific logging.
@@ -15,7 +13,7 @@ See the [wiki](https://github.com/alleyinteractive/logger/wiki) for complete inf
 
 ## Installation
 
-Logger requires PHP 8.1 and Composer to run properly.
+Logger requires PHP 8.2 and Composer to run properly.
 
 ```bash
 composer require alleyinteractive/logger

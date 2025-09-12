@@ -3,6 +3,14 @@
 This library adheres to [Semantic Versioning](https://semver.org/) and [Keep a
 CHANGELOG](https://keepachangelog.com/en/1.0.0/).
 
+## 2.6.2
+
+- Fix issue with `spatie/backtrace` package.
+
+## 2.6.1
+
+- Release, no changes.
+
 ## 2.6.0
 
 - Upgrade minimum PHP version to 8.2.
