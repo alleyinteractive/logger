@@ -42,7 +42,7 @@ final class CLI {
 	/**
 	 * Display the site-wide log.
 	 *
-	 * @synopsis [--count=<value>] [--offset=<value>]
+	 * @synopsis [--count=<value>] [--offset=<value>] [--log-context=<value>] [--level=<value>]
 	 *
 	 * @param array $args Arguments for the command.
 	 * @param array $assoc_args Associated flags for the command.
@@ -56,14 +56,35 @@ final class CLI {
 			]
 		);
 
+		$tax_query = [
+			'relation' => 'AND',
+		];
+
+		if ( ! empty( $assoc_args['log-context'] ) ) {
+			$tax_query[] = [
+				'taxonomy' => Post_Handler::TAXONOMY_LOG_CONTEXT,
+				'field'    => 'slug',
+				'terms'    => explode( ',', $assoc_args['log-context'] ),
+			];
+		}
+
+		if ( ! empty( $assoc_args['level'] ) ) {
+			$tax_query[] = [
+				'taxonomy' => Post_Handler::TAXONOMY_LOG_LEVEL,
+				'field'    => 'slug',
+				'terms'    => explode( ',', $assoc_args['level'] ),
+			];
+		}
+
 		$logs = get_posts( [
+			'fields'					 => 'ids',
 			'offset'           => (int) $assoc_args['offset'],
 			'order'            => 'DESC',
 			'orderby'          => 'date',
 			'post_type'        => Post_Handler::POST_TYPE,
 			'posts_per_page'   => (int) $assoc_args['count'],
 			'suppress_filters' => false,
-			'fields'					 => 'ids',
+			'tax_query'        => $tax_query,
 		] );
 
 		if ( empty( $logs ) ) {
