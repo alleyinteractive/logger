@@ -28,5 +28,5 @@ add_action(
 
 // wp-cli command.
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
-	\WP_CLI::add_command( 'ai-logger', __NAMESPACE__ . '\CLI' );
+	new CLI();
 }

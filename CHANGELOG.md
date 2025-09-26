@@ -3,6 +3,10 @@
 This library adheres to [Semantic Versioning](https://semver.org/) and [Keep a
 CHANGELOG](https://keepachangelog.com/en/1.0.0/).
 
+## 2.6.3
+
+- Add CLI command to display site logs.
+
 ## 2.6.2
 
 - Fix issue with `spatie/backtrace` package.

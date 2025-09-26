@@ -12,6 +12,8 @@ use Monolog\Logger;
 use Psr\Log\LogLevel;
 use WP_CLI;
 
+use function Mantle\Support\Helpers\collect;
+
 // phpcs:disable WordPressVIPMinimum.Classes.RestrictedExtendClasses.wp_cli
 
 if ( ! class_exists( 'WP_CLI_Command' ) ) {
@@ -24,7 +26,114 @@ if ( ! class_exists( 'WP_CLI_Command' ) ) {
  * Cannot extend `WPCOM_VIP_CLI_Command` since this plugin can run
  * outside the context of a VIP site.
  */
-class CLI extends \WP_CLI_Command {
+final class CLI {
+	/**
+	 * Constructor.
+	 */
+	public function __construct() {
+		if ( ! defined( 'WP_CLI' ) || ! WP_CLI ) {
+			return;
+		}
+
+		WP_CLI::add_command( 'ai-logger cleanup', [ $this, 'cleanup' ] );
+		WP_CLI::add_command( 'ai-logger display-object', [ $this, 'display_object' ] );
+		WP_CLI::add_command( 'ai-logger display', [ $this, 'display' ] );
+		WP_CLI::add_command( 'ai-logger generate-for-object', [ $this, 'generate_for_object' ] );
+		WP_CLI::add_command( 'ai-logger generate', [ $this, 'generate' ] );
+	}
+
+	/**
+	 * Display the site-wide log.
+	 *
+	 * @synopsis [--count=<value>] [--offset=<value>] [--log-context=<value>] [--level=<value>] [--format=<value>]
+	 *
+	 * @param array $args Arguments for the command.
+	 * @param array $assoc_args Associated flags for the command.
+	 */
+	public function display( $args, $assoc_args ): int {
+		$assoc_args = \wp_parse_args(
+			$assoc_args,
+			[
+				'count'  => 50,
+				'offset' => 0,
+				'format' => 'table',
+			]
+		);
+
+		$tax_query = [
+			'relation' => 'AND',
+		];
+
+		if ( ! empty( $assoc_args['log-context'] ) ) {
+			$tax_query[] = [
+				'taxonomy' => Post_Handler::TAXONOMY_LOG_CONTEXT,
+				'field'    => 'slug',
+				'terms'    => explode( ',', $assoc_args['log-context'] ),
+			];
+		}
+
+		if ( ! empty( $assoc_args['level'] ) ) {
+			$tax_query[] = [
+				'taxonomy' => Post_Handler::TAXONOMY_LOG_LEVEL,
+				'field'    => 'slug',
+				'terms'    => explode( ',', $assoc_args['level'] ),
+			];
+		}
+
+		$logs = get_posts( [ // phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.get_posts_get_posts
+			'fields'           => 'ids',
+			'offset'           => (int) $assoc_args['offset'],
+			'order'            => 'DESC',
+			'orderby'          => 'date',
+			'post_type'        => Post_Handler::POST_TYPE,
+			'posts_per_page'   => (int) $assoc_args['count'],
+			'suppress_filters' => false,
+			'tax_query'        => $tax_query, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+		] );
+
+		if ( empty( $logs ) ) {
+			WP_CLI::line( 'No logs found.' );
+
+			return 0;
+		}
+
+		$logs = collect( $logs )->map( function ( int $log_id ): ?array {
+			$record = get_post_meta( $log_id, '_logger_record', true );
+
+			if ( ! $record ) {
+				return null;
+			}
+
+			return [
+				'context'    => $record['context']['context'] ?? '',
+				'message'    => $record['message'] ?? '',
+				'level_name' => $record['level_name'] ?? '',
+				'datetime'   => isset( $record['datetime'] ) ? $record['datetime']->setTimezone( wp_timezone() )->format( 'm/d/Y H:i:s' ) : null,
+			];
+		} )->filter()->values()->all();
+
+		WP_CLI\Utils\format_items(
+			$assoc_args['format'],
+			array_map(
+				fn ( array $log ) => [
+					'level'     => $log['level_name'],
+					'message'   => $log['message'],
+					'context'   => $log['context'],
+					'timestamp' => $log['datetime'],
+				],
+				$logs
+			),
+			[
+				'level',
+				'message',
+				'context',
+				'timestamp',
+			]
+		);
+
+		return 0;
+	}
+
 	/**
 	 * Display the log for a post.
 	 *
@@ -42,7 +151,7 @@ class CLI extends \WP_CLI_Command {
 	 * @param array $args Arguments for the command.
 	 * @param array $assoc_args Associated flags for the command.
 	 */
-	public function display( $args, $assoc_args ) {
+	public function display_object( $args, $assoc_args ) {
 		[ $object_type, $object_id ] = $args;
 
 		$assoc_args = \wp_parse_args(
