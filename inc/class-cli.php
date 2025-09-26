@@ -45,7 +45,7 @@ final class CLI {
 	/**
 	 * Display the site-wide log.
 	 *
-	 * @synopsis [--count=<value>] [--offset=<value>] [--log-context=<value>] [--level=<value>]
+	 * @synopsis [--count=<value>] [--offset=<value>] [--log-context=<value>] [--level=<value>] [--format=<value>]
 	 *
 	 * @param array $args Arguments for the command.
 	 * @param array $assoc_args Associated flags for the command.
@@ -56,6 +56,7 @@ final class CLI {
 			[
 				'count'  => 50,
 				'offset' => 0,
+				'format' => 'table',
 			]
 		);
 
@@ -112,7 +113,7 @@ final class CLI {
 		} )->filter()->values()->all();
 
 		WP_CLI\Utils\format_items(
-			'table',
+			$assoc_args['format'],
 			array_map(
 				fn ( array $log ) => [
 					'level'     => $log['level_name'],
