@@ -27,6 +27,9 @@ if ( ! class_exists( 'WP_CLI_Command' ) ) {
  * outside the context of a VIP site.
  */
 final class CLI {
+	/**
+	 * Constructor.
+	 */
 	public function __construct() {
 		if ( ! defined( 'WP_CLI' ) || ! WP_CLI ) {
 			return;
@@ -76,15 +79,15 @@ final class CLI {
 			];
 		}
 
-		$logs = get_posts( [
-			'fields'					 => 'ids',
+		$logs = get_posts( [ // phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.get_posts_get_posts
+			'fields'           => 'ids',
 			'offset'           => (int) $assoc_args['offset'],
 			'order'            => 'DESC',
 			'orderby'          => 'date',
 			'post_type'        => Post_Handler::POST_TYPE,
 			'posts_per_page'   => (int) $assoc_args['count'],
 			'suppress_filters' => false,
-			'tax_query'        => $tax_query,
+			'tax_query'        => $tax_query, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 		] );
 
 		if ( empty( $logs ) ) {
