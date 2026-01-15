@@ -25,7 +25,6 @@ class Slack_Notifier {
 	 * @return void
 	 */
 	public static function send(
-
 		string $message,
 		string $level = 'info',
 		array $context = [],
@@ -40,8 +39,8 @@ class Slack_Notifier {
 
 		$args = wp_parse_args( $args, [
 			'channel'    => null,
-			'username'   => 'WordPress',
-			'icon_emoji' => ':speech_balloon:',
+			'username'   => 'Logger',
+			'icon_emoji' => ':log:',
 		] );
 
 		$slack_handler = new SlackWebhookHandler(
@@ -52,7 +51,7 @@ class Slack_Notifier {
 			$args['icon_emoji'],
 			false,
 			true,
-			Logger::DEBUG
+			Logger::ALERT
 		);
 
 		AI_Logger::instance()
@@ -61,41 +60,15 @@ class Slack_Notifier {
 	}
 
 	/**
-	 * Send an error notification.
+	 * Send an alert notification.
 	 *
-	 * @param string $message Error message.
+	 * @param string $message Alert message.
 	 * @param array  $context Additional context.
 	 * @return void
 	 */
-	public static function error( string $message, array $context = [] ): void {
-		self::send( $message, 'error', $context, [
+	public static function alert( string $message, array $context = [] ): void {
+		self::send( $message, 'alert', $context, [
 			'icon_emoji' => ':x:',
-		] );
-	}
-
-	/**
-	 * Send a warning notification.
-	 *
-	 * @param string $message Warning message.
-	 * @param array  $context Additional context.
-	 * @return void
-	 */
-	public static function warning( string $message, array $context = [] ): void {
-		self::send( $message, 'warning', $context, [
-			'icon_emoji' => ':warning:',
-		] );
-	}
-
-	/**
-	 * Send a critical notification.
-	 *
-	 * @param string $message Critical message.
-	 * @param array  $context Additional context.
-	 * @return void
-	 */
-	public static function critical( string $message, array $context = [] ): void {
-		self::send( $message, 'critical', $context, [
-			'icon_emoji' => ':fire:',
 		] );
 	}
 
