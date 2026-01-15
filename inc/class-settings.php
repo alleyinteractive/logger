@@ -65,18 +65,31 @@ class Settings {
 		register_setting( 'ai-logger', 'ai-logger' );
 
 		// Log filters settings.
-		add_settings_section( 'logger_filter', __( 'Logger Filter Settings', 'ai-logger' ), '__return_null', 'ai-logger' );
+		add_settings_section( 'logger_settings', __( 'Logger Settings', 'ai-logger' ), '__return_null', 'ai-logger' );
 
 		add_settings_field(
 			'filter_error_message',
-			__( 'Error Message', 'ai-logger' ),
+			__( 'Error Message Filter', 'ai-logger' ),
 			[ $this, 'render_field' ],
 			'ai-logger',
-			'logger_filter',
+			'logger_settings',
 			[
 				'description' => __( 'Filters out error messages matching a given string. Patterns regular expressions and separated by new lines.', 'ai-logger' ),
 				'field'       => 'filter_error_message',
 				'type'        => 'textarea',
+			]
+		);
+
+		add_settings_field(
+			'ai_logger_slack_webhook_url',
+			__( 'Slack Webhook URL', 'ai-logger' ),
+			[ $this, 'render_field' ],
+			'ai-logger',
+			'logger_settings',
+			[
+				'description' => __( 'Webhook URL of Slack channel to receive escalated logger messages.', 'ai-logger' ),
+				'field'       => 'ai_logger_slack_webhook_url',
+				'type'        => 'text',
 			]
 		);
 	}

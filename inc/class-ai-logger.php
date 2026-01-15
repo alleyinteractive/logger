@@ -268,6 +268,9 @@ class AI_Logger implements LoggerInterface {
 	 */
 	public function alert( $message, array $context = [] ): void {
 		$this->logger->alert( $message, $context );
+		Slack_Notifier::error( $message, [
+			'user_id' => 123,
+		] );
 	}
 
 	/**
