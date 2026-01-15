@@ -26,7 +26,7 @@ class Slack_Notifier {
 	 */
 	public static function send(
 		string $message,
-		string $level = 'info',
+		string $level = 'alert',
 		array $context = [],
 		array $args = []
 	): void {
@@ -67,9 +67,7 @@ class Slack_Notifier {
 	 * @return void
 	 */
 	public static function alert( string $message, array $context = [] ): void {
-		self::send( $message, 'alert', $context, [
-			'icon_emoji' => ':x:',
-		] );
+		self::send( $message, 'alert', $context );
 	}
 
 }
