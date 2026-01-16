@@ -3,7 +3,7 @@
  * Plugin Name: Alley Logger
  * Plugin URI: https://github.com/alleyinteractive/logger
  * Description: A Monolog-based logging tool for WordPress. Supports storing log message in a custom post type or in individual posts and terms.
- * Version: 2.6.3
+ * Version: 2.6.4
  * Author: Alley Interactive
  * Author URI: https://alley.com/
  * Requires at least: 6.5
@@ -45,7 +45,6 @@ if ( ! file_exists( __DIR__ . '/vendor/wordpress-autoload.php' ) ) {
 }
 
 require_once __DIR__ . '/inc/bootstrap.php';
-require_once __DIR__ . '/inc/class-slack-notifier.php';
 
 /**
  * Retrieve the core logger instance.

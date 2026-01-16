@@ -81,14 +81,14 @@ class Settings {
 		);
 
 		add_settings_field(
-			'ai_logger_slack_webhook_url',
+			'slack_webhook_url',
 			__( 'Slack Webhook URL', 'ai-logger' ),
 			[ $this, 'render_field' ],
 			'ai-logger',
 			'logger_settings',
 			[
-				'description' => __( 'Webhook URL of Slack channel to receive escalated logger messages.', 'ai-logger' ),
-				'field'       => 'ai_logger_slack_webhook_url',
+				'description' => __( 'Webhook URL of Slack channel to receive escalated Logger messages.', 'ai-logger' ),
+				'field'       => 'slack_webhook_url',
 				'type'        => 'text',
 			]
 		);
