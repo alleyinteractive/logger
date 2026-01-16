@@ -50,7 +50,7 @@ class Slack_Notifier {
 			true,
 			$args['icon_emoji'],
 			false,
-			true,
+			false,
 			Logger::ALERT
 		);
 
