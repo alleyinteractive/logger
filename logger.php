@@ -53,7 +53,6 @@ require_once __DIR__ . '/inc/bootstrap.php';
  * @return \AI_Logger\AI_Logger
  */
 function ai_logger( array|string|null $context = null ): \AI_Logger\AI_Logger {
-	//die('hello');
 	if ( $context ) {
 		return \AI_Logger\AI_Logger::instance()->with_context( $context );
 	}
