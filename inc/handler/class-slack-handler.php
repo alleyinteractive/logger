@@ -23,7 +23,7 @@ class Slack_Handler extends SlackWebhookHandler {
 	 * @param array $args Optional arguments for customization.
 	 */
 	public function __construct( $level = Logger::ALERT, array $args = [] ) {
-		$webhook_url = Settings::instance()->get( 'ai_logger_slack_webhook_url' );
+		$webhook_url = Settings::instance()->get( 'ai_logger_slack_webhook_url' ) ?: '';
 
 		$args = wp_parse_args( $args, [
 			'channel'    => null,
