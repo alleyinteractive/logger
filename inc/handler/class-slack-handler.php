@@ -22,7 +22,7 @@ class Slack_Handler extends SlackWebhookHandler {
 	 * @param string|int $level The minimum logging level at which this handler will be triggered.
 	 * @param array      $args Optional arguments for customization.
 	 */
-	public function __construct( $level = Logger::ALERT, array $args = [] ) {
+	public function __construct( $level = Logger::CRITICAL, array $args = [] ) {
 		$webhook_url = Settings::instance()->get( 'slack_webhook_url' ) ?: '';
 
 		$args = wp_parse_args( $args, [
