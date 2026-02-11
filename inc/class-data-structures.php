@@ -125,7 +125,7 @@ class Data_Structures {
 			static::POST_TYPE,
 			[
 				'labels'             => [
-					'name'                  => __( 'Level', 'ai-logger' ),
+					'name'                  => __( 'Levels', 'ai-logger' ),
 					'singular_name'         => __( 'Level', 'ai-logger' ),
 					'search_items'          => __( 'Search Levels', 'ai-logger' ),
 					'popular_items'         => __( 'Popular Levels', 'ai-logger' ),
