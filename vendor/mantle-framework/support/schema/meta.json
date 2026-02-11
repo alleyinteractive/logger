@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Meta Definition Schema for register_meta_from_file() helper",
+  "description": "A schema for registering post/term meta definitions with register_meta_from_file().",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    }
+  },
+  "patternProperties": {
+    "^[a-zA-Z0-9_\\-]+$": {
+      "type": "object",
+      "additionalProperties": true,
+      "not": {
+        "allOf": [
+          { "required": ["post_types"] },
+          { "required": ["terms"] }
+        ]
+      },
+      "properties": {
+        "default": {
+          "description": "The default value for this meta key.",
+          "type": "string"
+        },
+        "description": {
+          "description": "A description of the data attached to this meta key.",
+          "type": "string"
+        },
+        "label": {
+          "description": "A human-readable label of the data attached to this meta key.",
+          "type": "string"
+        },
+        "post_types": {
+          "description": "The post types that can use this meta key.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "show_in_rest": {
+          "description": "Whether to show this meta key in the REST API.",
+          "type": "boolean",
+          "default": true
+        },
+        "single": {
+          "description": "Whether this meta key is a single value or an array of values.",
+          "type": "boolean",
+          "default": true
+        },
+        "terms": {
+          "description": "An array of taxonomy slugs this meta key is associated with.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "description": "The type of data associated with this meta key.",
+          "type": "string",
+          "enum": [
+            "string",
+            "boolean",
+            "integer",
+            "number",
+            "array",
+            "object"
+          ]
+        }
+      }
+    }
+  }
+}
